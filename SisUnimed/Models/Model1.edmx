@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UnimedModel.Store" Provider="Npgsql" ProviderManifestToken="9.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_grupo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="grupo_permissao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_grupo" Type="int4" Nullable="false" />
+          <Property Name="operadora" Type="int4" Nullable="false" />
+          <Property Name="operadora_i" Type="int4" Nullable="false" />
+          <Property Name="operadora_a" Type="int4" Nullable="false" />
+          <Property Name="operadora_d" Type="int4" Nullable="false" />
+          <Property Name="grupo" Type="int4" Nullable="false" />
+          <Property Name="grupo_i" Type="int4" Nullable="false" />
+          <Property Name="grupo_a" Type="int4" Nullable="false" />
+          <Property Name="grupo_d" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_i" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_a" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_d" Type="int4" Nullable="false" />
+          <Property Name="usuario" Type="int4" Nullable="false" />
+          <Property Name="usuario_i" Type="int4" Nullable="false" />
+          <Property Name="usuario_a" Type="int4" Nullable="false" />
+          <Property Name="usuario_d" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_i" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="operadora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_operadora" Type="int4" Nullable="false" />
+          <Property Name="nome_operadora" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_operadora" Type="int4" Nullable="false" />
+          <Property Name="id_grupo" Type="int4" Nullable="false" />
+          <Property Name="nome_usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email_usuario" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="senha_usuario" Type="bpchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_permissao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="operadora" Type="int4" Nullable="false" />
+          <Property Name="operadora_i" Type="int4" Nullable="false" />
+          <Property Name="operadora_a" Type="int4" Nullable="false" />
+          <Property Name="operadora_d" Type="int4" Nullable="false" />
+          <Property Name="grupo" Type="int4" Nullable="false" />
+          <Property Name="grupo_i" Type="int4" Nullable="false" />
+          <Property Name="grupo_a" Type="int4" Nullable="false" />
+          <Property Name="grupo_d" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_i" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_a" Type="int4" Nullable="false" />
+          <Property Name="grupo_permissao_d" Type="int4" Nullable="false" />
+          <Property Name="usuario" Type="int4" Nullable="false" />
+          <Property Name="usuario_i" Type="int4" Nullable="false" />
+          <Property Name="usuario_a" Type="int4" Nullable="false" />
+          <Property Name="usuario_d" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_i" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
+          <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
+        </EntityType>
+        <Association Name="grupo_permissao_id_grupo_fkey">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="grupo_permissao" Type="Self.grupo_permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo_permissao">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_id_grupo_fkey">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_id_operadora_fkey">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_permissao_id_usuario_fkey">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_permissao" Type="Self.usuario_permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_permissao">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnimedModelStoreContainer">
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="public" store:Type="Tables" />
+          <EntitySet Name="grupo_permissao" EntityType="Self.grupo_permissao" Schema="public" store:Type="Tables" />
+          <EntitySet Name="operadora" EntityType="Self.operadora" Schema="public" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="public" store:Type="Tables" />
+          <EntitySet Name="usuario_permissao" EntityType="Self.usuario_permissao" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="grupo_permissao_id_grupo_fkey" Association="Self.grupo_permissao_id_grupo_fkey">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="grupo_permissao" EntitySet="grupo_permissao" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_id_grupo_fkey" Association="Self.usuario_id_grupo_fkey">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_id_operadora_fkey" Association="Self.usuario_id_operadora_fkey">
+            <End Role="operadora" EntitySet="operadora" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_permissao_id_usuario_fkey" Association="Self.usuario_permissao_id_usuario_fkey">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_permissao" EntitySet="usuario_permissao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnimedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_grupo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="grupo_permissao" Relationship="Self.grupo_permissao_id_grupo_fkey" FromRole="grupo" ToRole="grupo_permissao" />
+          <NavigationProperty Name="usuarios" Relationship="Self.usuario_id_grupo_fkey" FromRole="grupo" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="grupo_permissao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="operadora" Type="Int32" Nullable="false" />
+          <Property Name="operadora_i" Type="Int32" Nullable="false" />
+          <Property Name="operadora_a" Type="Int32" Nullable="false" />
+          <Property Name="operadora_d" Type="Int32" Nullable="false" />
+          <Property Name="grupo" Type="Int32" Nullable="false" />
+          <Property Name="grupo_i" Type="Int32" Nullable="false" />
+          <Property Name="grupo_a" Type="Int32" Nullable="false" />
+          <Property Name="grupo_d" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao1" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_i" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_a" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_d" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="Int32" Nullable="false" />
+          <Property Name="usuario_i" Type="Int32" Nullable="false" />
+          <Property Name="usuario_a" Type="Int32" Nullable="false" />
+          <Property Name="usuario_d" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_i" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_a" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_d" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="grupo1" Relationship="Self.grupo_permissao_id_grupo_fkey" FromRole="grupo_permissao" ToRole="grupo" />
+        </EntityType>
+        <EntityType Name="operadora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_operadora" Type="Int32" Nullable="false" />
+          <Property Name="nome_operadora" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.usuario_id_operadora_fkey" FromRole="operadora" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_operadora" Type="Int32" Nullable="false" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="nome_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email_usuario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="senha_usuario" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="grupo" Relationship="Self.usuario_id_grupo_fkey" FromRole="usuario" ToRole="grupo" />
+          <NavigationProperty Name="operadora" Relationship="Self.usuario_id_operadora_fkey" FromRole="usuario" ToRole="operadora" />
+          <NavigationProperty Name="usuario_permissao" Relationship="Self.usuario_permissao_id_usuario_fkey" FromRole="usuario" ToRole="usuario_permissao" />
+        </EntityType>
+        <EntityType Name="usuario_permissao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="operadora" Type="Int32" Nullable="false" />
+          <Property Name="operadora_i" Type="Int32" Nullable="false" />
+          <Property Name="operadora_a" Type="Int32" Nullable="false" />
+          <Property Name="operadora_d" Type="Int32" Nullable="false" />
+          <Property Name="grupo" Type="Int32" Nullable="false" />
+          <Property Name="grupo_i" Type="Int32" Nullable="false" />
+          <Property Name="grupo_a" Type="Int32" Nullable="false" />
+          <Property Name="grupo_d" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_i" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_a" Type="Int32" Nullable="false" />
+          <Property Name="grupo_permissao_d" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="Int32" Nullable="false" />
+          <Property Name="usuario_i" Type="Int32" Nullable="false" />
+          <Property Name="usuario_a" Type="Int32" Nullable="false" />
+          <Property Name="usuario_d" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao1" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_i" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_a" Type="Int32" Nullable="false" />
+          <Property Name="usuario_permissao_d" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario1" Relationship="Self.usuario_permissao_id_usuario_fkey" FromRole="usuario_permissao" ToRole="usuario" />
+        </EntityType>
+        <Association Name="grupo_permissao_id_grupo_fkey">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="grupo_permissao" Type="Self.grupo_permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo_permissao">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_id_grupo_fkey">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_id_operadora_fkey">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_permissao_id_usuario_fkey">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_permissao" Type="Self.usuario_permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_permissao">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnimedEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="grupoes" EntityType="Self.grupo" />
+          <EntitySet Name="grupo_permissao" EntityType="Self.grupo_permissao" />
+          <EntitySet Name="operadoras" EntityType="Self.operadora" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <EntitySet Name="usuario_permissao" EntityType="Self.usuario_permissao" />
+          <AssociationSet Name="grupo_permissao_id_grupo_fkey" Association="Self.grupo_permissao_id_grupo_fkey">
+            <End Role="grupo" EntitySet="grupoes" />
+            <End Role="grupo_permissao" EntitySet="grupo_permissao" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_id_grupo_fkey" Association="Self.usuario_id_grupo_fkey">
+            <End Role="grupo" EntitySet="grupoes" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_id_operadora_fkey" Association="Self.usuario_id_operadora_fkey">
+            <End Role="operadora" EntitySet="operadoras" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_permissao_id_usuario_fkey" Association="Self.usuario_permissao_id_usuario_fkey">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="usuario_permissao" EntitySet="usuario_permissao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnimedModelStoreContainer" CdmEntityContainer="UnimedEntities1">
+          <EntitySetMapping Name="grupoes">
+            <EntityTypeMapping TypeName="UnimedModel.grupo">
+              <MappingFragment StoreEntitySet="grupo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome_grupo" ColumnName="nome_grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupo_permissao">
+            <EntityTypeMapping TypeName="UnimedModel.grupo_permissao">
+              <MappingFragment StoreEntitySet="grupo_permissao">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="operadora" ColumnName="operadora" />
+                <ScalarProperty Name="operadora_i" ColumnName="operadora_i" />
+                <ScalarProperty Name="operadora_a" ColumnName="operadora_a" />
+                <ScalarProperty Name="operadora_d" ColumnName="operadora_d" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="grupo_i" ColumnName="grupo_i" />
+                <ScalarProperty Name="grupo_a" ColumnName="grupo_a" />
+                <ScalarProperty Name="grupo_d" ColumnName="grupo_d" />
+                <ScalarProperty Name="grupo_permissao1" ColumnName="grupo_permissao" />
+                <ScalarProperty Name="grupo_permissao_i" ColumnName="grupo_permissao_i" />
+                <ScalarProperty Name="grupo_permissao_a" ColumnName="grupo_permissao_a" />
+                <ScalarProperty Name="grupo_permissao_d" ColumnName="grupo_permissao_d" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="usuario_i" ColumnName="usuario_i" />
+                <ScalarProperty Name="usuario_a" ColumnName="usuario_a" />
+                <ScalarProperty Name="usuario_d" ColumnName="usuario_d" />
+                <ScalarProperty Name="usuario_permissao" ColumnName="usuario_permissao" />
+                <ScalarProperty Name="usuario_permissao_i" ColumnName="usuario_permissao_i" />
+                <ScalarProperty Name="usuario_permissao_a" ColumnName="usuario_permissao_a" />
+                <ScalarProperty Name="usuario_permissao_d" ColumnName="usuario_permissao_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operadoras">
+            <EntityTypeMapping TypeName="UnimedModel.operadora">
+              <MappingFragment StoreEntitySet="operadora">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cod_operadora" ColumnName="cod_operadora" />
+                <ScalarProperty Name="nome_operadora" ColumnName="nome_operadora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="UnimedModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_operadora" ColumnName="id_operadora" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="nome_usuario" ColumnName="nome_usuario" />
+                <ScalarProperty Name="email_usuario" ColumnName="email_usuario" />
+                <ScalarProperty Name="senha_usuario" ColumnName="senha_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_permissao">
+            <EntityTypeMapping TypeName="UnimedModel.usuario_permissao">
+              <MappingFragment StoreEntitySet="usuario_permissao">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="operadora" ColumnName="operadora" />
+                <ScalarProperty Name="operadora_i" ColumnName="operadora_i" />
+                <ScalarProperty Name="operadora_a" ColumnName="operadora_a" />
+                <ScalarProperty Name="operadora_d" ColumnName="operadora_d" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="grupo_i" ColumnName="grupo_i" />
+                <ScalarProperty Name="grupo_a" ColumnName="grupo_a" />
+                <ScalarProperty Name="grupo_d" ColumnName="grupo_d" />
+                <ScalarProperty Name="grupo_permissao" ColumnName="grupo_permissao" />
+                <ScalarProperty Name="grupo_permissao_i" ColumnName="grupo_permissao_i" />
+                <ScalarProperty Name="grupo_permissao_a" ColumnName="grupo_permissao_a" />
+                <ScalarProperty Name="grupo_permissao_d" ColumnName="grupo_permissao_d" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="usuario_i" ColumnName="usuario_i" />
+                <ScalarProperty Name="usuario_a" ColumnName="usuario_a" />
+                <ScalarProperty Name="usuario_d" ColumnName="usuario_d" />
+                <ScalarProperty Name="usuario_permissao1" ColumnName="usuario_permissao" />
+                <ScalarProperty Name="usuario_permissao_i" ColumnName="usuario_permissao_i" />
+                <ScalarProperty Name="usuario_permissao_a" ColumnName="usuario_permissao_a" />
+                <ScalarProperty Name="usuario_permissao_d" ColumnName="usuario_permissao_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

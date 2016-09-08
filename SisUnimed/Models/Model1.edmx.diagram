@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a2725f577af843c8b9239be9b2ff4e40" Name="Diagram1">
+        <EntityTypeShape EntityType="UnimedModel.grupo" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnimedModel.grupo_permissao" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnimedModel.operadora" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnimedModel.usuario" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnimedModel.usuario_permissao" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="UnimedModel.grupo_permissao_id_grupo_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="UnimedModel.usuario_id_grupo_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="UnimedModel.usuario_id_operadora_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="UnimedModel.usuario_permissao_id_usuario_fkey" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

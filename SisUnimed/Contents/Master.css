@@ -1,0 +1,141 @@
+﻿body {
+    background-color: rgba(211,211,211,0.30);
+    width: auto;
+    background-size: 100%;
+    scrollbar-highlight-color: aquamarine;
+}
+#menulateral {
+    top: 0px;
+    height: 100%;
+    left: 0px;
+    background-color: rgba(76, 216, 75,0.60);
+    width: 10%;
+    position:fixed;
+    border: 3px;
+    border-style: double;
+    border-color: white;
+    border-spacing: 5px;
+}
+#imageLogo {
+    top: 1%;
+    left: 1%;
+    width: 95%;
+    position: absolute;
+    
+}
+#Divtopo {
+    top: 0%;
+    position: fixed;
+    left: 10.8%;
+    width:89%;
+    height:10%;    
+}
+#txttopo {
+    border-bottom: 1px;
+    border-bottom-style: double;
+    border-bottom-color: greenyellow;
+    text-align: right;
+    font-family: sans-serif,Verdana;
+    font-size: 10px;
+    font-weight: bold;
+    color: GrayText;
+}
+.logout {
+    text-align: right;
+    font-family: sans-serif,Verdana;
+    font-size: 10px;
+    font-weight: bold;
+    color: GrayText;
+}
+#divRodape {
+    bottom: 0%;
+    position: absolute;
+    left: 10.8%;
+    width:89%;
+       
+}
+#txtRodape {
+    border-top: 3px;
+    border-top-style: double;
+    border-top-color: greenyellow;
+    text-align: left;
+    font-family: sans-serif,Verdana;
+    font-size: 10px;
+    font-weight: bold;
+    color: GrayText;
+}
+/*menu dropdown*/
+ul#nav, ul#nav li ul {
+    font-size: 12px;
+    color: white;
+    font-family: sans-serif,Arial,Verdana;
+    font-weight: bold;
+    margin-top: 150px;
+    margin-left:5px;
+    padding: 0;
+    list-style: none;
+    width: 90%;
+    border: solid #FFF;
+    border-width: 0 1px 1px;
+    background-color:darkgoldenrod;
+   
+}
+    ul#nav li {
+        position: relative;
+    }
+        ul#nav li ul {
+            position: absolute;
+            left:95%;
+            top:0;
+            display: none;
+            margin-top:0;
+            width:90%;
+        }
+        ul#nav li a, ul#nav ul li a {
+            display: block;
+            text-decoration: none;
+            color: #FFF;
+            padding: 0.25em 0.5em 0.25em 0.75em;
+            border-top: 1px solid #FFF;
+        }
+        ul#nav li.submenu {
+            background: transparent url("/Contents/Images/seta.png") no-repeat right;
+            background-size: 10px;
+        }
+        ul#nav li a:hover {
+            background-color:gold;
+        }
+        /*\*/
+*html ul li {
+    float: left;
+    height: 1%;
+}
+    *html ul li a {
+        height: 1%;
+    }
+    /* */
+ul#nav li:hover ul, ul#nav li.over ul {
+    display: block;
+    
+}
+#corposite {
+    top: 10%;
+    position: fixed;
+    left: 10.8%;
+    width:89%;
+    height:80%;   
+}
+#txtTitulo {
+    color:darkgoldenrod;
+    font-family: sans-serif,Verdana,'News701 BT';
+    font-size: 14px;
+    font-style:italic;
+    font-weight:bold;
+    text-align:left;
+}
+hr {
+    width: 100%;
+    color: darkgoldenrod;
+    align-self:stretch;
+    
+}

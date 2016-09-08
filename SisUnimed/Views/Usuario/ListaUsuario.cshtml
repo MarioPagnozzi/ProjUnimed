@@ -1,0 +1,11 @@
+﻿@model IEnumerable<SisUnimed.Models.usuario>
+@{       
+    var lu = ViewData["ListaUsuario"] as SisUnimed.Models.usuario;
+    var grid = new WebGrid(Model, defaultSort: "nome_usuario", rowsPerPage: 5);
+}
+
+@*@grid.GetHtml(columns: grid.Columns(grid.Column("nome_usuario","Nome"), grid.Column("email_usuario","E-mail")))*@
+@grid.GetHtml(columns: new[] {
+    grid.Column(columnName: "nome_usuario", header: "Nome", format: a => new HtmlString(Html.ActionLink((string)a.nome_usuario.ToString(),"Usuario", new { @id=a.id}).ToString()),canSort: true),
+    grid.Column(columnName: "senha_usuario",header: "E-mail", format: a => new HtmlString(Html.ActionLink((string)a.email_usuario.ToString(),"Usuario", new { @id=a.id}).ToString()),canSort: true)
+})

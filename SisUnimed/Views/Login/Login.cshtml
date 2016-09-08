@@ -1,0 +1,72 @@
+﻿@model SisUnimed.Models.usuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Contents/Login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>    
+    <title>Login</title>
+</head>
+<body>
+    <div id="borda">
+        <table id="tlogin">
+            <tbody>
+               
+                   <table>
+                       <tbody id="login">
+                           <tr>
+                               <td>
+                                   <img src="~/Contents/Images/unimed.png" />
+                               </td>
+                               <td>
+                                  <table>
+                                      
+                                      <tbody>
+                                          @using (@Html.BeginForm("Login","Login",FormMethod.Post))
+                                          {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true)
+                                                if (@ViewBag.Message != null)
+                                                {
+                                                    <font style="color: red;text-align:right;font-size:11px">
+                                                        @ViewBag.Message
+                                                    </font>
+                                                }
+                                               
+                                          <tr>
+                                              <td>@Html.LabelFor(a => a.email_usuario)</td>
+                                              <td>@Html.TextBoxFor(a => a.email_usuario)</td>
+                                              <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.email_usuario)</font> </td>
+                                          </tr>
+                                          <tr>
+                                              <td>@Html.LabelFor(a => a.senha_usuario)</td>
+                                              <td>@Html.PasswordFor(a => a.senha_usuario)</td>
+                                              <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.senha_usuario)</font> </td>
+                                          </tr>                                          
+                                          <tr>
+                                              <td></td>                                              
+                                              <td><input type="submit" value="Entrar" class="btnLogin" />
+                                                  
+                                              </td>
+                                          </tr>
+                                          }
+                                      </tbody>                                      
+                                  </table>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

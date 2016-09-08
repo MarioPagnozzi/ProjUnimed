@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;    
+    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
+    
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Contents/Master.css" rel="stylesheet" />
+    <!--[if lt IE 7] /* Ver [C14 S14.5] */
+    <script type="text/javascript">
+        function IEHoverPseudo() {
+            var navItems = document.getElementById("nav").getElementsByTagName("li");
+            for (var i=0; i < navItems.length; i++) {
+                if (navItems[i].className=="submenu") {
+                    navItems[i].onmouseover=function() {this.className += "over";}
+                    navItems[i].onmouseout=function() {this.className = "submenu";}
+                }
+            }
+        }
+    </script>
+        <![endif]-->
+    <title>@ViewBag.Titulo</title>
+</head>
+<body>
+    <div id="menulateral">
+        <img src="~/Contents/Images/unimedBranco.png" id="imageLogo" />
+            <ul id="nav">
+                <li class="submenu"><a href="#">Cadastro</a>
+                    <ul>
+                        @if (up.operadora == 1)
+                        {
+                            <li>@Html.ActionLink("Operadora","Operadora","Operadora")</li>
+                        }
+                        @if (up.grupo == 1)
+                        {
+                            <li>@Html.ActionLink("Grupo","Grupo","Grupo")</li>
+                        }
+                        @if (up.usuario == 1)
+                        {
+                            <li>@Html.ActionLink("Usuario","Usuario","Usuario")</li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        
+    </div>
+    <header>
+        <div id="Divtopo">
+            <p id="txttopo">
+                @Session["usuariologadonome"].ToString() - Dia: @Session["datalogado"].ToString() às @Session["horalogado"].ToString()  - 
+                @Html.ActionLink("[Logout]","Logout", "Home",new object {}, new { @class="logout" }) <br/>
+
+            </p>
+        </div>
+    </header>    
+    <div id="corposite">
+                     
+        @RenderBody()       
+           
+       
+    </div>
+    <div id="divRodape">
+       
+            <p id="txtRodape">
+              &reg Copy Right - Leopoldo Sistema - Todos os direitos reservados
+            </p>
+        
+    </div>
+</body>
+</html>
+
