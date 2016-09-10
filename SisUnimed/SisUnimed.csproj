@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassesProjeto.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -173,6 +174,7 @@
     <Content Include="Contents\Images\btnLogin-1.png" />
     <Content Include="Contents\Images\btnLoginOff.png" />
     <Content Include="Contents\Images\fundohome.jpg" />
+    <Content Include="Contents\Images\Lupa.png" />
     <Content Include="Contents\Images\seta.png" />
     <Content Include="Contents\Images\unimed.png" />
     <Content Include="Contents\Images\unimedBranco.png" />

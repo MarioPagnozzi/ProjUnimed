@@ -40,6 +40,7 @@ namespace SisUnimed.Controllers
         public ActionResult logout()
         {
             Session.Abandon();
+            Npgsql.NpgsqlConnection.ClearAllPools();
             return RedirectToAction("Login", "Login");
         }
 

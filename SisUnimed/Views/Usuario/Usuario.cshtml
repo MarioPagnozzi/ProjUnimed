@@ -1,12 +1,159 @@
-﻿@model IEnumerable<SisUnimed.Models.usuario>
+﻿@model SisUnimed.Models.usuario
+
 
 @{
     ViewBag.Title = "Usuario";
     Layout = "~/Views/Home/Index.cshtml";
-   
-    
+    @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
+    IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
+    IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["LitaUsuario"];   
+    List<SelectListItem> listacampo = new List<SelectListItem>();
+    listacampo.Add(new SelectListItem{
+        Text="Código",
+        Value="codigo"
+    });
+    listacampo.Add(new SelectListItem{
+       Text="Nome",
+       Value="nome",
+       Selected=true 
+    });
+    listacampo.Add(new SelectListItem{
+        Text="E-mail",
+        Value="email"
+    });
+    listacampo.Add(new SelectListItem{
+        Text="Operadora",
+        Value="operadora"
+    });
+    listacampo.Add(new SelectListItem{
+        Text="Grupo",
+        Value="grupo"
+    });
+    List<SelectListItem> listatipo = new List<SelectListItem>();
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Inicia com",
+        Value = "inicia",
+        Selected=true
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Contém",
+        Value = "contem"
+        
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Termina com",
+        Value = "termina"
+    });
+    IEnumerable<SisUnimed.Models.ListaOperadora> listaoperadora = (IEnumerable<SisUnimed.Models.ListaOperadora>)ViewData["listaoperadora"];
+    IEnumerable<SisUnimed.Models.ListaGrupo> listagrupo = (IEnumerable<SisUnimed.Models.ListaGrupo>)ViewData["listagrupo"];
+
+    List<SelectListItem> operadoras = new List<SelectListItem>();
+    foreach (var op in listaoperadora){
+        operadoras.Add( new SelectListItem{
+            Text = op.desc_op,
+            Value = op.cod_op.ToString()
+        
+        });
+    };
+    List<SelectListItem> grupos = new List<SelectListItem>();
+    foreach (var gp in listagrupo)
+    {
+        grupos.Add(new SelectListItem
+        {
+            Text = gp.desc_grupo,
+            Value = gp.cod_grupo.ToString()
+
+        });
+    };
 }
 
 <h2 id="txtTitulo">Cadastro de Usuário</h2>
 <hr />
-@Html.Partial("ListaUsuario")
+ <div id="divPesq">
+     <fieldset>
+        <legend>Pesquisa</legend>
+ <table class="tblPesquisa">
+              
+            @using (Html.BeginForm("Usuario", "Usuario",FormMethod.Post, new { @id = "formPesquisa" })){
+            <tr>
+                <td>
+                    @Html.Label("Pesquisar Por:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("campo",listacampo)
+                </td>
+                 <td>
+                    @Html.Label("Tipo:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("tipo",listatipo)
+                </td>
+                 <td>
+                    @Html.Label("Conteúdo Pesquisa:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.TextBox("pesquisa")
+                </td>
+                 <td>
+                    <button type="submit" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
+                </td>
+
+            </tr>
+            }
+  
+
+</table>
+</fieldset>
+ </div>
+    <div id="divCadastro">
+        <fieldset>
+            <legend>Cadastro</legend>
+            <table class="tblPesquisa">
+                
+                @using (Html.BeginForm("Usario","Usuario",FormMethod.Post, new{@id="formCadastro"})){
+                    <tr>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.nome_usuario)</font></td>
+                       <td></td>
+                       <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.email_usuario)</font></td>
+                   </tr> 
+                   <tr>
+                       <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
+                       <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true" })</td>
+                       <td>@Html.LabelFor(a => a.nome_usuario,new {@class="txtcorposite"})</td>
+                       <td>@Html.TextBoxFor(a => a.nome_usuario, new { @size = "30" })</td>
+                       <td>@Html.LabelFor(a => a.email_usuario, new {@class="txtcorposite"})</td>
+                       <td>@Html.TextBoxFor(a => a.email_usuario, new {@size = "50"})</td>
+                   </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(a => a.id_operadora)</td>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(a => a.id_grupo)</td>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(a => a.senha_usuario)</td>
+                    </tr> 
+                    <tr>
+                        <td>@Html.LabelFor(a => a.id_operadora,new{@class="txtcorposite"})</td>
+                        <td>@Html.DropDownListFor(a => a.id_operadora,operadoras)</td>
+                        <td>@Html.LabelFor(a => a.id_grupo,new{@class="txtcorposite"})</td>
+                        <td>@Html.DropDownListFor(a => a.id_grupo,grupos)</td>
+                        <td>@Html.LabelFor(a => a.senha_usuario, new{@class="txtcorposite"})</td>
+                        <td>@Html.PasswordFor(a => a.senha_usuario)</td>
+                    </tr>
+                    
+                }
+            </table>
+        </fieldset>
+    </div>
+    <div id="divGrid">
+        <fieldset>
+            <legend>Usuários</legend>
+                @Html.Partial("ListaUsuario",resultadolista)
+        </fieldset>
+    </div>

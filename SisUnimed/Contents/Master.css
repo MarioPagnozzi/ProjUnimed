@@ -15,6 +15,7 @@
     border-style: double;
     border-color: white;
     border-spacing: 5px;
+    z-index:200;
 }
 #imageLogo {
     top: 1%;
@@ -29,6 +30,7 @@
     left: 10.8%;
     width:89%;
     height:10%;    
+    z-index:100;
 }
 #txttopo {
     border-bottom: 1px;
@@ -52,6 +54,7 @@
     position: absolute;
     left: 10.8%;
     width:89%;
+    z-index:100;
        
 }
 #txtRodape {
@@ -78,6 +81,7 @@ ul#nav, ul#nav li ul {
     border: solid #FFF;
     border-width: 0 1px 1px;
     background-color:darkgoldenrod;
+    z-index:201;
    
 }
     ul#nav li {
@@ -90,6 +94,7 @@ ul#nav, ul#nav li ul {
             display: none;
             margin-top:0;
             width:90%;
+            z-index:202;
         }
         ul#nav li a, ul#nav ul li a {
             display: block;
@@ -97,18 +102,21 @@ ul#nav, ul#nav li ul {
             color: #FFF;
             padding: 0.25em 0.5em 0.25em 0.75em;
             border-top: 1px solid #FFF;
+            z-index:203;
         }
         ul#nav li.submenu {
             background: transparent url("/Contents/Images/seta.png") no-repeat right;
             background-size: 10px;
+            z-index:204;
         }
         ul#nav li a:hover {
-            background-color:gold;
+            background-color:goldenrod;
         }
         /*\*/
 *html ul li {
     float: left;
     height: 1%;
+    z-index:205;
 }
     *html ul li a {
         height: 1%;
@@ -116,6 +124,7 @@ ul#nav, ul#nav li ul {
     /* */
 ul#nav li:hover ul, ul#nav li.over ul {
     display: block;
+    z-index:206;
     
 }
 #corposite {
@@ -139,3 +148,148 @@ hr {
     align-self:stretch;
     
 }
+.table {
+    border: 1px;
+    text-decoration: none;
+    font-family: sans-serif,Verdana,'News701 BT';
+    text-decoration: none;
+    border: 1px solid #FFF;
+    padding:0;
+    grid-cell:inherit;
+    font-size: 14px;
+    width: 100%;
+    z-index:105;
+}
+.table {
+    font-family: sans-serif,Verdana,'News701 BT';
+    text-decoration: none;
+    border: 1px;
+    padding:0;
+    border-collapse: separate;
+    z-index:106;
+    
+}
+    .table th {
+        background-color: darkgoldenrod;
+        font-weight:bold;
+        font-size: 14px;
+        color: black;
+        z-index:107;
+    }
+        .table th:hover {
+            background-color:goldenrod;
+        }
+    .table td {
+        border-bottom: 1px solid #FFF;
+        padding:0;
+        font-size: 12px;
+        z-index:108;
+    }        
+    .table a {
+        text-decoration: none;
+        z-index:109;
+    }
+        .table a:link {
+            color:black;
+        }
+        .table a:visited {
+            color:black;
+        }
+        .table a:active {
+            color:black;
+        }
+.alternate {
+    background-color: gray;
+    z-index:110;
+}
+.selected {
+    background-color: azure;
+    z-index:111;
+}
+#formPesquisa {
+    position: absolute;
+    display: block;
+    margin-top: 0em;
+    z-index:112;
+}
+#formPesquisa input.campo {
+    position:absolute;
+    width: 50px;
+
+}
+    #formPesquisa input.tipo {
+        position:absolute;
+        width: 50px;
+    }
+    #formPesquisa input.pesquisa {
+        position:absolute;
+        width: 100px;
+    }
+ #btnPesquisa {
+    background: transparent url("/Contents/Images/Lupa.png") no-repeat right;  
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    padding: 0px;   
+    border: none;
+    
+}
+
+.tblPesquisa {
+        width:auto;
+        height:auto;
+    }
+.tblPesquisa tbody {
+        width:99%;
+        height:auto;
+    }
+legend
+{
+    font-weight:bold;
+    font-family: "Segoe UI";
+    z-index:114;
+}
+#divPesq {
+    width:98%;
+    position:relative;
+    z-index:115;
+    top:initial;
+}
+#divPesq fieldset {
+        width: 99%;
+        height: auto;
+        z-index:113;
+    }
+#divGrid {
+    width:98%;    
+    z-index:116;
+}
+    #divGrid fieldset {
+        
+        width: 99%;
+        height: auto;
+        z-index:117;
+    }
+#formcadastro {
+    position: absolute;
+    display: block;
+    margin-top: 0em;
+    z-index:118;
+}
+#formCadastro input.texto {
+    position:absolute;
+    /*width: 50px;*/
+
+}
+#divCadastro {
+    width:98%;
+    /*position:relative;*/
+    z-index:119;
+    top:initial;
+}
+#divCadastro fieldset {
+        width: 99%;
+        height: auto;
+        z-index:120;
+    }
+    

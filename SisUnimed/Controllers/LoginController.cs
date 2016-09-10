@@ -20,6 +20,7 @@ namespace SisUnimed.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(usuario u)
         {
+            Npgsql.NpgsqlConnection.ClearAllPools();
             if (ModelState.IsValidField("email_usuario") && ModelState.IsValidField("senha_usuario"))
             {
                 using (UnimedEntities1 ul = new UnimedEntities1())
