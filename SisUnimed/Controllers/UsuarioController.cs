@@ -163,7 +163,7 @@ namespace SisUnimed.Controllers
         }
         public ActionResult Incluir()
         {
-            ViewBag.Action = "Inserir";
+            
             using (UnimedEntities1 up = new UnimedEntities1())
                 {
                     int usuario_id = int.Parse(Session["usuariologadoId"].ToString());
@@ -203,11 +203,21 @@ namespace SisUnimed.Controllers
                                  cod_grupo = a.id,
                                  desc_grupo = a.nome_grupo
                              };
+                    usuario usuario = new usuario();
+                    usuario_permissao usupermissao = new usuario_permissao();
+                    var vDetalheUsuarioPermissao = new ViewModelDetalhePermisao
+                    {
+                        VusuarioPermissao = usupermissao,
+                        Vusuario = usuario
+
+                    };
                     ViewData["listagrupo"] = gp.ToList();
                     ViewData["LitaUsuario"] = md.ToList();
+                    ViewBag.Action = "Inserir";
+                    return View("Usuario",vDetalheUsuarioPermissao);
                 }
            
-            return View("Usuario");
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
