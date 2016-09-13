@@ -1,0 +1,86 @@
+﻿@model SisUnimed.Models.ViewModelDetalhePermisao
+@{       
+    
+    @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
+    IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
+    //SisUnimed.Models.usuario_permissao usuariopermissao = new SisUnimed.Models.usuario_permissao();
+    
+   List<SelectListItem> simenao = new List<SelectListItem>();
+   simenao.Add(new SelectListItem{
+       Text = "Sim",
+       Value = "1"
+   });
+   simenao.Add(new SelectListItem{
+       Text = "Não",
+       Value = "0"
+   });
+}
+
+@if (Model != null)
+{
+    using (@Html.BeginForm("EditarPermissao","Usuario",FormMethod.Post, new { @id="FormCadastro"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(b => b.VusuarioPermissao.id, new { value =  Model.VusuarioPermissao.id })
+        @Html.HiddenFor(b => b.VusuarioPermissao.id_usuario, new { value =  Model.VusuarioPermissao.id_usuario })
+       <table class="table">
+           <thead>
+               <tr class="header">
+                   <th scope="col">Descrição Tabela</th>
+                   <th scope="col">Visualizar</th>
+                   <th scope="col">Inserir</th>
+                   <th scope="col">Atualizar</th>
+                   <th scope="col">Excluir</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>Operadoras</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.operadora, simenao, new { value = Model.VusuarioPermissao.operadora})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.operadora_i, simenao,new { value =  Model.VusuarioPermissao.operadora_i})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.operadora_a, simenao,new { value =  Model.VusuarioPermissao.operadora_a})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.operadora_d, simenao,new { value =  Model.VusuarioPermissao.operadora_d})</td>
+
+               </tr>
+               <tr class="alternate">
+                   <td>Usuario</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario,simenao,new { value =  Model.VusuarioPermissao.usuario})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_i, simenao,new { value =  Model.VusuarioPermissao.usuario_i})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_a, simenao,new { value = Model.VusuarioPermissao.usuario_a})</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_d, simenao,new { value =  Model.VusuarioPermissao.usuario_d})</td>
+               </tr>
+               <tr>
+                   <td>Grupo</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo, simenao, new { value =  Model.VusuarioPermissao.grupo })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_i,simenao,new { value =  Model.VusuarioPermissao.grupo_i })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_a,simenao,new { value =  Model.VusuarioPermissao.grupo_a })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_d, simenao,new { value =  Model.VusuarioPermissao.grupo_d })</td>
+               </tr>
+               <tr class="alternate">
+                   <td>Permissão de Grupo</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_permissao, simenao, new { value =  Model.VusuarioPermissao.grupo_permissao })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_permissao_i,simenao,new { value =  Model.VusuarioPermissao.grupo_permissao_i })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_permissao_a,simenao,new { value =  Model.VusuarioPermissao.grupo_permissao_a })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.grupo_permissao_d,simenao,new { value =  Model.VusuarioPermissao.grupo_permissao_d })</td>
+               </tr>
+               <tr>
+                   <td>Permissao de Usuário</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_permissao1, simenao, new { value =  Model.VusuarioPermissao.usuario_permissao1 })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_permissao_i,simenao,new { value =  Model.VusuarioPermissao.usuario_permissao_i })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_permissao_a,simenao,new { value =  Model.VusuarioPermissao.usuario_permissao_a })</td>
+                   <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_permissao_d,simenao,new { value =  Model.VusuarioPermissao.usuario_permissao_d })</td>
+               </tr>
+               <tr>
+                   <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+               </tr>
+           </tbody>
+
+       </table>
+    }      
+} else {
+    
+    <font style='color: red;text-align:right;font-size:11px'>Não existe usuário selecionado</font>    
+}
+
+

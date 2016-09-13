@@ -4,7 +4,54 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UnimedModel.Store" Provider="Npgsql" ProviderManifestToken="9.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UnimedModel.Store" Provider="Npgsql" ProviderManifestToken="9.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="classificacoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="especialidades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_razao_social" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="c_email_principal" Type="varchar" MaxLength="100" />
+          <Property Name="c_codigo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="c_cnpj" Type="varchar" MaxLength="20" />
+          <Property Name="c_responsavel" Type="varchar" MaxLength="200" />
+          <Property Name="operadora" Type="int8" Nullable="false" />
+          <Property Name="f_situacao" Type="int4" Nullable="false" />
+          <Property Name="f_tipo_fornecedor" Type="int4" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
         <EntityType Name="grupo">
           <Key>
             <PropertyRef Name="id" />
@@ -39,6 +86,99 @@
           <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
         </EntityType>
+        <EntityType Name="importacao_xls">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="d_importacao" Type="timestamp" Nullable="false" />
+          <Property Name="c_numero" Type="varchar" MaxLength="10" />
+          <Property Name="c_fabricante" Type="varchar" MaxLength="200" />
+          <Property Name="c_fornecedor_cadastrado" Type="varchar" MaxLength="200" />
+          <Property Name="c_cnpj_forncedor" Type="varchar" MaxLength="20" />
+          <Property Name="c_tnumm" Type="varchar" MaxLength="10" />
+          <Property Name="c_dv2" Type="varchar" MaxLength="10" />
+          <Property Name="c_codigo_tuss" Type="varchar" MaxLength="20" />
+          <Property Name="c_cod_ref_fabr" Type="varchar" MaxLength="20" />
+          <Property Name="c_nome_comercial" Type="varchar" MaxLength="200" />
+          <Property Name="c_descricao_tecnica" Type="varchar" MaxLength="200" />
+          <Property Name="c_descricao_generica" Type="varchar" MaxLength="200" />
+          <Property Name="c_preco" Type="varchar" MaxLength="20" />
+          <Property Name="c_vigencia" Type="varchar" MaxLength="20" />
+          <Property Name="c_rms" Type="varchar" MaxLength="20" />
+          <Property Name="c_validade" Type="varchar" MaxLength="20" />
+          <Property Name="c_classificacao" Type="varchar" MaxLength="200" />
+          <Property Name="c_especialidade" Type="varchar" MaxLength="200" />
+          <Property Name="c_origem" Type="varchar" MaxLength="20" />
+          <Property Name="c_observacao" Type="varchar" MaxLength="200" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="f_situacao" Type="int4" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="marcas_operadoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="int8" Nullable="false" />
+          <Property Name="operadora" Type="int8" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="materiais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_tnumm" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="c_cod_ref_fabr" Type="varchar" MaxLength="100" />
+          <Property Name="c_nome_material" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="c_registro_anvisa" Type="varchar" MaxLength="20" />
+          <Property Name="d_validade" Type="timestamp" />
+          <Property Name="d_inicio_vigencia" Type="timestamp" />
+          <Property Name="d_fim_vigencia" Type="timestamp" />
+          <Property Name="fornecedor" Type="int8" />
+          <Property Name="v_preco" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="f_status" Type="int4" Nullable="false" />
+          <Property Name="f_distribuidor_exclusivo" Type="bool" Nullable="false" />
+          <Property Name="f_nao_negociado" Type="bool" Nullable="false" />
+          <Property Name="classificacao" Type="int8" />
+          <Property Name="marca" Type="int8" />
+          <Property Name="f_origem" Type="int4" Nullable="false" />
+          <Property Name="unidade" Type="int8" />
+          <Property Name="c_nome_comercial" Type="varchar" MaxLength="200" />
+          <Property Name="c_codigo_tuss" Type="varchar" MaxLength="20" />
+          <Property Name="c_composicao" Type="text" />
+          <Property Name="c_descricao_generica" Type="text" />
+          <Property Name="c_justificativa_alteracao" Type="text" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
         <EntityType Name="operadora">
           <Key>
             <PropertyRef Name="id" />
@@ -46,6 +186,34 @@
           <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cod_operadora" Type="int4" Nullable="false" />
           <Property Name="nome_operadora" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="operadoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_cod_operadora" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="unidades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_sigla" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -85,6 +253,18 @@
           <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
         </EntityType>
+        <Association Name="fornecedores_operadora_fkey">
+          <End Role="operadoras" Type="Self.operadoras" Multiplicity="1" />
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores">
+              <PropertyRef Name="operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="grupo_permissao_id_grupo_fkey">
           <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
           <End Role="grupo_permissao" Type="Self.grupo_permissao" Multiplicity="*" />
@@ -94,6 +274,78 @@
             </Principal>
             <Dependent Role="grupo_permissao">
               <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="marcas_operadoras_marca_fkey">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+          <End Role="marcas_operadoras" Type="Self.marcas_operadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="marcas_operadoras">
+              <PropertyRef Name="marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="marcas_operadoras_operadora_fkey">
+          <End Role="operadoras" Type="Self.operadoras" Multiplicity="1" />
+          <End Role="marcas_operadoras" Type="Self.marcas_operadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="marcas_operadoras">
+              <PropertyRef Name="operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_classificacao_fkey">
+          <End Role="classificacoes" Type="Self.classificacoes" Multiplicity="0..1" />
+          <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classificacoes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais">
+              <PropertyRef Name="classificacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="0..1" />
+          <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_marca_fkey">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais">
+              <PropertyRef Name="marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_unidade_fkey">
+          <End Role="unidades" Type="Self.unidades" Multiplicity="0..1" />
+          <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais">
+              <PropertyRef Name="unidade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -133,15 +385,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        
+        
         <EntityContainer Name="UnimedModelStoreContainer">
+          <EntitySet Name="classificacoes" EntityType="Self.classificacoes" Schema="public" store:Type="Tables" />
+          <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores" EntityType="Self.fornecedores" Schema="public" store:Type="Tables" />
           <EntitySet Name="grupo" EntityType="Self.grupo" Schema="public" store:Type="Tables" />
           <EntitySet Name="grupo_permissao" EntityType="Self.grupo_permissao" Schema="public" store:Type="Tables" />
+          <EntitySet Name="importacao_xls" EntityType="Self.importacao_xls" Schema="public" store:Type="Tables" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" Schema="public" store:Type="Tables" />
+          <EntitySet Name="marcas_operadoras" EntityType="Self.marcas_operadoras" Schema="public" store:Type="Tables" />
+          <EntitySet Name="materiais" EntityType="Self.materiais" Schema="public" store:Type="Tables" />
           <EntitySet Name="operadora" EntityType="Self.operadora" Schema="public" store:Type="Tables" />
+          <EntitySet Name="operadoras" EntityType="Self.operadoras" Schema="public" store:Type="Tables" />
+          <EntitySet Name="unidades" EntityType="Self.unidades" Schema="public" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="public" store:Type="Tables" />
           <EntitySet Name="usuario_permissao" EntityType="Self.usuario_permissao" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fornecedores_operadora_fkey" Association="Self.fornecedores_operadora_fkey">
+            <End Role="operadoras" EntitySet="operadoras" />
+            <End Role="fornecedores" EntitySet="fornecedores" />
+          </AssociationSet>
           <AssociationSet Name="grupo_permissao_id_grupo_fkey" Association="Self.grupo_permissao_id_grupo_fkey">
             <End Role="grupo" EntitySet="grupo" />
             <End Role="grupo_permissao" EntitySet="grupo_permissao" />
+          </AssociationSet>
+          <AssociationSet Name="marcas_operadoras_marca_fkey" Association="Self.marcas_operadoras_marca_fkey">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="marcas_operadoras" EntitySet="marcas_operadoras" />
+          </AssociationSet>
+          <AssociationSet Name="marcas_operadoras_operadora_fkey" Association="Self.marcas_operadoras_operadora_fkey">
+            <End Role="operadoras" EntitySet="operadoras" />
+            <End Role="marcas_operadoras" EntitySet="marcas_operadoras" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_classificacao_fkey" Association="Self.materiais_classificacao_fkey">
+            <End Role="classificacoes" EntitySet="classificacoes" />
+            <End Role="materiais" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_fornecedor_fkey" Association="Self.materiais_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="materiais" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_marca_fkey" Association="Self.materiais_marca_fkey">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="materiais" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_unidade_fkey" Association="Self.materiais_unidade_fkey">
+            <End Role="unidades" EntitySet="unidades" />
+            <End Role="materiais" EntitySet="materiais" />
           </AssociationSet>
           <AssociationSet Name="usuario_id_grupo_fkey" Association="Self.usuario_id_grupo_fkey">
             <End Role="grupo" EntitySet="grupo" />
@@ -156,8 +447,7 @@
             <End Role="usuario_permissao" EntitySet="usuario_permissao" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UnimedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -319,7 +609,310 @@
             <End Role="usuario" EntitySet="usuarios" />
             <End Role="usuario_permissao" EntitySet="usuario_permissao" />
           </AssociationSet>
+          <EntitySet Name="classificacoes" EntityType="UnimedModel.classificaco" />
+          <EntitySet Name="especialidades" EntityType="UnimedModel.especialidade" />
+          <EntitySet Name="fornecedores" EntityType="UnimedModel.fornecedore" />
+          <EntitySet Name="importacao_xls" EntityType="UnimedModel.importacao_xls" />
+          <EntitySet Name="marcas" EntityType="UnimedModel.marca" />
+          <EntitySet Name="marcas_operadoras" EntityType="UnimedModel.marcas_operadoras" />
+          <EntitySet Name="materiais" EntityType="UnimedModel.materiai" />
+          <EntitySet Name="operadoras1" EntityType="UnimedModel.operadora1" />
+          <EntitySet Name="unidades" EntityType="UnimedModel.unidade" />
+          <AssociationSet Name="materiais_classificacao_fkey" Association="UnimedModel.materiais_classificacao_fkey">
+            <End Role="classificaco" EntitySet="classificacoes" />
+            <End Role="materiai" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_operadora_fkey" Association="UnimedModel.fornecedores_operadora_fkey">
+            <End Role="operadora1" EntitySet="operadoras1" />
+            <End Role="fornecedore" EntitySet="fornecedores" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_fornecedor_fkey" Association="UnimedModel.materiais_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="materiai" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="marcas_operadoras_marca_fkey" Association="UnimedModel.marcas_operadoras_marca_fkey">
+            <End Role="marca" EntitySet="marcas" />
+            <End Role="marcas_operadoras" EntitySet="marcas_operadoras" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_marca_fkey" Association="UnimedModel.materiais_marca_fkey">
+            <End Role="marca" EntitySet="marcas" />
+            <End Role="materiai" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="marcas_operadoras_operadora_fkey" Association="UnimedModel.marcas_operadoras_operadora_fkey">
+            <End Role="operadora1" EntitySet="operadoras1" />
+            <End Role="marcas_operadoras" EntitySet="marcas_operadoras" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_unidade_fkey" Association="UnimedModel.materiais_unidade_fkey">
+            <End Role="unidade" EntitySet="unidades" />
+            <End Role="materiai" EntitySet="materiais" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="classificaco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiais" Relationship="UnimedModel.materiais_classificacao_fkey" FromRole="classificaco" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="especialidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+        </EntityType>
+        <EntityType Name="fornecedore">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_razao_social" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_email_principal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="c_codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_responsavel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="operadora" Type="Int64" Nullable="false" />
+          <Property Name="f_situacao" Type="Int32" Nullable="false" />
+          <Property Name="f_tipo_fornecedor" Type="Int32" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="operadora1" Relationship="UnimedModel.fornecedores_operadora_fkey" FromRole="fornecedore" ToRole="operadora1" />
+          <NavigationProperty Name="materiais" Relationship="UnimedModel.materiais_fornecedor_fkey" FromRole="fornecedore" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="importacao_xls">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="d_importacao" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="c_numero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_fabricante" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_fornecedor_cadastrado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_cnpj_forncedor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_tnumm" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_dv2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_codigo_tuss" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_cod_ref_fabr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_nome_comercial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao_tecnica" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao_generica" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_preco" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_vigencia" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_rms" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_validade" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_classificacao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_especialidade" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_origem" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_observacao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+        </EntityType>
+        <EntityType Name="marca">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="f_situacao" Type="Int32" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="marcas_operadoras" Relationship="UnimedModel.marcas_operadoras_marca_fkey" FromRole="marca" ToRole="marcas_operadoras" />
+          <NavigationProperty Name="materiais" Relationship="UnimedModel.materiais_marca_fkey" FromRole="marca" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="marcas_operadoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="Int64" Nullable="false" />
+          <Property Name="operadora" Type="Int64" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="marca1" Relationship="UnimedModel.marcas_operadoras_marca_fkey" FromRole="marcas_operadoras" ToRole="marca" />
+          <NavigationProperty Name="operadora1" Relationship="UnimedModel.marcas_operadoras_operadora_fkey" FromRole="marcas_operadoras" ToRole="operadora1" />
+        </EntityType>
+        <EntityType Name="materiai">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_tnumm" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_cod_ref_fabr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="c_nome_material" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_registro_anvisa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="d_validade" Type="DateTime" Precision="6" />
+          <Property Name="d_inicio_vigencia" Type="DateTime" Precision="6" />
+          <Property Name="d_fim_vigencia" Type="DateTime" Precision="6" />
+          <Property Name="fornecedor" Type="Int64" />
+          <Property Name="v_preco" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="f_status" Type="Int32" Nullable="false" />
+          <Property Name="f_distribuidor_exclusivo" Type="Boolean" Nullable="false" />
+          <Property Name="f_nao_negociado" Type="Boolean" Nullable="false" />
+          <Property Name="classificacao" Type="Int64" />
+          <Property Name="marca" Type="Int64" />
+          <Property Name="f_origem" Type="Int32" Nullable="false" />
+          <Property Name="unidade" Type="Int64" />
+          <Property Name="c_nome_comercial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_codigo_tuss" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_composicao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao_generica" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="c_justificativa_alteracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="classificaco" Relationship="UnimedModel.materiais_classificacao_fkey" FromRole="materiai" ToRole="classificaco" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.materiais_fornecedor_fkey" FromRole="materiai" ToRole="fornecedore" />
+          <NavigationProperty Name="marca1" Relationship="UnimedModel.materiais_marca_fkey" FromRole="materiai" ToRole="marca" />
+          <NavigationProperty Name="unidade1" Relationship="UnimedModel.materiais_unidade_fkey" FromRole="materiai" ToRole="unidade" />
+        </EntityType>
+        <EntityType Name="operadora1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_cod_operadora" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedores" Relationship="UnimedModel.fornecedores_operadora_fkey" FromRole="operadora1" ToRole="fornecedore" />
+          <NavigationProperty Name="marcas_operadoras" Relationship="UnimedModel.marcas_operadoras_operadora_fkey" FromRole="operadora1" ToRole="marcas_operadoras" />
+        </EntityType>
+        <EntityType Name="unidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_sigla" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiais" Relationship="UnimedModel.materiais_unidade_fkey" FromRole="unidade" ToRole="materiai" />
+        </EntityType>
+        <Association Name="materiais_classificacao_fkey">
+          <End Type="UnimedModel.classificaco" Role="classificaco" Multiplicity="0..1" />
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classificaco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiai">
+              <PropertyRef Name="classificacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_operadora_fkey">
+          <End Type="UnimedModel.operadora1" Role="operadora1" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedore">
+              <PropertyRef Name="operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="0..1" />
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiai">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="marcas_operadoras_marca_fkey">
+          <End Type="UnimedModel.marca" Role="marca" Multiplicity="1" />
+          <End Type="UnimedModel.marcas_operadoras" Role="marcas_operadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="marcas_operadoras">
+              <PropertyRef Name="marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_marca_fkey">
+          <End Type="UnimedModel.marca" Role="marca" Multiplicity="0..1" />
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiai">
+              <PropertyRef Name="marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="marcas_operadoras_operadora_fkey">
+          <End Type="UnimedModel.operadora1" Role="operadora1" Multiplicity="1" />
+          <End Type="UnimedModel.marcas_operadoras" Role="marcas_operadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="marcas_operadoras">
+              <PropertyRef Name="operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_unidade_fkey">
+          <End Type="UnimedModel.unidade" Role="unidade" Multiplicity="0..1" />
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiai">
+              <PropertyRef Name="unidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -408,6 +1001,183 @@
                 <ScalarProperty Name="usuario_permissao_i" ColumnName="usuario_permissao_i" />
                 <ScalarProperty Name="usuario_permissao_a" ColumnName="usuario_permissao_a" />
                 <ScalarProperty Name="usuario_permissao_d" ColumnName="usuario_permissao_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="classificacoes">
+            <EntityTypeMapping TypeName="UnimedModel.classificaco">
+              <MappingFragment StoreEntitySet="classificacoes">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="especialidades">
+            <EntityTypeMapping TypeName="UnimedModel.especialidade">
+              <MappingFragment StoreEntitySet="especialidades">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="c_codigo" ColumnName="c_codigo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedore">
+              <MappingFragment StoreEntitySet="fornecedores">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="f_tipo_fornecedor" ColumnName="f_tipo_fornecedor" />
+                <ScalarProperty Name="f_situacao" ColumnName="f_situacao" />
+                <ScalarProperty Name="operadora" ColumnName="operadora" />
+                <ScalarProperty Name="c_responsavel" ColumnName="c_responsavel" />
+                <ScalarProperty Name="c_cnpj" ColumnName="c_cnpj" />
+                <ScalarProperty Name="c_codigo" ColumnName="c_codigo" />
+                <ScalarProperty Name="c_email_principal" ColumnName="c_email_principal" />
+                <ScalarProperty Name="c_razao_social" ColumnName="c_razao_social" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="importacao_xls">
+            <EntityTypeMapping TypeName="UnimedModel.importacao_xls">
+              <MappingFragment StoreEntitySet="importacao_xls">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_observacao" ColumnName="c_observacao" />
+                <ScalarProperty Name="c_origem" ColumnName="c_origem" />
+                <ScalarProperty Name="c_especialidade" ColumnName="c_especialidade" />
+                <ScalarProperty Name="c_classificacao" ColumnName="c_classificacao" />
+                <ScalarProperty Name="c_validade" ColumnName="c_validade" />
+                <ScalarProperty Name="c_rms" ColumnName="c_rms" />
+                <ScalarProperty Name="c_vigencia" ColumnName="c_vigencia" />
+                <ScalarProperty Name="c_preco" ColumnName="c_preco" />
+                <ScalarProperty Name="c_descricao_generica" ColumnName="c_descricao_generica" />
+                <ScalarProperty Name="c_descricao_tecnica" ColumnName="c_descricao_tecnica" />
+                <ScalarProperty Name="c_nome_comercial" ColumnName="c_nome_comercial" />
+                <ScalarProperty Name="c_cod_ref_fabr" ColumnName="c_cod_ref_fabr" />
+                <ScalarProperty Name="c_codigo_tuss" ColumnName="c_codigo_tuss" />
+                <ScalarProperty Name="c_dv2" ColumnName="c_dv2" />
+                <ScalarProperty Name="c_tnumm" ColumnName="c_tnumm" />
+                <ScalarProperty Name="c_cnpj_forncedor" ColumnName="c_cnpj_forncedor" />
+                <ScalarProperty Name="c_fornecedor_cadastrado" ColumnName="c_fornecedor_cadastrado" />
+                <ScalarProperty Name="c_fabricante" ColumnName="c_fabricante" />
+                <ScalarProperty Name="c_numero" ColumnName="c_numero" />
+                <ScalarProperty Name="d_importacao" ColumnName="d_importacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marcas">
+            <EntityTypeMapping TypeName="UnimedModel.marca">
+              <MappingFragment StoreEntitySet="marcas">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="f_situacao" ColumnName="f_situacao" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marcas_operadoras">
+            <EntityTypeMapping TypeName="UnimedModel.marcas_operadoras">
+              <MappingFragment StoreEntitySet="marcas_operadoras">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="operadora" ColumnName="operadora" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materiais">
+            <EntityTypeMapping TypeName="UnimedModel.materiai">
+              <MappingFragment StoreEntitySet="materiais">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_justificativa_alteracao" ColumnName="c_justificativa_alteracao" />
+                <ScalarProperty Name="c_descricao_generica" ColumnName="c_descricao_generica" />
+                <ScalarProperty Name="c_composicao" ColumnName="c_composicao" />
+                <ScalarProperty Name="c_codigo_tuss" ColumnName="c_codigo_tuss" />
+                <ScalarProperty Name="c_nome_comercial" ColumnName="c_nome_comercial" />
+                <ScalarProperty Name="unidade" ColumnName="unidade" />
+                <ScalarProperty Name="f_origem" ColumnName="f_origem" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="classificacao" ColumnName="classificacao" />
+                <ScalarProperty Name="f_nao_negociado" ColumnName="f_nao_negociado" />
+                <ScalarProperty Name="f_distribuidor_exclusivo" ColumnName="f_distribuidor_exclusivo" />
+                <ScalarProperty Name="f_status" ColumnName="f_status" />
+                <ScalarProperty Name="v_preco" ColumnName="v_preco" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="d_fim_vigencia" ColumnName="d_fim_vigencia" />
+                <ScalarProperty Name="d_inicio_vigencia" ColumnName="d_inicio_vigencia" />
+                <ScalarProperty Name="d_validade" ColumnName="d_validade" />
+                <ScalarProperty Name="c_registro_anvisa" ColumnName="c_registro_anvisa" />
+                <ScalarProperty Name="c_nome_material" ColumnName="c_nome_material" />
+                <ScalarProperty Name="c_cod_ref_fabr" ColumnName="c_cod_ref_fabr" />
+                <ScalarProperty Name="c_tnumm" ColumnName="c_tnumm" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operadoras1">
+            <EntityTypeMapping TypeName="UnimedModel.operadora1">
+              <MappingFragment StoreEntitySet="operadoras">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="c_cod_operadora" ColumnName="c_cod_operadora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unidades">
+            <EntityTypeMapping TypeName="UnimedModel.unidade">
+              <MappingFragment StoreEntitySet="unidades">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="c_sigla" ColumnName="c_sigla" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

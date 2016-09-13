@@ -1,12 +1,13 @@
-﻿@model SisUnimed.Models.usuario
-
-
+﻿@model SisUnimed.Models.ViewModelDetalhePermisao
 @{
     ViewBag.Title = "Usuario";
     Layout = "~/Views/Home/Index.cshtml";
     @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
     IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
-    IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["LitaUsuario"];   
+    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;      
+    IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["LitaUsuario"];
+    // Vusuario usuario = (Model.Vusuario)ViewData["usuario"];
+    //SisUnimed.Models.ViewModelDetalhePermisao usuPermissao = (SisUnimed.Models.ViewModelDetalhePermisao)ViewData["usoPermissao"];
     List<SelectListItem> listacampo = new List<SelectListItem>();
     listacampo.Add(new SelectListItem{
         Text="Código",
@@ -47,27 +48,7 @@
         Text = "Termina com",
         Value = "termina"
     });
-    IEnumerable<SisUnimed.Models.ListaOperadora> listaoperadora = (IEnumerable<SisUnimed.Models.ListaOperadora>)ViewData["listaoperadora"];
-    IEnumerable<SisUnimed.Models.ListaGrupo> listagrupo = (IEnumerable<SisUnimed.Models.ListaGrupo>)ViewData["listagrupo"];
-
-    List<SelectListItem> operadoras = new List<SelectListItem>();
-    foreach (var op in listaoperadora){
-        operadoras.Add( new SelectListItem{
-            Text = op.desc_op,
-            Value = op.cod_op.ToString()
-        
-        });
-    };
-    List<SelectListItem> grupos = new List<SelectListItem>();
-    foreach (var gp in listagrupo)
-    {
-        grupos.Add(new SelectListItem
-        {
-            Text = gp.desc_grupo,
-            Value = gp.cod_grupo.ToString()
-
-        });
-    };
+   
 }
 
 <h2 id="txtTitulo">Cadastro de Usuário</h2>
@@ -113,9 +94,21 @@
             <legend>Dados Usuário</legend>
              <table class="btnPesquisa">
                  <tr>
-                     <td><button type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button></td>
-                     <td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>
-                     <td><button id="btnComandos" type="button"><img src="/Contents/Images/btnExcluir.png" /></button></td>
+                     <td>
+                         @if (up.usuario_i == 1)
+                         {                        
+                            <button onclick="location.href='@Url.Action("Incluir","Usuario")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                         }
+                     </td>
+                     @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
+                       
+                     <td>
+                          @if (up.usuario_d == 1 && Model != null)
+                          {
+                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Usuario", new { id = Model.Vusuario.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
+                          }
+                     </td>
+                        
                  </tr>
              </table>
             <div class="conteiner">
@@ -127,52 +120,16 @@
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
-                        <table class="tblPesquisa">
-               
-                            @using (Html.BeginForm("Usario","Usuario",FormMethod.Post, new{@id="formCadastro"})){
-                                <tr>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.nome_usuario)</font></td>
-                                   <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.email_usuario)</font></td>
-                               </tr> 
-                               <tr>
-                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true" })</td>
-                                   <td>@Html.LabelFor(a => a.nome_usuario,new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.nome_usuario, new { @size = "30" })</td>
-                                   <td>@Html.LabelFor(a => a.email_usuario, new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.email_usuario, new {@size = "50"})</td>
-                               </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.ValidationMessageFor(a => a.id_operadora)</td>
-                                    <td></td>
-                                    <td>@Html.ValidationMessageFor(a => a.id_grupo)</td>
-                                    <td></td>
-                                    <td>@Html.ValidationMessageFor(a => a.senha_usuario)</td>
-                                </tr> 
-                                <tr>
-                                    <td>@Html.LabelFor(a => a.id_operadora,new{@class="txtcorposite"})</td>
-                                    <td>@Html.DropDownListFor(a => a.id_operadora,operadoras)</td>
-                                    <td>@Html.LabelFor(a => a.id_grupo,new{@class="txtcorposite"})</td>
-                                    <td>@Html.DropDownListFor(a => a.id_grupo,grupos)</td>
-                                    <td>@Html.LabelFor(a => a.senha_usuario, new{@class="txtcorposite"})</td>
-                                    <td>@Html.PasswordFor(a => a.senha_usuario)</td>
-                                </tr>
-                                
-                                <tr>                                    
-                                    <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
-                                    <td><button id="btnComandos" type="reset" ><img src="/Contents/Images/btnCancelar.png" /></button></td>
-                                </tr>
-                    
-                            }                    
-                        </table>
+                        @Html.Partial("CadastroUsuario",Model)
                     </div>
-                        <div class="tab-pane " id="tab2">
-                            Tabela de Permissões
+                        <div class="tab-pane" id="tab2"> 
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>@Html.Partial("UsuarioPermissao",Model)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>    

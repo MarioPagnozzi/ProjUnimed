@@ -30,5 +30,14 @@ namespace SisUnimed.Models
         public virtual DbSet<operadora> operadoras { get; set; }
         public virtual DbSet<usuario> usuarios { get; set; }
         public virtual DbSet<usuario_permissao> usuario_permissao { get; set; }
+        public virtual DbSet<classificaco> classificacoes { get; set; }
+        public virtual DbSet<especialidade> especialidades { get; set; }
+        public virtual DbSet<fornecedore> fornecedores { get; set; }
+        public virtual DbSet<importacao_xls> importacao_xls { get; set; }
+        public virtual DbSet<marca> marcas { get; set; }
+        public virtual DbSet<marcas_operadoras> marcas_operadoras { get; set; }
+        public virtual DbSet<materiai> materiais { get; set; }
+        public virtual DbSet<operadora1> operadoras1 { get; set; }
+        public virtual DbSet<unidade> unidades { get; set; }
     }
 }

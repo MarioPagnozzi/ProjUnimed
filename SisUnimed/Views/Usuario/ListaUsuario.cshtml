@@ -10,9 +10,9 @@
 
 @*@grid.GetHtml(columns: grid.Columns(grid.Column("nome_usuario","Nome"), grid.Column("email_usuario","E-mail")))*@
 @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
-    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"Usuario", new{@id=a.id}).ToString()),canSort: true),
-    grid.Column(columnName: "nome_usuario", header: "Nome", format: a => new HtmlString(Html.ActionLink((string)a.nome_usuario.ToString(),"Usuario", new { @id=a.id}).ToString()),canSort: true),
-    grid.Column(columnName: "senha_usuario",header: "E-mail", format: a => new HtmlString(Html.ActionLink((string)a.email_usuario.ToString(),"Usuario", new { @id=a.id}).ToString()),canSort: true),
-    grid.Column(columnName: "grupo",header:"Grupo",format: a => new HtmlString(Html.ActionLink((string)a.nome_grupo.ToString(),"Usuario", new{@id=a.id}).ToString()),canSort: true),
-    grid.Column(columnName: "Operadora",header:"Operadora",format: a => new HtmlString(Html.ActionLink((string)a.nome_operadora.ToString(),"Usuario", new{@id=a.id}).ToString()),canSort: true)
+    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
+    grid.Column(columnName: "nome_usuario", header: "Nome", format: a => new HtmlString(Html.ActionLink((string)a.nome_usuario.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+    grid.Column(columnName: "senha_usuario",header: "E-mail", format: a => new HtmlString(Html.ActionLink((string)a.email_usuario.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+    grid.Column(columnName: "grupo",header:"Grupo",format: a => new HtmlString(Html.ActionLink((string)a.nome_grupo.ToString(),"PreencheCampos", new{id=a.id},null).ToString()),canSort: true),
+    grid.Column(columnName: "Operadora",header:"Operadora",format: a => new HtmlString(Html.ActionLink((string)a.nome_operadora.ToString(),"PreencheCampos", new{id=a.id},null).ToString()),canSort: true)
 })

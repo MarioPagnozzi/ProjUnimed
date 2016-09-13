@@ -14,6 +14,22 @@
         <AssociationConnector Association="UnimedModel.usuario_id_grupo_fkey" ManuallyRouted="false" />
         <AssociationConnector Association="UnimedModel.usuario_id_operadora_fkey" ManuallyRouted="false" />
         <AssociationConnector Association="UnimedModel.usuario_permissao_id_usuario_fkey" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UnimedModel.classificaco" Width="1.5" PointX="13" PointY="14.625" />
+        <EntityTypeShape EntityType="UnimedModel.especialidade" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedore" Width="1.5" PointX="13" PointY="9" />
+        <EntityTypeShape EntityType="UnimedModel.importacao_xls" Width="1.5" PointX="5.75" PointY="10.125" />
+        <EntityTypeShape EntityType="UnimedModel.marca" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UnimedModel.marcas_operadoras" Width="1.5" PointX="13" PointY="4.75" />
+        <EntityTypeShape EntityType="UnimedModel.materiai" Width="1.5" PointX="15.25" PointY="7.625" />
+        <EntityTypeShape EntityType="UnimedModel.operadora1" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="UnimedModel.unidade" Width="1.5" PointX="13" PointY="1" />
+        <AssociationConnector Association="UnimedModel.materiais_classificacao_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_operadora_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.marcas_operadoras_marca_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_marca_fkey" />
+        <AssociationConnector Association="UnimedModel.marcas_operadoras_operadora_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_unidade_fkey" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

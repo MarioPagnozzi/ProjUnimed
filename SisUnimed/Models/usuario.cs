@@ -72,4 +72,9 @@ namespace SisUnimed.Models
         public int cod_grupo { get; set; }
         public string desc_grupo { get; set; }
     }
+    public class ViewModelDetalhePermisao
+    {
+        public usuario_permissao VusuarioPermissao { get; set; }
+        public usuario Vusuario { get; set; }
+    }
 }

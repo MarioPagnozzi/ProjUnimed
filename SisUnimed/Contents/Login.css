@@ -28,6 +28,7 @@
     font-size:large;
     font:bold;
     color:white;
+    position:absolute;
 }
 #tlogin {
     width:100%;
@@ -36,6 +37,7 @@
     bottom:5px;
     left: 5px;
     right: 5px;
+    position:absolute;
 }
 .btnLogin {
     background: url("/Contents/Images/btnLogin-1.png");

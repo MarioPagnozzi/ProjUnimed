@@ -290,6 +290,17 @@ legend
     /*width: 50px;*/
 
 }
+#FormPermissao {
+    position: absolute;
+    display: block;
+    margin-top: 0em;
+    z-index:118;
+}
+#formCadastro input.texto {
+    position:absolute;
+    /*width: 50px;*/
+
+}
 #divCadastro {
     width:98%;
     /*position:relative;*/
