@@ -273,6 +273,10 @@ legend
     width:98%;    
     z-index:116;
 }
+#divGrid1 {
+    width:100%;    
+    z-index:116;
+}
     #divGrid fieldset {
         
         width: 99%;

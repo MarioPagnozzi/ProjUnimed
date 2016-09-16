@@ -4,8 +4,8 @@
     Layout = "~/Views/Home/Index.cshtml";
     @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
     IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
-    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;      
-    IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["LitaUsuario"];
+    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
+    IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["ListaUsuario"];
     // Vusuario usuario = (Model.Vusuario)ViewData["usuario"];
     //SisUnimed.Models.ViewModelDetalhePermisao usuPermissao = (SisUnimed.Models.ViewModelDetalhePermisao)ViewData["usoPermissao"];
     List<SelectListItem> listacampo = new List<SelectListItem>();
@@ -50,6 +50,38 @@
     });
    
 }
+<script type="text/javascript">
+    function er_replace(pattern, replacement, subject) {
+        return subject.replace(pattern, replacement);
+    };
+    $(document).ready(function () {
+        
+        $('#btnPesquisa').click(function () {
+            var vtipo = document.getElementById("tipo").value;
+            var vcampo = document.getElementById("campo").value;
+            var vpesquisa = document.getElementById("pesquisa").value;
+            $.ajax({
+                url: "@Url.Action("Pesquisa","Usuario")",
+                type: "GET",
+                data: { tipo: vtipo, campo: vcampo, pesquisa: vpesquisa },
+                success: function (retorno) {
+                    document.getElementById("divGrid").setAttribute("style","width:100%");
+                    document.getElementById("divGrid").innerHTML = retorno;
+                }
+
+            });
+        });
+
+        $('#pesquisa').keyup(function () {
+            var vcampo = document.getElementById("campo").value;
+            if (vcampo == "codigo") {
+                var $this = $(this);
+                $this.val(er_replace(/[^0-9]+/g, '', $this.val()));
+            }
+        });
+    }),'json';
+
+</script>
 
 <h2 id="txtTitulo">Cadastro de Usuário</h2>
 <hr />
@@ -58,35 +90,35 @@
         <legend>Pesquisa</legend>
  <table class="tblPesquisa">
               
-            @using (Html.BeginForm("Usuario", "Usuario",FormMethod.Post, new { @id = "formPesquisa" })){
+           
             <tr>
                 <td>
                     @Html.Label("Pesquisar Por:", new { @id = "txtcorposite" })
                 </td>
                 <td>
-                    @Html.DropDownList("campo",listacampo)
+                    @Html.DropDownList("campo", listacampo, new { @class="#formPesquisa input" })
                 </td>
                  <td>
                     @Html.Label("Tipo:", new { @id = "txtcorposite" })
                 </td>
                 <td>
-                    @Html.DropDownList("tipo",listatipo)
+                    @Html.DropDownList("tipo",listatipo,new { @class="#formPesquisa input" })
                 </td>
                  <td>
                     @Html.Label("Conteúdo Pesquisa:", new { @id = "txtcorposite" })
                 </td>
                 <td>
-                    @Html.TextBox("pesquisa")
+                    @Html.TextBox("pesquisa","",new { @class="#formPesquisa input" })
                 </td>
                  <td>
-                    <button type="submit" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
+                    <button type="button" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
                 </td>
 
-            </tr>
-            }
+            </tr>          
   
 
 </table>
+     
 </fieldset>
  </div>
     <div id="divCadastro">        
@@ -97,7 +129,7 @@
                      <td>
                          @if (up.usuario_i == 1)
                          {                        
-                            <button onclick="location.href='@Url.Action("Incluir","Usuario")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                            <button onclick="location.href='@Url.Action("Incluir", "Usuario")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
                          }
                      </td>
                      @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
@@ -120,13 +152,13 @@
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
-                        @Html.Partial("CadastroUsuario",Model)
+                        @Html.Partial("CadastroUsuario", Model)
                     </div>
                         <div class="tab-pane" id="tab2"> 
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>@Html.Partial("UsuarioPermissao",Model)</td>
+                                        <td>@Html.Partial("UsuarioPermissao", Model)</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -136,9 +168,6 @@
                 </div>           
         </fieldset>
     </div>
-    <div id="divGrid">
-        <fieldset>
-            <legend>Usuários</legend>
+    
                 @Html.Partial("ListaUsuario",resultadolista)
-        </fieldset>
-    </div>
+      

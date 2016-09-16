@@ -29,20 +29,21 @@ namespace SisUnimed.Controllers
 
                 using (UnimedEntities1 lu = new UnimedEntities1())
                 {
-                    
+
                     var md = from a in lu.usuarios
-                                  join g in lu.grupoes on a.id_grupo equals g.id
-                                  join o in lu.operadoras on a.id_operadora equals o.id
-                                  select new ResultadoLista {
-                                      id = a.id,
-                                      id_grupo = a.id_grupo,
-                                      id_operadora = a.id_operadora,
-                                      nome_usuario = a.nome_usuario,
-                                      senha_usuario = a.senha_usuario,
-                                      email_usuario = a.email_usuario,
-                                      nome_grupo = g.nome_grupo,
-                                      nome_operadora = o.nome_operadora
-                                  };
+                             join g in lu.grupoes on a.id_grupo equals g.id
+                             join o in lu.operadoras on a.id_operadora equals o.id
+                             select new ResultadoLista
+                             {
+                                 id = a.id,
+                                 id_grupo = a.id_grupo,
+                                 id_operadora = a.id_operadora,
+                                 nome_usuario = a.nome_usuario,
+                                 senha_usuario = a.senha_usuario,
+                                 email_usuario = a.email_usuario,
+                                 nome_grupo = g.nome_grupo,
+                                 nome_operadora = o.nome_operadora
+                             };
                     var op = from a in lu.operadoras
                              select new ListaOperadora
                              {
@@ -57,7 +58,7 @@ namespace SisUnimed.Controllers
                                  desc_grupo = a.nome_grupo
                              };
                     ViewData["listagrupo"] = gp.ToList();
-                    ViewData["LitaUsuario"] = md.ToList();
+                    ViewData["ListaUsuario"] = md.ToList();
                    
                     return View();
                 }
@@ -106,7 +107,7 @@ namespace SisUnimed.Controllers
                              desc_grupo = a.nome_grupo
                          };
                 ViewData["listagrupo"] = gp.ToList();
-                ViewData["LitaUsuario"] = md.ToList();
+                ViewData["ListaUsuario"] = md.ToList();
 
                 var dados = (lu.usuarios.Where(a => a.id.Equals(id))).FirstOrDefault();
                 ViewData["usuario"] = dados;
@@ -212,7 +213,7 @@ namespace SisUnimed.Controllers
 
                     };
                     ViewData["listagrupo"] = gp.ToList();
-                    ViewData["LitaUsuario"] = md.ToList();
+                    ViewData["ListaUsuario"] = md.ToList();
                     ViewBag.Action = "Inserir";
                     return View("Usuario",vDetalheUsuarioPermissao);
                 }
@@ -308,6 +309,276 @@ namespace SisUnimed.Controllers
             }
             ViewBag.Action = "";
             return RedirectToAction("Usuario"); ;
+        }
+        public ActionResult Pesquisa(string tipo, string campo, string pesquisa)
+        {
+            using (UnimedEntities1 lu = new UnimedEntities1())
+            {
+                
+                    int usuario_id = int.Parse(Session["usuariologadoId"].ToString());
+                    var resultado = lu.usuario_permissao.Where(a => a.id_usuario.Equals(usuario_id)).FirstOrDefault();
+                    ViewData["usuario_permissao"] = resultado;
+
+                    var op = from a in lu.operadoras
+                             select new ListaOperadora
+                             {
+                                 cod_op = a.id,
+                                 desc_op = a.nome_operadora
+                             };
+                    ViewData["listaOperadora"] = op.ToList();
+                    var gp = from a in lu.grupoes
+                             select new ListaGrupo
+                             {
+                                 cod_grupo = a.id,
+                                 desc_grupo = a.nome_grupo
+                             };
+                    ViewData["ListaGrupo"] = gp.ToList();
+                
+                if (campo == "codigo")
+                {
+
+
+                    var codigo = int.Parse(pesquisa);
+                    var md = from a in lu.usuarios
+                             where a.id == codigo
+                             select new ResultadoLista
+                             {
+                                 id = a.id,
+                                 id_grupo = a.id_grupo,
+                                 id_operadora = a.id_operadora,
+                                 nome_usuario = a.nome_usuario,
+                                 senha_usuario = a.senha_usuario,
+                                 email_usuario = a.email_usuario,
+                                 nome_grupo = a.grupo.nome_grupo,
+                                 nome_operadora = a.operadora.nome_operadora
+                             };
+                    ViewData["ListaUsuario"] = md.ToList();
+                    
+                    
+
+
+                }
+                if (campo == "nome")
+                {
+                    if (tipo == "contem")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.nome_usuario.Contains(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "inicia")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.nome_usuario.StartsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+
+                    }
+                    if (tipo == "termina")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.nome_usuario.EndsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                };
+                if (campo == "email")
+                {
+                    if (tipo == "contem")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.email_usuario.Contains(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "inicia")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.email_usuario.StartsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "termina")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.email_usuario.EndsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                }
+                if (campo == "operadora")
+                {
+                    if (tipo == "contem")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.operadora.nome_operadora.Contains(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "inicia")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.operadora.nome_operadora.StartsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "termina")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.operadora.nome_operadora.EndsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                }
+                if (campo == "grupo")
+                {
+                    if (tipo == "contem")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.grupo.nome_grupo.Contains(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "inicia")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.grupo.nome_grupo.StartsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                    if (tipo == "termina")
+                    {
+                        var md = from a in lu.usuarios
+                                 where a.grupo.nome_grupo.EndsWith(pesquisa)
+                                 select new ResultadoLista
+                                 {
+                                     id = a.id,
+                                     id_grupo = a.id_grupo,
+                                     id_operadora = a.id_operadora,
+                                     nome_usuario = a.nome_usuario,
+                                     senha_usuario = a.senha_usuario,
+                                     email_usuario = a.email_usuario,
+                                     nome_grupo = a.grupo.nome_grupo,
+                                     nome_operadora = a.operadora.nome_operadora
+                                 };
+                        ViewData["ListaUsuario"] = md.ToList();
+                    }
+                }
+                
+            }
+            
+            return PartialView("ListaUsuario");
         }
 
     }
