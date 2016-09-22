@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class usuario
     {
@@ -19,17 +20,61 @@ namespace SisUnimed.Models
         {
             this.usuario_permissao = new HashSet<usuario_permissao>();
         }
-    
+
+        [Display(Name = "Código")]
         public int id { get; set; }
+
+        [Display(Name = "Operadora")]
+        [Required(ErrorMessage = "Informe uma operadora", AllowEmptyStrings = false)]
         public int id_operadora { get; set; }
+
+        [Display(Name = "Grupo")]
+        [Required(ErrorMessage = "Informe um grupo", AllowEmptyStrings = false)]
         public int id_grupo { get; set; }
+
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "Informe o nome do usuário", AllowEmptyStrings = false)]
         public string nome_usuario { get; set; }
+
+        [Display(Name = "E-mail")]
+        [Required(ErrorMessage = "Informe um e-mail", AllowEmptyStrings = false)]
         public string email_usuario { get; set; }
+
+        [Display(Name = "Senha de Acesso")]
+        [Required(ErrorMessage = "Informe uma senha de acesso", AllowEmptyStrings = false)]
         public string senha_usuario { get; set; }
-    
+
         public virtual grupo grupo { get; set; }
         public virtual operadora operadora { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usuario_permissao> usuario_permissao { get; set; }
+        public virtual ICollection<usuario_permissao> usuario_permissao { get; set; } 
+    }
+    public class ResultadoLista
+    {
+        public int id { get; set; }
+        public int id_grupo { get; set; }
+        public int id_operadora { get; set; }
+        public string nome_usuario { get; set; }
+        public string email_usuario { get; set; }
+        public string senha_usuario { get; set; }
+        public string nome_operadora { get; set; }
+        public string nome_grupo { get; set; }
+
+
+    }
+    public class ListaOperadora
+    {
+        public int cod_op { get; set; }
+        public string desc_op { get; set; }
+    }
+    public class ListaGrupo
+    {
+        public int cod_grupo { get; set; }
+        public string desc_grupo { get; set; }
+    }
+    public class ViewModelDetalhePermisao
+    {
+        public usuario_permissao VusuarioPermissao { get; set; }
+        public usuario Vusuario { get; set; }
     }
 }
