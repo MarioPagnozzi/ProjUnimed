@@ -39,5 +39,24 @@ namespace SisUnimed.Models
         public virtual DbSet<materiai> materiais { get; set; }
         public virtual DbSet<operadora1> operadoras1 { get; set; }
         public virtual DbSet<unidade> unidades { get; set; }
+        public virtual DbSet<banco> bancos { get; set; }
+        public virtual DbSet<estado> estados { get; set; }
+        public virtual DbSet<fornecedores_anexos> fornecedores_anexos { get; set; }
+        public virtual DbSet<fornecedores_bancos> fornecedores_bancos { get; set; }
+        public virtual DbSet<fornecedores_emails> fornecedores_emails { get; set; }
+        public virtual DbSet<fornecedores_enderecos> fornecedores_enderecos { get; set; }
+        public virtual DbSet<fornecedores_materiais> fornecedores_materiais { get; set; }
+        public virtual DbSet<fornecedores_regioes> fornecedores_regioes { get; set; }
+        public virtual DbSet<fornecedores_telefones> fornecedores_telefones { get; set; }
+        public virtual DbSet<materiais_informacoes> materiais_informacoes { get; set; }
+        public virtual DbSet<materiais_procedimentos> materiais_procedimentos { get; set; }
+        public virtual DbSet<materiais_similares> materiais_similares { get; set; }
+        public virtual DbSet<negociaco> negociacoes { get; set; }
+        public virtual DbSet<negociacoes_chat> negociacoes_chat { get; set; }
+        public virtual DbSet<negociacoes_materiais> negociacoes_materiais { get; set; }
+        public virtual DbSet<negociacoes_negociadores> negociacoes_negociadores { get; set; }
+        public virtual DbSet<negociadore> negociadores { get; set; }
+        public virtual DbSet<procedimento> procedimentos { get; set; }
+        public virtual DbSet<regio> regioes { get; set; }
     }
 }

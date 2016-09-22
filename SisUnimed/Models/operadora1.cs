@@ -19,6 +19,7 @@ namespace SisUnimed.Models
         {
             this.fornecedores = new HashSet<fornecedore>();
             this.marcas_operadoras = new HashSet<marcas_operadoras>();
+            this.negociadores = new HashSet<negociadore>();
         }
     
         public long id { get; set; }
@@ -35,5 +36,7 @@ namespace SisUnimed.Models
         public virtual ICollection<fornecedore> fornecedores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<marcas_operadoras> marcas_operadoras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<negociadore> negociadores { get; set; }
     }
 }

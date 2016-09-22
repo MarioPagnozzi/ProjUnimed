@@ -18,6 +18,12 @@ namespace SisUnimed.Models
         public fornecedore()
         {
             this.materiais = new HashSet<materiai>();
+            this.fornecedores_anexos = new HashSet<fornecedores_anexos>();
+            this.fornecedores_emails = new HashSet<fornecedores_emails>();
+            this.fornecedores_materiais = new HashSet<fornecedores_materiais>();
+            this.fornecedores_regioes = new HashSet<fornecedores_regioes>();
+            this.fornecedores_telefones = new HashSet<fornecedores_telefones>();
+            this.negociacoes = new HashSet<negociaco>();
         }
     
         public long id { get; set; }
@@ -39,5 +45,17 @@ namespace SisUnimed.Models
         public virtual operadora1 operadora1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<materiai> materiais { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_anexos> fornecedores_anexos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_emails> fornecedores_emails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_materiais> fornecedores_materiais { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_regioes> fornecedores_regioes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_telefones> fornecedores_telefones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<negociaco> negociacoes { get; set; }
     }
 }

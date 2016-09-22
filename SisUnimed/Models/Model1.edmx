@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="UnimedModel.Store" Provider="Npgsql" ProviderManifestToken="9.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bancos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
         <EntityType Name="classificacoes">
           <Key>
             <PropertyRef Name="id" />
@@ -32,6 +46,20 @@
           <Property Name="sisdatae" Type="timestamp" />
           <Property Name="sisusuarioe" Type="int8" />
         </EntityType>
+        <EntityType Name="estados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_sigla" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
         <EntityType Name="fornecedores">
           <Key>
             <PropertyRef Name="id" />
@@ -45,6 +73,124 @@
           <Property Name="operadora" Type="int8" Nullable="false" />
           <Property Name="f_situacao" Type="int4" Nullable="false" />
           <Property Name="f_tipo_fornecedor" Type="int4" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_anexos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
+          <Property Name="c_nome_anexo" Type="varchar" MaxLength="200" />
+          <Property Name="d_validade" Type="timestamp" />
+          <Property Name="c_caminho_arquivo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_bancos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="banco" Type="int8" Nullable="false" />
+          <Property Name="c_agencia" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="c_conta" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="c_titular" Type="varchar" MaxLength="200" />
+          <Property Name="c_cidade" Type="varchar" MaxLength="200" />
+          <Property Name="estado" Type="int8" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_emails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="c_email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_enderecos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="200" />
+          <Property Name="c_logradouro" Type="varchar" MaxLength="200" />
+          <Property Name="c_cep" Type="varchar" MaxLength="9" />
+          <Property Name="c_numero" Type="varchar" MaxLength="200" />
+          <Property Name="c_bairro" Type="varchar" MaxLength="200" />
+          <Property Name="c_complemento" Type="varchar" MaxLength="200" />
+          <Property Name="c_cidade" Type="varchar" MaxLength="200" />
+          <Property Name="estado" Type="int8" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_materiais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
+          <Property Name="material" Type="int8" Nullable="false" />
+          <Property Name="v_preco_ctnpm" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_regioes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
+          <Property Name="regiao" Type="int8" Nullable="false" />
+          <Property Name="c_distribuidor" Type="varchar" MaxLength="200" />
+          <Property Name="c_telefone" Type="varchar" MaxLength="20" />
+          <Property Name="c_responsavel" Type="varchar" MaxLength="200" />
+          <Property Name="c_email" Type="varchar" MaxLength="200" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="fornecedores_telefones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="c_telefone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="c_setor" Type="varchar" MaxLength="200" />
           <Property Name="sisdatai" Type="timestamp" />
           <Property Name="sisusuarioi" Type="int8" />
           <Property Name="sisdataa" Type="timestamp" />
@@ -179,6 +325,133 @@
           <Property Name="sisdatae" Type="timestamp" />
           <Property Name="sisusuarioe" Type="int8" />
         </EntityType>
+        <EntityType Name="materiais_informacoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="material" Type="int8" Nullable="false" />
+          <Property Name="c_informacoes" Type="text" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="materiais_procedimentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="material" Type="int8" Nullable="false" />
+          <Property Name="procedimento" Type="int8" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="materiais_similares">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="material" Type="int8" Nullable="false" />
+          <Property Name="material_similar" Type="int8" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="negociacoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f_status_negociacao" Type="int4" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="d_inicio_fornecedor" Type="timestamp" />
+          <Property Name="d_termino_fornecedor" Type="timestamp" />
+          <Property Name="d_inicio_operadora" Type="timestamp" />
+          <Property Name="d_termino_operadora" Type="timestamp" />
+          <Property Name="fornecedor" Type="int8" />
+          <Property Name="c_reuniao" Type="varchar" MaxLength="200" />
+          <Property Name="c_observacoes" Type="text" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="negociacoes_chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="negociacao" Type="int8" Nullable="false" />
+          <Property Name="usuario" Type="int8" Nullable="false" />
+          <Property Name="d_data" Type="timestamp" Nullable="false" />
+          <Property Name="c_mensagem" Type="text" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="negociacoes_materiais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="negociacao" Type="int8" Nullable="false" />
+          <Property Name="material" Type="int8" Nullable="false" />
+          <Property Name="v_valor_proposto" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="v_valor_final" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="v_preco_operadora" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="v_qtd_ano" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="c_observacao" Type="text" />
+          <Property Name="c_justificativa" Type="text" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="negociacoes_negociadores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="negociacao" Type="int8" Nullable="false" />
+          <Property Name="negociador" Type="int8" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="negociadores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="operadora" Type="int8" Nullable="false" />
+          <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
         <EntityType Name="operadora">
           <Key>
             <PropertyRef Name="id" />
@@ -194,6 +467,33 @@
           <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="c_cod_operadora" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="c_nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="procedimentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_codigo" Type="varchar" MaxLength="100" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="sisdatai" Type="timestamp" />
+          <Property Name="sisusuarioi" Type="int8" />
+          <Property Name="sisdataa" Type="timestamp" />
+          <Property Name="sisusuarioa" Type="int8" />
+          <Property Name="sisdatae" Type="timestamp" />
+          <Property Name="sisusuarioe" Type="int8" />
+        </EntityType>
+        <EntityType Name="regioes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_descricao" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="sisdatai" Type="timestamp" />
           <Property Name="sisusuarioi" Type="int8" />
           <Property Name="sisdataa" Type="timestamp" />
@@ -253,6 +553,90 @@
           <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
         </EntityType>
+        <Association Name="fornecedores_anexos_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
+          <End Role="fornecedores_anexos" Type="Self.fornecedores_anexos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_anexos">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_bancos_banco_fkey">
+          <End Role="bancos" Type="Self.bancos" Multiplicity="1" />
+          <End Role="fornecedores_bancos" Type="Self.fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bancos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_bancos_estado_fkey">
+          <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+          <End Role="fornecedores_bancos" Type="Self.fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_emails_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
+          <End Role="fornecedores_emails" Type="Self.fornecedores_emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_emails">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_enderecos_estado_fkey">
+          <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+          <End Role="fornecedores_enderecos" Type="Self.fornecedores_enderecos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_enderecos">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_materiais_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
+          <End Role="fornecedores_materiais" Type="Self.fornecedores_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_materiais">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_materiais_material_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="fornecedores_materiais" Type="Self.fornecedores_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_materiais">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fornecedores_operadora_fkey">
           <End Role="operadoras" Type="Self.operadoras" Multiplicity="1" />
           <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="*" />
@@ -262,6 +646,42 @@
             </Principal>
             <Dependent Role="fornecedores">
               <PropertyRef Name="operadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_regioes_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
+          <End Role="fornecedores_regioes" Type="Self.fornecedores_regioes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_regioes">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_regioes_regiao_fkey">
+          <End Role="regioes" Type="Self.regioes" Multiplicity="1" />
+          <End Role="fornecedores_regioes" Type="Self.fornecedores_regioes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regioes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_regioes">
+              <PropertyRef Name="regiao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_telefones_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
+          <End Role="fornecedores_telefones" Type="Self.fornecedores_telefones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_telefones">
+              <PropertyRef Name="fornecedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -325,6 +745,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="materiais_informacoes_material_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="materiais_informacoes" Type="Self.materiais_informacoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_informacoes">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="materiais_marca_fkey">
           <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
           <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
@@ -337,6 +769,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="materiais_procedimentos_material_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="materiais_procedimentos" Type="Self.materiais_procedimentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_procedimentos">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_procedimentos_procedimento_fkey">
+          <End Role="procedimentos" Type="Self.procedimentos" Multiplicity="1" />
+          <End Role="materiais_procedimentos" Type="Self.materiais_procedimentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedimentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_procedimentos">
+              <PropertyRef Name="procedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_similares_material_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="materiais_similares" Type="Self.materiais_similares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_similares">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_similares_material_similar_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="materiais_similares" Type="Self.materiais_similares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_similares">
+              <PropertyRef Name="material_similar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="materiais_unidade_fkey">
           <End Role="unidades" Type="Self.unidades" Multiplicity="0..1" />
           <End Role="materiais" Type="Self.materiais" Multiplicity="*" />
@@ -346,6 +826,90 @@
             </Principal>
             <Dependent Role="materiais">
               <PropertyRef Name="unidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_chat_negociacao_fkey">
+          <End Role="negociacoes" Type="Self.negociacoes" Multiplicity="1" />
+          <End Role="negociacoes_chat" Type="Self.negociacoes_chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociacoes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_chat">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="0..1" />
+          <End Role="negociacoes" Type="Self.negociacoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_materiais_material_fkey">
+          <End Role="materiais" Type="Self.materiais" Multiplicity="1" />
+          <End Role="negociacoes_materiais" Type="Self.negociacoes_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_materiais">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_materiais_negociacao_fkey">
+          <End Role="negociacoes" Type="Self.negociacoes" Multiplicity="1" />
+          <End Role="negociacoes_materiais" Type="Self.negociacoes_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociacoes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_materiais">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_negociadores_negociacao_fkey">
+          <End Role="negociacoes" Type="Self.negociacoes" Multiplicity="1" />
+          <End Role="negociacoes_negociadores" Type="Self.negociacoes_negociadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociacoes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_negociadores">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_negociadores_negociador_fkey">
+          <End Role="negociadores" Type="Self.negociadores" Multiplicity="1" />
+          <End Role="negociacoes_negociadores" Type="Self.negociacoes_negociadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociadores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_negociadores">
+              <PropertyRef Name="negociador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociadores_operadora_fkey">
+          <End Role="operadoras" Type="Self.operadoras" Multiplicity="1" />
+          <End Role="negociadores" Type="Self.negociadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociadores">
+              <PropertyRef Name="operadora" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -388,23 +952,82 @@
         
         
         <EntityContainer Name="UnimedModelStoreContainer">
+          <EntitySet Name="bancos" EntityType="Self.bancos" Schema="public" store:Type="Tables" />
           <EntitySet Name="classificacoes" EntityType="Self.classificacoes" Schema="public" store:Type="Tables" />
           <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="public" store:Type="Tables" />
+          <EntitySet Name="estados" EntityType="Self.estados" Schema="public" store:Type="Tables" />
           <EntitySet Name="fornecedores" EntityType="Self.fornecedores" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_anexos" EntityType="Self.fornecedores_anexos" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_bancos" EntityType="Self.fornecedores_bancos" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_emails" EntityType="Self.fornecedores_emails" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_enderecos" EntityType="Self.fornecedores_enderecos" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_materiais" EntityType="Self.fornecedores_materiais" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_regioes" EntityType="Self.fornecedores_regioes" Schema="public" store:Type="Tables" />
+          <EntitySet Name="fornecedores_telefones" EntityType="Self.fornecedores_telefones" Schema="public" store:Type="Tables" />
           <EntitySet Name="grupo" EntityType="Self.grupo" Schema="public" store:Type="Tables" />
           <EntitySet Name="grupo_permissao" EntityType="Self.grupo_permissao" Schema="public" store:Type="Tables" />
           <EntitySet Name="importacao_xls" EntityType="Self.importacao_xls" Schema="public" store:Type="Tables" />
           <EntitySet Name="marcas" EntityType="Self.marcas" Schema="public" store:Type="Tables" />
           <EntitySet Name="marcas_operadoras" EntityType="Self.marcas_operadoras" Schema="public" store:Type="Tables" />
           <EntitySet Name="materiais" EntityType="Self.materiais" Schema="public" store:Type="Tables" />
+          <EntitySet Name="materiais_informacoes" EntityType="Self.materiais_informacoes" Schema="public" store:Type="Tables" />
+          <EntitySet Name="materiais_procedimentos" EntityType="Self.materiais_procedimentos" Schema="public" store:Type="Tables" />
+          <EntitySet Name="materiais_similares" EntityType="Self.materiais_similares" Schema="public" store:Type="Tables" />
+          <EntitySet Name="negociacoes" EntityType="Self.negociacoes" Schema="public" store:Type="Tables" />
+          <EntitySet Name="negociacoes_chat" EntityType="Self.negociacoes_chat" Schema="public" store:Type="Tables" />
+          <EntitySet Name="negociacoes_materiais" EntityType="Self.negociacoes_materiais" Schema="public" store:Type="Tables" />
+          <EntitySet Name="negociacoes_negociadores" EntityType="Self.negociacoes_negociadores" Schema="public" store:Type="Tables" />
+          <EntitySet Name="negociadores" EntityType="Self.negociadores" Schema="public" store:Type="Tables" />
           <EntitySet Name="operadora" EntityType="Self.operadora" Schema="public" store:Type="Tables" />
           <EntitySet Name="operadoras" EntityType="Self.operadoras" Schema="public" store:Type="Tables" />
+          <EntitySet Name="procedimentos" EntityType="Self.procedimentos" Schema="public" store:Type="Tables" />
+          <EntitySet Name="regioes" EntityType="Self.regioes" Schema="public" store:Type="Tables" />
           <EntitySet Name="unidades" EntityType="Self.unidades" Schema="public" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="public" store:Type="Tables" />
           <EntitySet Name="usuario_permissao" EntityType="Self.usuario_permissao" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fornecedores_anexos_fornecedor_fkey" Association="Self.fornecedores_anexos_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_anexos" EntitySet="fornecedores_anexos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_bancos_banco_fkey" Association="Self.fornecedores_bancos_banco_fkey">
+            <End Role="bancos" EntitySet="bancos" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_bancos_estado_fkey" Association="Self.fornecedores_bancos_estado_fkey">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_emails_fornecedor_fkey" Association="Self.fornecedores_emails_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_emails" EntitySet="fornecedores_emails" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_enderecos_estado_fkey" Association="Self.fornecedores_enderecos_estado_fkey">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="fornecedores_enderecos" EntitySet="fornecedores_enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_materiais_fornecedor_fkey" Association="Self.fornecedores_materiais_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_materiais" EntitySet="fornecedores_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_materiais_material_fkey" Association="Self.fornecedores_materiais_material_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="fornecedores_materiais" EntitySet="fornecedores_materiais" />
+          </AssociationSet>
           <AssociationSet Name="fornecedores_operadora_fkey" Association="Self.fornecedores_operadora_fkey">
             <End Role="operadoras" EntitySet="operadoras" />
             <End Role="fornecedores" EntitySet="fornecedores" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_regioes_fornecedor_fkey" Association="Self.fornecedores_regioes_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_regioes" EntitySet="fornecedores_regioes" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_regioes_regiao_fkey" Association="Self.fornecedores_regioes_regiao_fkey">
+            <End Role="regioes" EntitySet="regioes" />
+            <End Role="fornecedores_regioes" EntitySet="fornecedores_regioes" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_telefones_fornecedor_fkey" Association="Self.fornecedores_telefones_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_telefones" EntitySet="fornecedores_telefones" />
           </AssociationSet>
           <AssociationSet Name="grupo_permissao_id_grupo_fkey" Association="Self.grupo_permissao_id_grupo_fkey">
             <End Role="grupo" EntitySet="grupo" />
@@ -426,13 +1049,61 @@
             <End Role="fornecedores" EntitySet="fornecedores" />
             <End Role="materiais" EntitySet="materiais" />
           </AssociationSet>
+          <AssociationSet Name="materiais_informacoes_material_fkey" Association="Self.materiais_informacoes_material_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="materiais_informacoes" EntitySet="materiais_informacoes" />
+          </AssociationSet>
           <AssociationSet Name="materiais_marca_fkey" Association="Self.materiais_marca_fkey">
             <End Role="marcas" EntitySet="marcas" />
             <End Role="materiais" EntitySet="materiais" />
           </AssociationSet>
+          <AssociationSet Name="materiais_procedimentos_material_fkey" Association="Self.materiais_procedimentos_material_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="materiais_procedimentos" EntitySet="materiais_procedimentos" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_procedimentos_procedimento_fkey" Association="Self.materiais_procedimentos_procedimento_fkey">
+            <End Role="procedimentos" EntitySet="procedimentos" />
+            <End Role="materiais_procedimentos" EntitySet="materiais_procedimentos" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_similares_material_fkey" Association="Self.materiais_similares_material_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="materiais_similares" EntitySet="materiais_similares" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_similares_material_similar_fkey" Association="Self.materiais_similares_material_similar_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="materiais_similares" EntitySet="materiais_similares" />
+          </AssociationSet>
           <AssociationSet Name="materiais_unidade_fkey" Association="Self.materiais_unidade_fkey">
             <End Role="unidades" EntitySet="unidades" />
             <End Role="materiais" EntitySet="materiais" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_chat_negociacao_fkey" Association="Self.negociacoes_chat_negociacao_fkey">
+            <End Role="negociacoes" EntitySet="negociacoes" />
+            <End Role="negociacoes_chat" EntitySet="negociacoes_chat" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_fornecedor_fkey" Association="Self.negociacoes_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="negociacoes" EntitySet="negociacoes" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_materiais_material_fkey" Association="Self.negociacoes_materiais_material_fkey">
+            <End Role="materiais" EntitySet="materiais" />
+            <End Role="negociacoes_materiais" EntitySet="negociacoes_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_materiais_negociacao_fkey" Association="Self.negociacoes_materiais_negociacao_fkey">
+            <End Role="negociacoes" EntitySet="negociacoes" />
+            <End Role="negociacoes_materiais" EntitySet="negociacoes_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_negociadores_negociacao_fkey" Association="Self.negociacoes_negociadores_negociacao_fkey">
+            <End Role="negociacoes" EntitySet="negociacoes" />
+            <End Role="negociacoes_negociadores" EntitySet="negociacoes_negociadores" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_negociadores_negociador_fkey" Association="Self.negociacoes_negociadores_negociador_fkey">
+            <End Role="negociadores" EntitySet="negociadores" />
+            <End Role="negociacoes_negociadores" EntitySet="negociacoes_negociadores" />
+          </AssociationSet>
+          <AssociationSet Name="negociadores_operadora_fkey" Association="Self.negociadores_operadora_fkey">
+            <End Role="operadoras" EntitySet="operadoras" />
+            <End Role="negociadores" EntitySet="negociadores" />
           </AssociationSet>
           <AssociationSet Name="usuario_id_grupo_fkey" Association="Self.usuario_id_grupo_fkey">
             <End Role="grupo" EntitySet="grupo" />
@@ -646,6 +1317,113 @@
             <End Role="unidade" EntitySet="unidades" />
             <End Role="materiai" EntitySet="materiais" />
           </AssociationSet>
+          <EntitySet Name="bancos" EntityType="UnimedModel.banco" />
+          <EntitySet Name="estados" EntityType="UnimedModel.estado" />
+          <EntitySet Name="fornecedores_anexos" EntityType="UnimedModel.fornecedores_anexos" />
+          <EntitySet Name="fornecedores_bancos" EntityType="UnimedModel.fornecedores_bancos" />
+          <EntitySet Name="fornecedores_emails" EntityType="UnimedModel.fornecedores_emails" />
+          <EntitySet Name="fornecedores_enderecos" EntityType="UnimedModel.fornecedores_enderecos" />
+          <EntitySet Name="fornecedores_materiais" EntityType="UnimedModel.fornecedores_materiais" />
+          <EntitySet Name="fornecedores_regioes" EntityType="UnimedModel.fornecedores_regioes" />
+          <EntitySet Name="fornecedores_telefones" EntityType="UnimedModel.fornecedores_telefones" />
+          <EntitySet Name="materiais_informacoes" EntityType="UnimedModel.materiais_informacoes" />
+          <EntitySet Name="materiais_procedimentos" EntityType="UnimedModel.materiais_procedimentos" />
+          <EntitySet Name="materiais_similares" EntityType="UnimedModel.materiais_similares" />
+          <EntitySet Name="negociacoes" EntityType="UnimedModel.negociaco" />
+          <EntitySet Name="negociacoes_chat" EntityType="UnimedModel.negociacoes_chat" />
+          <EntitySet Name="negociacoes_materiais" EntityType="UnimedModel.negociacoes_materiais" />
+          <EntitySet Name="negociacoes_negociadores" EntityType="UnimedModel.negociacoes_negociadores" />
+          <EntitySet Name="negociadores" EntityType="UnimedModel.negociadore" />
+          <EntitySet Name="procedimentos" EntityType="UnimedModel.procedimento" />
+          <EntitySet Name="regioes" EntityType="UnimedModel.regio" />
+          <AssociationSet Name="fornecedores_bancos_banco_fkey" Association="UnimedModel.fornecedores_bancos_banco_fkey">
+            <End Role="banco" EntitySet="bancos" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_bancos_estado_fkey" Association="UnimedModel.fornecedores_bancos_estado_fkey">
+            <End Role="estado" EntitySet="estados" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_enderecos_estado_fkey" Association="UnimedModel.fornecedores_enderecos_estado_fkey">
+            <End Role="estado" EntitySet="estados" />
+            <End Role="fornecedores_enderecos" EntitySet="fornecedores_enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_anexos_fornecedor_fkey" Association="UnimedModel.fornecedores_anexos_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_anexos" EntitySet="fornecedores_anexos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_emails_fornecedor_fkey" Association="UnimedModel.fornecedores_emails_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_emails" EntitySet="fornecedores_emails" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_materiais_fornecedor_fkey" Association="UnimedModel.fornecedores_materiais_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_materiais" EntitySet="fornecedores_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_regioes_fornecedor_fkey" Association="UnimedModel.fornecedores_regioes_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_regioes" EntitySet="fornecedores_regioes" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_telefones_fornecedor_fkey" Association="UnimedModel.fornecedores_telefones_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_telefones" EntitySet="fornecedores_telefones" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_fornecedor_fkey" Association="UnimedModel.negociacoes_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="negociaco" EntitySet="negociacoes" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_materiais_material_fkey" Association="UnimedModel.fornecedores_materiais_material_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="fornecedores_materiais" EntitySet="fornecedores_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_regioes_regiao_fkey" Association="UnimedModel.fornecedores_regioes_regiao_fkey">
+            <End Role="regio" EntitySet="regioes" />
+            <End Role="fornecedores_regioes" EntitySet="fornecedores_regioes" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_informacoes_material_fkey" Association="UnimedModel.materiais_informacoes_material_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="materiais_informacoes" EntitySet="materiais_informacoes" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_procedimentos_material_fkey" Association="UnimedModel.materiais_procedimentos_material_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="materiais_procedimentos" EntitySet="materiais_procedimentos" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_similares_material_fkey" Association="UnimedModel.materiais_similares_material_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="materiais_similares" EntitySet="materiais_similares" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_similares_material_similar_fkey" Association="UnimedModel.materiais_similares_material_similar_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="materiais_similares" EntitySet="materiais_similares" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_materiais_material_fkey" Association="UnimedModel.negociacoes_materiais_material_fkey">
+            <End Role="materiai" EntitySet="materiais" />
+            <End Role="negociacoes_materiais" EntitySet="negociacoes_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="materiais_procedimentos_procedimento_fkey" Association="UnimedModel.materiais_procedimentos_procedimento_fkey">
+            <End Role="procedimento" EntitySet="procedimentos" />
+            <End Role="materiais_procedimentos" EntitySet="materiais_procedimentos" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_chat_negociacao_fkey" Association="UnimedModel.negociacoes_chat_negociacao_fkey">
+            <End Role="negociaco" EntitySet="negociacoes" />
+            <End Role="negociacoes_chat" EntitySet="negociacoes_chat" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_materiais_negociacao_fkey" Association="UnimedModel.negociacoes_materiais_negociacao_fkey">
+            <End Role="negociaco" EntitySet="negociacoes" />
+            <End Role="negociacoes_materiais" EntitySet="negociacoes_materiais" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_negociadores_negociacao_fkey" Association="UnimedModel.negociacoes_negociadores_negociacao_fkey">
+            <End Role="negociaco" EntitySet="negociacoes" />
+            <End Role="negociacoes_negociadores" EntitySet="negociacoes_negociadores" />
+          </AssociationSet>
+          <AssociationSet Name="negociacoes_negociadores_negociador_fkey" Association="UnimedModel.negociacoes_negociadores_negociador_fkey">
+            <End Role="negociadore" EntitySet="negociadores" />
+            <End Role="negociacoes_negociadores" EntitySet="negociacoes_negociadores" />
+          </AssociationSet>
+          <AssociationSet Name="negociadores_operadora_fkey" Association="UnimedModel.negociadores_operadora_fkey">
+            <End Role="operadora1" EntitySet="operadoras1" />
+            <End Role="negociadore" EntitySet="negociadores" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="classificaco">
           <Key>
@@ -696,6 +1474,12 @@
           <Property Name="sisusuarioe" Type="Int64" />
           <NavigationProperty Name="operadora1" Relationship="UnimedModel.fornecedores_operadora_fkey" FromRole="fornecedore" ToRole="operadora1" />
           <NavigationProperty Name="materiais" Relationship="UnimedModel.materiais_fornecedor_fkey" FromRole="fornecedore" ToRole="materiai" />
+          <NavigationProperty Name="fornecedores_anexos" Relationship="UnimedModel.fornecedores_anexos_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_anexos" />
+          <NavigationProperty Name="fornecedores_emails" Relationship="UnimedModel.fornecedores_emails_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_emails" />
+          <NavigationProperty Name="fornecedores_materiais" Relationship="UnimedModel.fornecedores_materiais_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_materiais" />
+          <NavigationProperty Name="fornecedores_regioes" Relationship="UnimedModel.fornecedores_regioes_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_regioes" />
+          <NavigationProperty Name="fornecedores_telefones" Relationship="UnimedModel.fornecedores_telefones_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_telefones" />
+          <NavigationProperty Name="negociacoes" Relationship="UnimedModel.negociacoes_fornecedor_fkey" FromRole="fornecedore" ToRole="negociaco" />
         </EntityType>
         <EntityType Name="importacao_xls">
           <Key>
@@ -797,6 +1581,12 @@
           <NavigationProperty Name="fornecedore" Relationship="UnimedModel.materiais_fornecedor_fkey" FromRole="materiai" ToRole="fornecedore" />
           <NavigationProperty Name="marca1" Relationship="UnimedModel.materiais_marca_fkey" FromRole="materiai" ToRole="marca" />
           <NavigationProperty Name="unidade1" Relationship="UnimedModel.materiais_unidade_fkey" FromRole="materiai" ToRole="unidade" />
+          <NavigationProperty Name="fornecedores_materiais" Relationship="UnimedModel.fornecedores_materiais_material_fkey" FromRole="materiai" ToRole="fornecedores_materiais" />
+          <NavigationProperty Name="materiais_informacoes" Relationship="UnimedModel.materiais_informacoes_material_fkey" FromRole="materiai" ToRole="materiais_informacoes" />
+          <NavigationProperty Name="materiais_procedimentos" Relationship="UnimedModel.materiais_procedimentos_material_fkey" FromRole="materiai" ToRole="materiais_procedimentos" />
+          <NavigationProperty Name="materiais_similares" Relationship="UnimedModel.materiais_similares_material_fkey" FromRole="materiai" ToRole="materiais_similares" />
+          <NavigationProperty Name="materiais_similares1" Relationship="UnimedModel.materiais_similares_material_similar_fkey" FromRole="materiai" ToRole="materiais_similares" />
+          <NavigationProperty Name="negociacoes_materiais" Relationship="UnimedModel.negociacoes_materiais_material_fkey" FromRole="materiai" ToRole="negociacoes_materiais" />
         </EntityType>
         <EntityType Name="operadora1">
           <Key>
@@ -813,6 +1603,7 @@
           <Property Name="sisusuarioe" Type="Int64" />
           <NavigationProperty Name="fornecedores" Relationship="UnimedModel.fornecedores_operadora_fkey" FromRole="operadora1" ToRole="fornecedore" />
           <NavigationProperty Name="marcas_operadoras" Relationship="UnimedModel.marcas_operadoras_operadora_fkey" FromRole="operadora1" ToRole="marcas_operadoras" />
+          <NavigationProperty Name="negociadores" Relationship="UnimedModel.negociadores_operadora_fkey" FromRole="operadora1" ToRole="negociadore" />
         </EntityType>
         <EntityType Name="unidade">
           <Key>
@@ -910,6 +1701,601 @@
             </Principal>
             <Dependent Role="materiai">
               <PropertyRef Name="unidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="banco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedores_bancos" Relationship="UnimedModel.fornecedores_bancos_banco_fkey" FromRole="banco" ToRole="fornecedores_bancos" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_sigla" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="c_nome" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedores_bancos" Relationship="UnimedModel.fornecedores_bancos_estado_fkey" FromRole="estado" ToRole="fornecedores_bancos" />
+          <NavigationProperty Name="fornecedores_enderecos" Relationship="UnimedModel.fornecedores_enderecos_estado_fkey" FromRole="estado" ToRole="fornecedores_enderecos" />
+        </EntityType>
+        <EntityType Name="fornecedores_anexos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <Property Name="c_nome_anexo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="d_validade" Type="DateTime" Precision="6" />
+          <Property Name="c_caminho_arquivo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_anexos_fornecedor_fkey" FromRole="fornecedores_anexos" ToRole="fornecedore" />
+        </EntityType>
+        <EntityType Name="fornecedores_bancos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="banco" Type="Int64" Nullable="false" />
+          <Property Name="c_agencia" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_conta" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_titular" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_cidade" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Int64" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="banco1" Relationship="UnimedModel.fornecedores_bancos_banco_fkey" FromRole="fornecedores_bancos" ToRole="banco" />
+          <NavigationProperty Name="estado1" Relationship="UnimedModel.fornecedores_bancos_estado_fkey" FromRole="fornecedores_bancos" ToRole="estado" />
+        </EntityType>
+        <EntityType Name="fornecedores_emails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_emails_fornecedor_fkey" FromRole="fornecedores_emails" ToRole="fornecedore" />
+        </EntityType>
+        <EntityType Name="fornecedores_enderecos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_logradouro" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_cep" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="c_numero" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_bairro" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_complemento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_cidade" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Int64" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="estado1" Relationship="UnimedModel.fornecedores_enderecos_estado_fkey" FromRole="fornecedores_enderecos" ToRole="estado" />
+        </EntityType>
+        <EntityType Name="fornecedores_materiais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <Property Name="material" Type="Int64" Nullable="false" />
+          <Property Name="v_preco_ctnpm" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_materiais_fornecedor_fkey" FromRole="fornecedores_materiais" ToRole="fornecedore" />
+          <NavigationProperty Name="materiai" Relationship="UnimedModel.fornecedores_materiais_material_fkey" FromRole="fornecedores_materiais" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="fornecedores_regioes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <Property Name="regiao" Type="Int64" Nullable="false" />
+          <Property Name="c_distribuidor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_responsavel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_regioes_fornecedor_fkey" FromRole="fornecedores_regioes" ToRole="fornecedore" />
+          <NavigationProperty Name="regio" Relationship="UnimedModel.fornecedores_regioes_regiao_fkey" FromRole="fornecedores_regioes" ToRole="regio" />
+        </EntityType>
+        <EntityType Name="fornecedores_telefones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_telefone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="c_setor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_telefones_fornecedor_fkey" FromRole="fornecedores_telefones" ToRole="fornecedore" />
+        </EntityType>
+        <EntityType Name="materiais_informacoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="material" Type="Int64" Nullable="false" />
+          <Property Name="c_informacoes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiai" Relationship="UnimedModel.materiais_informacoes_material_fkey" FromRole="materiais_informacoes" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="materiais_procedimentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="material" Type="Int64" Nullable="false" />
+          <Property Name="procedimento" Type="Int64" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiai" Relationship="UnimedModel.materiais_procedimentos_material_fkey" FromRole="materiais_procedimentos" ToRole="materiai" />
+          <NavigationProperty Name="procedimento1" Relationship="UnimedModel.materiais_procedimentos_procedimento_fkey" FromRole="materiais_procedimentos" ToRole="procedimento" />
+        </EntityType>
+        <EntityType Name="materiais_similares">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="material" Type="Int64" Nullable="false" />
+          <Property Name="material_similar" Type="Int64" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiai" Relationship="UnimedModel.materiais_similares_material_fkey" FromRole="materiais_similares" ToRole="materiai" />
+          <NavigationProperty Name="materiai1" Relationship="UnimedModel.materiais_similares_material_similar_fkey" FromRole="materiais_similares" ToRole="materiai" />
+        </EntityType>
+        <EntityType Name="negociaco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f_status_negociacao" Type="Int32" Nullable="false" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="d_inicio_fornecedor" Type="DateTime" Precision="6" />
+          <Property Name="d_termino_fornecedor" Type="DateTime" Precision="6" />
+          <Property Name="d_inicio_operadora" Type="DateTime" Precision="6" />
+          <Property Name="d_termino_operadora" Type="DateTime" Precision="6" />
+          <Property Name="fornecedor" Type="Int64" />
+          <Property Name="c_reuniao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="c_observacoes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.negociacoes_fornecedor_fkey" FromRole="negociaco" ToRole="fornecedore" />
+          <NavigationProperty Name="negociacoes_chat" Relationship="UnimedModel.negociacoes_chat_negociacao_fkey" FromRole="negociaco" ToRole="negociacoes_chat" />
+          <NavigationProperty Name="negociacoes_materiais" Relationship="UnimedModel.negociacoes_materiais_negociacao_fkey" FromRole="negociaco" ToRole="negociacoes_materiais" />
+          <NavigationProperty Name="negociacoes_negociadores" Relationship="UnimedModel.negociacoes_negociadores_negociacao_fkey" FromRole="negociaco" ToRole="negociacoes_negociadores" />
+        </EntityType>
+        <EntityType Name="negociacoes_chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="negociacao" Type="Int64" Nullable="false" />
+          <Property Name="usuario" Type="Int64" Nullable="false" />
+          <Property Name="d_data" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="c_mensagem" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="negociaco" Relationship="UnimedModel.negociacoes_chat_negociacao_fkey" FromRole="negociacoes_chat" ToRole="negociaco" />
+        </EntityType>
+        <EntityType Name="negociacoes_materiais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="negociacao" Type="Int64" Nullable="false" />
+          <Property Name="material" Type="Int64" Nullable="false" />
+          <Property Name="v_valor_proposto" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="v_valor_final" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="v_preco_operadora" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="v_qtd_ano" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="c_observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="c_justificativa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiai" Relationship="UnimedModel.negociacoes_materiais_material_fkey" FromRole="negociacoes_materiais" ToRole="materiai" />
+          <NavigationProperty Name="negociaco" Relationship="UnimedModel.negociacoes_materiais_negociacao_fkey" FromRole="negociacoes_materiais" ToRole="negociaco" />
+        </EntityType>
+        <EntityType Name="negociacoes_negociadores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="negociacao" Type="Int64" Nullable="false" />
+          <Property Name="negociador" Type="Int64" Nullable="false" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="negociaco" Relationship="UnimedModel.negociacoes_negociadores_negociacao_fkey" FromRole="negociacoes_negociadores" ToRole="negociaco" />
+          <NavigationProperty Name="negociadore" Relationship="UnimedModel.negociacoes_negociadores_negociador_fkey" FromRole="negociacoes_negociadores" ToRole="negociadore" />
+        </EntityType>
+        <EntityType Name="negociadore">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="operadora" Type="Int64" Nullable="false" />
+          <Property Name="c_nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="negociacoes_negociadores" Relationship="UnimedModel.negociacoes_negociadores_negociador_fkey" FromRole="negociadore" ToRole="negociacoes_negociadores" />
+          <NavigationProperty Name="operadora1" Relationship="UnimedModel.negociadores_operadora_fkey" FromRole="negociadore" ToRole="operadora1" />
+        </EntityType>
+        <EntityType Name="procedimento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="materiais_procedimentos" Relationship="UnimedModel.materiais_procedimentos_procedimento_fkey" FromRole="procedimento" ToRole="materiais_procedimentos" />
+        </EntityType>
+        <EntityType Name="regio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sisdatai" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioi" Type="Int64" />
+          <Property Name="sisdataa" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioa" Type="Int64" />
+          <Property Name="sisdatae" Type="DateTime" Precision="6" />
+          <Property Name="sisusuarioe" Type="Int64" />
+          <NavigationProperty Name="fornecedores_regioes" Relationship="UnimedModel.fornecedores_regioes_regiao_fkey" FromRole="regio" ToRole="fornecedores_regioes" />
+        </EntityType>
+        <Association Name="fornecedores_bancos_banco_fkey">
+          <End Type="UnimedModel.banco" Role="banco" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_bancos" Role="fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="banco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_bancos_estado_fkey">
+          <End Type="UnimedModel.estado" Role="estado" Multiplicity="0..1" />
+          <End Type="UnimedModel.fornecedores_bancos" Role="fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_enderecos_estado_fkey">
+          <End Type="UnimedModel.estado" Role="estado" Multiplicity="0..1" />
+          <End Type="UnimedModel.fornecedores_enderecos" Role="fornecedores_enderecos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_enderecos">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_anexos_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_anexos" Role="fornecedores_anexos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_anexos">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_emails_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_emails" Role="fornecedores_emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_emails">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_materiais_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_materiais" Role="fornecedores_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_materiais">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_regioes_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_regioes" Role="fornecedores_regioes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_regioes">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_telefones_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_telefones" Role="fornecedores_telefones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_telefones">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="0..1" />
+          <End Type="UnimedModel.negociaco" Role="negociaco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociaco">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_materiais_material_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_materiais" Role="fornecedores_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_materiais">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_regioes_regiao_fkey">
+          <End Type="UnimedModel.regio" Role="regio" Multiplicity="1" />
+          <End Type="UnimedModel.fornecedores_regioes" Role="fornecedores_regioes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_regioes">
+              <PropertyRef Name="regiao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_informacoes_material_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.materiais_informacoes" Role="materiais_informacoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_informacoes">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_procedimentos_material_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.materiais_procedimentos" Role="materiais_procedimentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_procedimentos">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_similares_material_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.materiais_similares" Role="materiais_similares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_similares">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_similares_material_similar_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.materiais_similares" Role="materiais_similares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_similares">
+              <PropertyRef Name="material_similar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_materiais_material_fkey">
+          <End Type="UnimedModel.materiai" Role="materiai" Multiplicity="1" />
+          <End Type="UnimedModel.negociacoes_materiais" Role="negociacoes_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_materiais">
+              <PropertyRef Name="material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materiais_procedimentos_procedimento_fkey">
+          <End Type="UnimedModel.procedimento" Role="procedimento" Multiplicity="1" />
+          <End Type="UnimedModel.materiais_procedimentos" Role="materiais_procedimentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedimento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materiais_procedimentos">
+              <PropertyRef Name="procedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_chat_negociacao_fkey">
+          <End Type="UnimedModel.negociaco" Role="negociaco" Multiplicity="1" />
+          <End Type="UnimedModel.negociacoes_chat" Role="negociacoes_chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociaco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_chat">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_materiais_negociacao_fkey">
+          <End Type="UnimedModel.negociaco" Role="negociaco" Multiplicity="1" />
+          <End Type="UnimedModel.negociacoes_materiais" Role="negociacoes_materiais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociaco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_materiais">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_negociadores_negociacao_fkey">
+          <End Type="UnimedModel.negociaco" Role="negociaco" Multiplicity="1" />
+          <End Type="UnimedModel.negociacoes_negociadores" Role="negociacoes_negociadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociaco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_negociadores">
+              <PropertyRef Name="negociacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociacoes_negociadores_negociador_fkey">
+          <End Type="UnimedModel.negociadore" Role="negociadore" Multiplicity="1" />
+          <End Type="UnimedModel.negociacoes_negociadores" Role="negociacoes_negociadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="negociadore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociacoes_negociadores">
+              <PropertyRef Name="negociador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="negociadores_operadora_fkey">
+          <End Type="UnimedModel.operadora1" Role="operadora1" Multiplicity="1" />
+          <End Type="UnimedModel.negociadore" Role="negociadore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="negociadore">
+              <PropertyRef Name="operadora" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1177,6 +2563,325 @@
                 <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
                 <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
                 <ScalarProperty Name="c_sigla" ColumnName="c_sigla" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bancos">
+            <EntityTypeMapping TypeName="UnimedModel.banco">
+              <MappingFragment StoreEntitySet="bancos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="c_codigo" ColumnName="c_codigo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estados">
+            <EntityTypeMapping TypeName="UnimedModel.estado">
+              <MappingFragment StoreEntitySet="estados">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="c_sigla" ColumnName="c_sigla" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_anexos">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_anexos">
+              <MappingFragment StoreEntitySet="fornecedores_anexos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_caminho_arquivo" ColumnName="c_caminho_arquivo" />
+                <ScalarProperty Name="d_validade" ColumnName="d_validade" />
+                <ScalarProperty Name="c_nome_anexo" ColumnName="c_nome_anexo" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_bancos">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_bancos">
+              <MappingFragment StoreEntitySet="fornecedores_bancos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="c_cidade" ColumnName="c_cidade" />
+                <ScalarProperty Name="c_titular" ColumnName="c_titular" />
+                <ScalarProperty Name="c_conta" ColumnName="c_conta" />
+                <ScalarProperty Name="c_agencia" ColumnName="c_agencia" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_emails">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_emails">
+              <MappingFragment StoreEntitySet="fornecedores_emails">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_email" ColumnName="c_email" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_enderecos">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_enderecos">
+              <MappingFragment StoreEntitySet="fornecedores_enderecos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="c_cidade" ColumnName="c_cidade" />
+                <ScalarProperty Name="c_complemento" ColumnName="c_complemento" />
+                <ScalarProperty Name="c_bairro" ColumnName="c_bairro" />
+                <ScalarProperty Name="c_numero" ColumnName="c_numero" />
+                <ScalarProperty Name="c_cep" ColumnName="c_cep" />
+                <ScalarProperty Name="c_logradouro" ColumnName="c_logradouro" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_materiais">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_materiais">
+              <MappingFragment StoreEntitySet="fornecedores_materiais">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="v_preco_ctnpm" ColumnName="v_preco_ctnpm" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_regioes">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_regioes">
+              <MappingFragment StoreEntitySet="fornecedores_regioes">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_email" ColumnName="c_email" />
+                <ScalarProperty Name="c_responsavel" ColumnName="c_responsavel" />
+                <ScalarProperty Name="c_telefone" ColumnName="c_telefone" />
+                <ScalarProperty Name="c_distribuidor" ColumnName="c_distribuidor" />
+                <ScalarProperty Name="regiao" ColumnName="regiao" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedores_telefones">
+            <EntityTypeMapping TypeName="UnimedModel.fornecedores_telefones">
+              <MappingFragment StoreEntitySet="fornecedores_telefones">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_setor" ColumnName="c_setor" />
+                <ScalarProperty Name="c_telefone" ColumnName="c_telefone" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materiais_informacoes">
+            <EntityTypeMapping TypeName="UnimedModel.materiais_informacoes">
+              <MappingFragment StoreEntitySet="materiais_informacoes">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_informacoes" ColumnName="c_informacoes" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materiais_procedimentos">
+            <EntityTypeMapping TypeName="UnimedModel.materiais_procedimentos">
+              <MappingFragment StoreEntitySet="materiais_procedimentos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="procedimento" ColumnName="procedimento" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materiais_similares">
+            <EntityTypeMapping TypeName="UnimedModel.materiais_similares">
+              <MappingFragment StoreEntitySet="materiais_similares">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="material_similar" ColumnName="material_similar" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="negociacoes">
+            <EntityTypeMapping TypeName="UnimedModel.negociaco">
+              <MappingFragment StoreEntitySet="negociacoes">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_observacoes" ColumnName="c_observacoes" />
+                <ScalarProperty Name="c_reuniao" ColumnName="c_reuniao" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="d_termino_operadora" ColumnName="d_termino_operadora" />
+                <ScalarProperty Name="d_inicio_operadora" ColumnName="d_inicio_operadora" />
+                <ScalarProperty Name="d_termino_fornecedor" ColumnName="d_termino_fornecedor" />
+                <ScalarProperty Name="d_inicio_fornecedor" ColumnName="d_inicio_fornecedor" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="f_status_negociacao" ColumnName="f_status_negociacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="negociacoes_chat">
+            <EntityTypeMapping TypeName="UnimedModel.negociacoes_chat">
+              <MappingFragment StoreEntitySet="negociacoes_chat">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_mensagem" ColumnName="c_mensagem" />
+                <ScalarProperty Name="d_data" ColumnName="d_data" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="negociacao" ColumnName="negociacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="negociacoes_materiais">
+            <EntityTypeMapping TypeName="UnimedModel.negociacoes_materiais">
+              <MappingFragment StoreEntitySet="negociacoes_materiais">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_justificativa" ColumnName="c_justificativa" />
+                <ScalarProperty Name="c_observacao" ColumnName="c_observacao" />
+                <ScalarProperty Name="v_qtd_ano" ColumnName="v_qtd_ano" />
+                <ScalarProperty Name="v_preco_operadora" ColumnName="v_preco_operadora" />
+                <ScalarProperty Name="v_valor_final" ColumnName="v_valor_final" />
+                <ScalarProperty Name="v_valor_proposto" ColumnName="v_valor_proposto" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="negociacao" ColumnName="negociacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="negociacoes_negociadores">
+            <EntityTypeMapping TypeName="UnimedModel.negociacoes_negociadores">
+              <MappingFragment StoreEntitySet="negociacoes_negociadores">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="negociador" ColumnName="negociador" />
+                <ScalarProperty Name="negociacao" ColumnName="negociacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="negociadores">
+            <EntityTypeMapping TypeName="UnimedModel.negociadore">
+              <MappingFragment StoreEntitySet="negociadores">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_nome" ColumnName="c_nome" />
+                <ScalarProperty Name="operadora" ColumnName="operadora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="procedimentos">
+            <EntityTypeMapping TypeName="UnimedModel.procedimento">
+              <MappingFragment StoreEntitySet="procedimentos">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
+                <ScalarProperty Name="c_codigo" ColumnName="c_codigo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regioes">
+            <EntityTypeMapping TypeName="UnimedModel.regio">
+              <MappingFragment StoreEntitySet="regioes">
+                <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
+                <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
+                <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
+                <ScalarProperty Name="sisdataa" ColumnName="sisdataa" />
+                <ScalarProperty Name="sisusuarioi" ColumnName="sisusuarioi" />
+                <ScalarProperty Name="sisdatai" ColumnName="sisdatai" />
+                <ScalarProperty Name="c_descricao" ColumnName="c_descricao" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

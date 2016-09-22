@@ -30,6 +30,47 @@
         <AssociationConnector Association="UnimedModel.materiais_marca_fkey" />
         <AssociationConnector Association="UnimedModel.marcas_operadoras_operadora_fkey" />
         <AssociationConnector Association="UnimedModel.materiais_unidade_fkey" />
+        <EntityTypeShape EntityType="UnimedModel.banco" Width="1.5" PointX="3.75" PointY="16.125" />
+        <EntityTypeShape EntityType="UnimedModel.estado" Width="1.5" PointX="0.75" PointY="21.125" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_anexos" Width="1.5" PointX="15.625" PointY="17.5" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_bancos" Width="1.5" PointX="6" PointY="20.625" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_emails" Width="1.5" PointX="15.625" PointY="25.75" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_enderecos" Width="1.5" PointX="3" PointY="20.625" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_materiais" Width="1.5" PointX="20.875" PointY="12.125" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_regioes" Width="1.5" PointX="20.625" PointY="16.75" />
+        <EntityTypeShape EntityType="UnimedModel.fornecedores_telefones" Width="1.5" PointX="15.625" PointY="21.625" />
+        <EntityTypeShape EntityType="UnimedModel.materiais_informacoes" Width="1.5" PointX="17.875" PointY="25.25" />
+        <EntityTypeShape EntityType="UnimedModel.materiais_procedimentos" Width="1.5" PointX="17.875" PointY="14.25" />
+        <EntityTypeShape EntityType="UnimedModel.materiais_similares" Width="1.5" PointX="17.875" PointY="21.375" />
+        <EntityTypeShape EntityType="UnimedModel.negociaco" Width="1.5" PointX="15.625" PointY="1.25" />
+        <EntityTypeShape EntityType="UnimedModel.negociacoes_chat" Width="1.5" PointX="17.875" PointY="2" />
+        <EntityTypeShape EntityType="UnimedModel.negociacoes_materiais" Width="1.5" PointX="20.875" PointY="6.5" />
+        <EntityTypeShape EntityType="UnimedModel.negociacoes_negociadores" Width="1.5" PointX="17.875" PointY="9.75" />
+        <EntityTypeShape EntityType="UnimedModel.negociadore" Width="1.5" PointX="13.375" PointY="18.25" />
+        <EntityTypeShape EntityType="UnimedModel.procedimento" Width="1.5" PointX="15.625" PointY="31.375" />
+        <EntityTypeShape EntityType="UnimedModel.regio" Width="1.5" PointX="18.375" PointY="29.375" />
+        <AssociationConnector Association="UnimedModel.fornecedores_bancos_banco_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_bancos_estado_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_enderecos_estado_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_anexos_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_emails_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_materiais_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_regioes_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_telefones_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_materiais_material_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_regioes_regiao_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_informacoes_material_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_procedimentos_material_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_similares_material_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_similares_material_similar_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_materiais_material_fkey" />
+        <AssociationConnector Association="UnimedModel.materiais_procedimentos_procedimento_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_chat_negociacao_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_materiais_negociacao_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_negociadores_negociacao_fkey" />
+        <AssociationConnector Association="UnimedModel.negociacoes_negociadores_negociador_fkey" />
+        <AssociationConnector Association="UnimedModel.negociadores_operadora_fkey" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

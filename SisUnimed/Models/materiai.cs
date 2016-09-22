@@ -14,6 +14,17 @@ namespace SisUnimed.Models
     
     public partial class materiai
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public materiai()
+        {
+            this.fornecedores_materiais = new HashSet<fornecedores_materiais>();
+            this.materiais_informacoes = new HashSet<materiais_informacoes>();
+            this.materiais_procedimentos = new HashSet<materiais_procedimentos>();
+            this.materiais_similares = new HashSet<materiais_similares>();
+            this.materiais_similares1 = new HashSet<materiais_similares>();
+            this.negociacoes_materiais = new HashSet<negociacoes_materiais>();
+        }
+    
         public long id { get; set; }
         public string c_tnumm { get; set; }
         public string c_cod_ref_fabr { get; set; }
@@ -47,5 +58,17 @@ namespace SisUnimed.Models
         public virtual fornecedore fornecedore { get; set; }
         public virtual marca marca1 { get; set; }
         public virtual unidade unidade1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_materiais> fornecedores_materiais { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<materiais_informacoes> materiais_informacoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<materiais_procedimentos> materiais_procedimentos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<materiais_similares> materiais_similares { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<materiais_similares> materiais_similares1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<negociacoes_materiais> negociacoes_materiais { get; set; }
     }
 }

@@ -11,79 +11,32 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class usuario_permissao
     {
-        
-        [Display(Name = "Código")]
-        [Required(ErrorMessage="Informe o código")]
         public int id { get; set; }
-        [Key]
-        [Display(Name = "Usuário")]
-        [Required(ErrorMessage="Informe o usuário")]
         public int id_usuario { get; set; }
-        [Display(Name = "Operadora")]
-        [Required(ErrorMessage="Informe Sim ou Não")]
         public int operadora { get; set; }
-        [Display(Name = "Inserir Operadora")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int operadora_i { get; set; }
-        [Display(Name = "Alterar Operadora")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int operadora_a { get; set; }
-        [Display(Name = "Excluir Operadora")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int operadora_d { get; set; }
-        [Display(Name = "Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo { get; set; }
-        [Display(Name = "Incluir Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_i { get; set; }
-        [Display(Name = "Alterar Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_a { get; set; }
-        [Display(Name = "Excluir Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_d { get; set; }
-        [Display(Name = "Permissão de Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_permissao { get; set; }
-        [Display(Name = "Inserir Permissao de Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_permissao_i { get; set; }
-        [Display(Name = "Alterar Permissão de Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_permissao_a { get; set; }
-        [Display(Name = "Excluir Permissão de Grupo")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int grupo_permissao_d { get; set; }
-        [Display(Name = "Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario { get; set; }
-        [Display(Name = "Incluir Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_i { get; set; }
-        [Display(Name = "Alterar Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_a { get; set; }
-        [Display(Name = "Excluir Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_d { get; set; }
-        [Display(Name = "Permissão de Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_permissao1 { get; set; }
-        [Display(Name = "Incluir Permissão de Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_permissao_i { get; set; }
-        [Display(Name = "Alterar Permissão de Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_permissao_a { get; set; }
-        [Display(Name = "Excluir Permissão de Usuário")]
-        [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_permissao_d { get; set; }
-        [Display(Name = "Usuário")]        
+    
         public virtual usuario usuario1 { get; set; }
     }
 }
