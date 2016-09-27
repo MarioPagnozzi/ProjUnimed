@@ -1,0 +1,81 @@
+﻿@model SisUnimed.Models.ViewModelDetalhePermisaoGrupo
+@{       
+           
+   List<SelectListItem> simenao = new List<SelectListItem>();
+   simenao.Add(new SelectListItem{
+       Text = "Sim",
+       Value = "1"
+   });
+   simenao.Add(new SelectListItem{
+       Text = "Não",
+       Value = "0"
+   });
+}
+
+@if (Model != null)
+{
+    using (@Html.BeginForm("EditarPermissao","Grupo",FormMethod.Post, new { @id="FormCadastro"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true) 
+        @Html.HiddenFor(a => a.Vgrupo_permissao.id)      
+       <table class="table">
+           <thead>
+               <tr class="header">
+                   <th scope="col">Descrição Tabela</th>
+                   <th scope="col">Visualizar</th>
+                   <th scope="col">Inserir</th>
+                   <th scope="col">Atualizar</th>
+                   <th scope="col">Excluir</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>Operadoras</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.operadora, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.operadora_i, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.operadora_a, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.operadora_d, simenao)</td>
+
+               </tr>
+               <tr class="alternate">
+                   <td>Usuario</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_i, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_a, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_d, simenao)</td>
+               </tr>
+               <tr>
+                   <td>Grupo</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_i,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_a,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_d, simenao)</td>
+               </tr>
+               <tr class="alternate">
+                   <td>Permissão de Grupo</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao1, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_i,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_a,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_d,simenao)</td>
+               </tr>
+               <tr>
+                   <td>Permissao de Usuário</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_i,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_a,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_d,simenao)</td>
+               </tr>
+               <tr>
+                   <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+               </tr>
+           </tbody>
+
+       </table>
+    }      
+} else {
+    
+    <font style='color: red;text-align:right;font-size:11px'>Não existe grupo selecionado</font>    
+}
+
+

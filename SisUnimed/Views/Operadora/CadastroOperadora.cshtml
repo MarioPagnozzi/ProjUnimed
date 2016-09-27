@@ -1,0 +1,49 @@
+﻿@model SisUnimed.Models.operadora1
+
+
+               
+                            @using (Html.BeginForm((string)ViewBag.Action,"Operadora",FormMethod.Post, new{id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_cod_operadora)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_nome)</font></td>
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.c_cod_operadora,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_cod_operadora, new { @size = "10",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.c_nome, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_nome, new { @size="30", @style="text-transform: uppercase" })</td>
+                                   
+                               </tr>                              
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Operadora", "Operadora", new { id = Model.Vgrupo.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }                   
+                       
+

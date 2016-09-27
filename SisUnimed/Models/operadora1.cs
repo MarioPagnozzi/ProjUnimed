@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class operadora1
     {
@@ -21,13 +22,32 @@ namespace SisUnimed.Models
             this.marcas_operadoras = new HashSet<marcas_operadoras>();
             this.negociadores = new HashSet<negociadore>();
         }
-    
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Código Alternativo")]
+        [Required(ErrorMessage="Código Alternativo deve ser informado")]
         public string c_cod_operadora { get; set; }
+
+        [Display(Name="Descrição")]
+        [Required(ErrorMessage="Descrição deve ser informada")]
         public string c_nome { get; set; }
+
+        [Display(Name="Data Inclusão")]
+        [Required(ErrorMessage="Data Inclusão deve ser informada")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+
+        [Display(Name="Usuário Inclusão")]
+        [Required(ErrorMessage="Usuário Inclusão deve ser informado")]
         public Nullable<long> sisusuarioi { get; set; }
+
+        [Display(Name="Data Alteração")]
+        [Required(ErrorMessage="Data Alteração deve ser informada")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+
+        [Display(Name="Usuário Alteração")]
+        [Required(ErrorMessage="Usuário Alteração deve ser informado")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -38,5 +58,16 @@ namespace SisUnimed.Models
         public virtual ICollection<marcas_operadoras> marcas_operadoras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociadore> negociadores { get; set; }
+        public virtual usuario usuarios { get; set; }
+    }
+    public class ListaOperadora1
+    {
+        public long id { get; set; }
+        public string c_cod_operadora { get; set; }
+        public string c_nome { get; set; }
+        public System.DateTime? data_Inclusao { get; set; }
+        public string usuario_Inclusao { get; set; }
+        public System.DateTime? data_alteracao { get; set; }
+        public string usuario_alteracao { get; set; }
     }
 }

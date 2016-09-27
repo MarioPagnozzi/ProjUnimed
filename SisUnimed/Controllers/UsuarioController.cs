@@ -30,9 +30,7 @@ namespace SisUnimed.Controllers
                 using (UnimedEntities1 lu = new UnimedEntities1())
                 {
 
-                    var md = from a in lu.usuarios
-                             join g in lu.grupoes on a.id_grupo equals g.id
-                             join o in lu.operadoras on a.id_operadora equals o.id
+                    var md = from a in lu.usuarios                             
                              select new ResultadoLista
                              {
                                  id = a.id,
@@ -41,8 +39,8 @@ namespace SisUnimed.Controllers
                                  nome_usuario = a.nome_usuario,
                                  senha_usuario = a.senha_usuario,
                                  email_usuario = a.email_usuario,
-                                 nome_grupo = g.nome_grupo,
-                                 nome_operadora = o.nome_operadora
+                                 nome_grupo = a.grupo.nome_grupo,
+                                 nome_operadora = a.operadora.nome_operadora
                              };
                     var op = from a in lu.operadoras
                              select new ListaOperadora
@@ -59,7 +57,8 @@ namespace SisUnimed.Controllers
                              };
                     ViewData["listagrupo"] = gp.ToList();
                     ViewData["ListaUsuario"] = md.ToList();
-                   
+                    ViewBag.Message = TempData["mensagem"];
+                    TempData["mensagem"] = "";
                     return View();
                 }
 
@@ -79,9 +78,7 @@ namespace SisUnimed.Controllers
                 int usuario_id = int.Parse(Session["usuariologadoId"].ToString());
                 var resultado = lu.usuario_permissao.Where(a => a.id_usuario.Equals(usuario_id)).FirstOrDefault();
                 ViewData["usuario_permissao"] = resultado;
-                var md = from a in lu.usuarios
-                         join g in lu.grupoes on a.id_grupo equals g.id
-                         join o in lu.operadoras on a.id_operadora equals o.id
+                var md = from a in lu.usuarios                         
                          select new ResultadoLista
                          {
                              id = a.id,
@@ -90,8 +87,8 @@ namespace SisUnimed.Controllers
                              nome_usuario = a.nome_usuario,
                              senha_usuario = a.senha_usuario,
                              email_usuario = a.email_usuario,
-                             nome_grupo = g.nome_grupo,
-                             nome_operadora = o.nome_operadora
+                             nome_grupo = a.grupo.nome_grupo,
+                             nome_operadora = a.operadora.nome_operadora
                          };
                  var op = from a in lu.operadoras
                          select new ListaOperadora
@@ -132,11 +129,20 @@ namespace SisUnimed.Controllers
         {
             using (UnimedEntities1 lu = new UnimedEntities1())
             {
-                usuario usuario = lu.usuarios.Find(id);
-                
-                lu.usuarios.Remove(usuario);
-                lu.SaveChanges();
-                ViewBag.Message = "<font style='color: green;text-align:right;font-size:11px'>Usuário Excluído com Sucesso!</font>";
+                var usuario_id = int.Parse(Session["usuariologadoid"].ToString());
+                var usuario_d = lu.usuario_permissao.Where(a => a.usuario_d.Equals(1) && a.id_usuario.Equals(usuario_id)).Count();
+                if (usuario_d >= 1)
+                {
+                    usuario usuario = lu.usuarios.Find(id);
+                    lu.usuarios.Remove(usuario);
+                    lu.SaveChanges();
+                    TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Usuário Excluído com Sucesso!</font>";
+
+                }
+                else
+                {
+                    TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Você não Tem Permissão para Excluir</font>";
+                }
             }
             ViewBag.Action = "";
             return RedirectToAction("Usuario");
@@ -145,26 +151,73 @@ namespace SisUnimed.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inserir(Models.ViewModelDetalhePermisao u)
         {
+            if (ModelState.IsValid) {
+                using  (UnimedEntities1 lu = new UnimedEntities1())
+                {
+                    var id = int.Parse(Session["usuariologadoid"].ToString());
+                    var up = lu.usuario_permissao.Where(a => a.usuario_i.Equals(id)).FirstOrDefault();
+                    if (up.usuario_i != 1)
+                    {
+                        TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
+                    } else {
+                        u.Vusuario.nome_usuario = u.Vusuario.nome_usuario.ToUpper();
+                        u.Vusuario.email_usuario = u.Vusuario.email_usuario.ToLower();
+                        lu.usuarios.Add(u.Vusuario);
+                        lu.SaveChanges();
+                        TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
+                    }
+                
+                }
+                ViewBag.Action = "";
+                return RedirectToAction("Usuario");
+            }
             using (UnimedEntities1 lu = new UnimedEntities1())
             {
-                var id = int.Parse(Session["usuariologadoid"].ToString());
-                var up = lu.usuario_permissao.Where(a => a.usuario_i.Equals(id)).FirstOrDefault();
-                if (up.usuario_i != 1)
-                {
-                    ViewBag.Message = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
-                } else {
-                    lu.usuarios.Add(u.Vusuario);
-                    lu.SaveChanges();
-                    ViewBag.Message = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
-                }
+                var op = from a in lu.operadoras
+                         select new ListaOperadora
+                         {
+                             cod_op = a.id,
+                             desc_op = a.nome_operadora
+                         };
+                ViewData["listaOperadora"] = op.ToList();
+                var gp = from a in lu.grupoes
+                         select new ListaGrupo
+                         {
+                             cod_grupo = a.id,
+                             desc_grupo = a.nome_grupo
+                         };
+                ViewData["listagrupo"] = gp.ToList();
+                int usuario_id = int.Parse(Session["usuariologadoId"].ToString());
+                var resultado = lu.usuario_permissao.Where(a => a.id_usuario.Equals(usuario_id)).FirstOrDefault();
+                ViewData["usuario_permissao"] = resultado;
+                var md = from a in lu.usuarios
+                         select new ResultadoLista
+                         {
+                             id = a.id,
+                             id_grupo = a.id_grupo,
+                             id_operadora = a.id_operadora,
+                             nome_usuario = a.nome_usuario,
+                             senha_usuario = a.senha_usuario,
+                             email_usuario = a.email_usuario,
+                             nome_grupo = a.grupo.nome_grupo,
+                             nome_operadora = a.operadora.nome_operadora
+                         };
+                ViewData["ListaUsuario"] = md.ToList();               
+
+                var usuPermissao = (from up in lu.usuario_permissao
+                                    where up.id_usuario == u.Vusuario.id
+                                    select up).FirstOrDefault();
                 
+               
+                ViewData["usoPermissao"] = usuPermissao;
+
             }
-            ViewBag.Action = "";
-            return RedirectToAction("Usuario"); ;
+            ViewBag.Action = "Inserir";
+            return View("Usuario", u);
         }
         public ActionResult Incluir()
         {
-            
+            TempData["mensagem"] = "";
             using (UnimedEntities1 up = new UnimedEntities1())
                 {
                     int usuario_id = int.Parse(Session["usuariologadoId"].ToString());
@@ -230,28 +283,26 @@ namespace SisUnimed.Controllers
                 var up = lu.usuario_permissao.Where(a => a.id_usuario.Equals(id)).FirstOrDefault();
                 if (up.usuario_i != 1)
                 {
-                    ViewBag.Message = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
+                    TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
                 }
                 else
                 {
-                    usuario usuario = lu.usuarios.Find(u.Vusuario.id);
-                    usuario.id_grupo = u.Vusuario.id_grupo;
-                    usuario.id_operadora = u.Vusuario.id_operadora;
-                    usuario.nome_usuario = u.Vusuario.nome_usuario;
-                    usuario.email_usuario = u.Vusuario.email_usuario;
-                    usuario.senha_usuario = u.Vusuario.senha_usuario;
-                    //var usupermissao = lu.usuario_permissao.Where(a => a.id_usuario.Equals(u.Vusuario.id)).First();
-                    //var vDetalheUsuarioPermissao = new ViewModelDetalhePermisao
-                    //{
-                    //    VusuarioPermissao = usupermissao,
-                    //    Vusuario = usuario
+                    if (ModelState.IsValid) {
+                        usuario usuario = lu.usuarios.Find(u.Vusuario.id);
+                        usuario.id_grupo = u.Vusuario.id_grupo;
+                        usuario.id_operadora = u.Vusuario.id_operadora;
+                        usuario.nome_usuario = u.Vusuario.nome_usuario.ToUpper();
+                        usuario.email_usuario = u.Vusuario.email_usuario.ToLower();
+                        usuario.senha_usuario = u.Vusuario.senha_usuario;
+                    
 
-                    //};
-
-                    if (TryUpdateModel(usuario))
-                    {
-                        lu.SaveChanges();
-                        ViewBag.Message = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
+                        if (TryUpdateModel(usuario))
+                        {
+                            lu.SaveChanges();
+                            TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
+                        } else {
+                            TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Error ao Atualizar Usuário</font>";
+                        }
                     }
                 }
 
@@ -270,7 +321,7 @@ namespace SisUnimed.Controllers
                 var up = lu.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 if (up.usuario_permissao_a != 1)
                 {
-                    ViewBag.Message = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
+                    TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão</font>";
                 }
                 else
                 {
@@ -302,7 +353,11 @@ namespace SisUnimed.Controllers
                     if (TryUpdateModel(usuariopermissao))
                     {
                         lu.SaveChanges();
-                        ViewBag.Message = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
+                        TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Usuário Salvo com Sucesso!</font>";
+                    }
+                    else
+                    {
+                        TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Erro ao Alterar as Permissões</font>";
                     }
                 }
 
@@ -312,6 +367,7 @@ namespace SisUnimed.Controllers
         }
         public ActionResult Pesquisa(string tipo, string campo, string pesquisa)
         {
+            TempData["mensagem"] = "";
             using (UnimedEntities1 lu = new UnimedEntities1())
             {
                 

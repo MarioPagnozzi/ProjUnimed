@@ -1,0 +1,45 @@
+﻿@model SisUnimed.Models.ViewModelDetalhePermisaoGrupo
+
+
+               
+                            @using (Html.BeginForm((string)ViewBag.Action,"Grupo",FormMethod.Post, new{id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vgrupo.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vgrupo.nome_grupo)</font></td>
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.Vgrupo.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.Vgrupo.id, new { @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.Vgrupo.nome_grupo,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.Vgrupo.nome_grupo, new { @size = "30",@style="text-transform: uppercase"})</td>
+                                   
+                               </tr>                              
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Grupo", "Grupo", new { id = Model.Vgrupo.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }                   
+                       
+

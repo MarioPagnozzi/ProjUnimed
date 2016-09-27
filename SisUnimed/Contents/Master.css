@@ -26,10 +26,10 @@
 }
 #Divtopo {
     top: 0%;
-    position: fixed;
+    position: relative;
     left: 10.8%;
     width:89%;
-    height:10%;    
+    height:auto;    
     z-index:100;
 }
 #txttopo {
@@ -51,7 +51,7 @@
 }
 #divRodape {
     bottom: 0%;
-    position: absolute;
+    position: fixed;
     left: 10.8%;
     width:89%;
     z-index:100;
@@ -128,11 +128,11 @@ ul#nav li:hover ul, ul#nav li.over ul {
     
 }
 #corposite {
-    top: 10%;
-    position: fixed;
+    top: auto;
+    position: relative;
     left: 10.8%;
     width:89%;
-    height:80%;   
+    height:auto;   
 }
 #txtTitulo {
     color:darkgoldenrod;
@@ -247,6 +247,9 @@ hr {
 .tblPesquisa {
         width:auto;
         height:auto;
+        font-family: sans-serif,Verdana,'News701 BT';
+        text-decoration: none;
+        font-size: 14px;
     }
 .tblPesquisa tbody {
         width:99%;

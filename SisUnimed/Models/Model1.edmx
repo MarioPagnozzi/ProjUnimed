@@ -457,7 +457,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cod_operadora" Type="int4" Nullable="false" />
+          <Property Name="cod_operadora" Type="bpchar" MaxLength="10" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nome_operadora" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="operadoras">
@@ -949,8 +949,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-        
         <EntityContainer Name="UnimedModelStoreContainer">
           <EntitySet Name="bancos" EntityType="Self.bancos" Schema="public" store:Type="Tables" />
           <EntitySet Name="classificacoes" EntityType="Self.classificacoes" Schema="public" store:Type="Tables" />
@@ -1164,7 +1162,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cod_operadora" Type="Int32" Nullable="false" />
+          <Property Name="cod_operadora" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="String" />
           <Property Name="nome_operadora" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="usuarios" Relationship="Self.usuario_id_operadora_fkey" FromRole="operadora" ToRole="usuario" />
         </EntityType>
@@ -2344,8 +2342,8 @@
           <EntitySetMapping Name="operadoras">
             <EntityTypeMapping TypeName="UnimedModel.operadora">
               <MappingFragment StoreEntitySet="operadora">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cod_operadora" ColumnName="cod_operadora" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome_operadora" ColumnName="nome_operadora" />
               </MappingFragment>
             </EntityTypeMapping>

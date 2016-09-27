@@ -39,7 +39,7 @@
                                      <tr>
                                          <td>
                                            
-                                                 @ViewBag.Message
+                                               @Html.Raw(ViewBag.Message)
                                             
                                          </td>
                                      </tr>
@@ -56,9 +56,9 @@
                                    <td>@Html.LabelFor(a => a.Vusuario.id,new{@class="txtcorposite"})</td>
                                    <td>@Html.TextBoxFor(a => a.Vusuario.id, new { @readonly = "true"})</td>
                                    <td>@Html.LabelFor(a => a.Vusuario.nome_usuario,new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.Vusuario.nome_usuario, new { @size = "30"})</td>
+                                   <td>@Html.TextBoxFor(a => a.Vusuario.nome_usuario, new { @size = "30",@style="text-transform: uppercase"})</td>
                                    <td>@Html.LabelFor(a => a.Vusuario.email_usuario, new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.Vusuario.email_usuario, new {@size = "50"})</td>
+                                   <td>@Html.TextBoxFor(a => a.Vusuario.email_usuario, new {@size = "50",@style="text-transform: lowercase"})</td>
                                </tr>
                                 
                                 <tr>
@@ -79,14 +79,14 @@
                                     <td>@Html.LabelFor(a => a.Vusuario.id_operadora,new{@class="txtcorposite"})</td>
                                     @if (Model != null)
                                     {
-                                    <td>@Html.DropDownListFor(a => a.Vusuario.id_operadora, operadoras,new { value = Model.Vusuario.id_operadora })</td>
+                                    <td>@Html.DropDownListFor(a => a.Vusuario.id_operadora, operadoras)</td>
                                     } else {
                                         <td>@Html.DropDownListFor(a => a.Vusuario.id_operadora, operadoras)</td>
                                     }
                                     <td>@Html.LabelFor(a => a.Vusuario.id_grupo,new{@class="txtcorposite"})</td>
                                     @if (Model != null)
                                     {
-                                    <td>@Html.DropDownListFor(a => a.Vusuario.id_grupo, grupos, new { value = Model.Vusuario.id_grupo })</td>
+                                    <td>@Html.DropDownListFor(a => a.Vusuario.id_grupo, grupos)</td>
                                     } else {
                                         <td>@Html.DropDownListFor(a => a.Vusuario.id_grupo, grupos)</td>
                                     }

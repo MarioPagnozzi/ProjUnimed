@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class grupo
     {
@@ -21,12 +22,22 @@ namespace SisUnimed.Models
             this.usuarios = new HashSet<usuario>();
         }
     
+        [Key]
+        [Display(Name="Código")]
         public int id { get; set; }
+
+        [Display(Name="Descrição")]
+        [Required(ErrorMessage="Descrião deve ser informada")]
         public string nome_grupo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<grupo_permissao> grupo_permissao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario> usuarios { get; set; }
+    }
+    public class ViewModelDetalhePermisaoGrupo
+    {
+        public grupo Vgrupo { get; set; }
+        public grupo_permissao Vgrupo_permissao { get; set; }
     }
 }

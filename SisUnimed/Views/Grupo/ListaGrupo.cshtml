@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaGrupo>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaGrupo> listagrupo = (IEnumerable<SisUnimed.Models.ListaGrupo>)ViewData["listagrupo"];
+    var grid = new WebGrid(listagrupo, defaultSort: "nome_grupo", rowsPerPage: 5);
+}
+
+<div id="divGrid">
+        <fieldset>
+            <legend>Grupos</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
+                    grid.Column(columnName: "cod_grupo",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.cod_grupo.ToString(),"PreencheCampos",new{id=a.cod_grupo},null).ToString()),canSort: true),
+                    grid.Column(columnName: "desc_grupo", header: "Descrição", format: a => new HtmlString(Html.ActionLink((string)a.desc_grupo.ToString(),"PreencheCampos", new { id=a.cod_grupo},null).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>
+
+</div>

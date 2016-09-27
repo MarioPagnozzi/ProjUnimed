@@ -336,6 +336,11 @@
     <Content Include="Views\Usuario\ListaUsuario.cshtml" />
     <Content Include="Views\Usuario\UsuarioPermissao.cshtml" />
     <Content Include="Views\Usuario\CadastroUsuario.cshtml" />
+    <Content Include="Views\Grupo\CadastroGrupo.cshtml" />
+    <Content Include="Views\Grupo\ListaGrupo.cshtml" />
+    <Content Include="Views\Grupo\GrupoPermissao.cshtml" />
+    <Content Include="Views\Operadora\ListaOperadora.cshtml" />
+    <Content Include="Views\Operadora\CadastroOperadora.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

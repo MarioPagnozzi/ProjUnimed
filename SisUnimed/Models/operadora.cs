@@ -21,7 +21,7 @@ namespace SisUnimed.Models
         }
     
         public int id { get; set; }
-        public int cod_operadora { get; set; }
+        public string cod_operadora { get; set; }
         public string nome_operadora { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
