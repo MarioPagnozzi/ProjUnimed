@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaEspecialidade>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaEspecialidade> listaespecialidade = (IEnumerable<SisUnimed.Models.ListaEspecialidade>)ViewData["listaespecialidade"];
+    var grid = new WebGrid(listaespecialidade.ToList(), defaultSort: "c_nome", rowsPerPage: 5);
+}
+
+<div id="divGrid">
+        <fieldset>
+            <legend>Operadoras</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
+                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "c_codigo",header:"Código Alternativo",format: a => new HtmlString(Html.ActionLink((string)a.c_codigo.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "c_nome", header: "Descrição", format: a => new HtmlString(Html.ActionLink((string)a.c_nome.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.sisdatai.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Html.ActionLink((string)a.sisdataa.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Html.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>
+
+</div>

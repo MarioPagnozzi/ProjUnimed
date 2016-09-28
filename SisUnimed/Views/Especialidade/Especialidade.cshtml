@@ -1,10 +1,10 @@
-﻿@model SisUnimed.Models.operadora1
+﻿@model SisUnimed.Models.especialidade
 @{
-    ViewBag.Title = "Operadora";
+    ViewBag.Title = "Especialidades";
     Layout = "~/Views/Home/Index.cshtml";
    
     var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
-    IEnumerable<SisUnimed.Models.ListaOperadora1> resultadolista = (IEnumerable<SisUnimed.Models.ListaOperadora1>)ViewData["listaoperadora"];
+    IEnumerable<SisUnimed.Models.ListaEspecialidade> resultadolista = (IEnumerable<SisUnimed.Models.ListaEspecialidade>)ViewData["listaespecialidade"];
   
     List<SelectListItem> listacampo = new List<SelectListItem>();
     listacampo.Add(new SelectListItem{
@@ -48,7 +48,7 @@
             var vpesquisa = document.getElementById("pesquisa").value.toUpperCase();
 
             $.ajax({
-                url: "@Url.Action("Pesquisa","Operadora")",
+                url: "@Url.Action("Pesquisa","Especialidade")",
                 type: "GET",
                 data: { tipo: vtipo, campo: vcampo, pesquisa: vpesquisa },
                 success: function (retorno) {
@@ -78,7 +78,7 @@
 
 </script>
 
-<h2 id="txtTitulo">Cadastro de Operadora</h2>
+<h2 id="txtTitulo">Cadastro de Especialidade</h2>
 <hr />
  <div id="divPesq">
      <fieldset>
@@ -118,21 +118,21 @@
  </div>
     <div id="divCadastro">        
         <fieldset>
-            <legend>Dados Operadora</legend>
+            <legend>Dados Especialidade</legend>
              <table class="btnPesquisa">
                  <tr>
                      <td>
-                         @if (up.operadora_i == 1)
+                         @if (up.especialidade_i == 1)
                          {                        
-                            <button onclick="location.href='@Url.Action("Incluir", "Operadora")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                            <button onclick="location.href='@Url.Action("Incluir", "Especialidade")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
                          }
                      </td>
                      @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
                        
                      <td>
-                          @if (up.operadora_d == 1 && Model != null)
+                          @if (up.especialidade_d == 1 && Model != null)
                           {
-                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Operadora", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
+                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Especialidade", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
                           }
                      </td>
                         
@@ -142,12 +142,12 @@
                 <div id="content">
                     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                         <li class="active"><a href="#tab1" 
-                        data-toggle="tab">Operadora</a></li>
+                        data-toggle="tab">Especialidades</a></li>
                         @*<li><a href="#tab2" data-toggle="tab">Permissões</a></li> *@                       
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
-                        @Html.Partial("CadastroOperadora", Model)
+                        @Html.Partial("CadastroEspecialidade", Model)
                     </div>
                        @* <div class="tab-pane" id="tab2"> 
                             <table class="table">
@@ -164,5 +164,5 @@
         </fieldset>
     </div>
     
-                @Html.Partial("ListaOperadora",resultadolista)
+                @Html.Partial("ListaEspecialidade",resultadolista)
       

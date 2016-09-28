@@ -52,6 +52,10 @@
                         {
                             <li>@Html.ActionLink("Usuario","Usuario","Usuario")</li>
                         }
+                         @if (up.especialidade == 1)
+                        {
+                            <li>@Html.ActionLink("Especialidade","Especialidade","Especialidade")</li>
+                        }
                     </ul>
                 </li>
             </ul>

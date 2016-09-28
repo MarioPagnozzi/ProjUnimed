@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassesProjeto.cs" />
+    <Compile Include="Controllers\EspecialidadeController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -341,6 +342,9 @@
     <Content Include="Views\Grupo\GrupoPermissao.cshtml" />
     <Content Include="Views\Operadora\ListaOperadora.cshtml" />
     <Content Include="Views\Operadora\CadastroOperadora.cshtml" />
+    <Content Include="Views\Especialidade\Especialidade.cshtml" />
+    <Content Include="Views\Especialidade\CadastroEspecialidade.cshtml" />
+    <Content Include="Views\Especialidade\ListaEspecialidade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
