@@ -34,20 +34,16 @@ namespace SisUnimed.Models
         [Required(ErrorMessage="Descrição deve ser informada")]
         public string c_nome { get; set; }
 
-        [Display(Name="Data Inclusão")]
-        [Required(ErrorMessage="Data Inclusão deve ser informada")]
+        [Display(Name="Data Inclusão")]       
         public Nullable<System.DateTime> sisdatai { get; set; }
 
-        [Display(Name="Usuário Inclusão")]
-        [Required(ErrorMessage="Usuário Inclusão deve ser informado")]
+        [Display(Name="Usuário Inclusão")]       
         public Nullable<long> sisusuarioi { get; set; }
 
-        [Display(Name="Data Alteração")]
-        [Required(ErrorMessage="Data Alteração deve ser informada")]
+        [Display(Name="Data Alteração")]       
         public Nullable<System.DateTime> sisdataa { get; set; }
 
-        [Display(Name="Usuário Alteração")]
-        [Required(ErrorMessage="Usuário Alteração deve ser informado")]
+        [Display(Name="Usuário Alteração")]       
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -58,7 +54,7 @@ namespace SisUnimed.Models
         public virtual ICollection<marcas_operadoras> marcas_operadoras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociadore> negociadores { get; set; }
-        public virtual usuario usuarios { get; set; }
+       
     }
     public class ListaOperadora1
     {

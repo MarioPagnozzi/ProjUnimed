@@ -24,16 +24,20 @@ namespace SisUnimed.Controllers
                     ViewData["usuario_permissao"] = resultado;
 
                     // busca Operadoras na tabela
-                    var operadoras = from a in up.operadoras1
+                    var operadoras = from a in up.operadoras1                                    
+                                     join b in up.usuarios on a.sisusuarioi equals b.id into g
+                                     join c in up.usuarios on a.sisusuarioa equals c.id into h
+                                     from x in g.DefaultIfEmpty()
+                                     from y in h.DefaultIfEmpty()
                                      select new ListaOperadora1
                                  {
                                      id = a.id,
                                      c_nome = a.c_nome,
                                      c_cod_operadora = a.c_cod_operadora,
-                                     data_Inclusao = a.sisdatai,
-                                     usuario_Inclusao = a.usuarios.nome_usuario,
-                                     data_alteracao = a.sisdataa,
-                                     usuario_alteracao = a.usuarios.nome_usuario
+                                     data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                     usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                     data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                     usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
                     ViewData["listaoperadora"] = operadoras.ToList();
                 }
@@ -57,16 +61,20 @@ namespace SisUnimed.Controllers
                
                 //carrega lista de operadoras
                 var listaoperadora = from a in dg.operadoras1
+                                     join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                     join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                     from x in g.DefaultIfEmpty()
+                                     from y in h.DefaultIfEmpty()
                                      select new ListaOperadora1
-                                 {
-                                     id = a.id,
-                                     c_nome = a.c_nome,
-                                     c_cod_operadora = a.c_cod_operadora,
-                                     data_Inclusao = a.sisdatai,
-                                     usuario_Inclusao = a.usuarios.nome_usuario,
-                                     data_alteracao = a.sisdataa,
-                                     usuario_alteracao = a.usuarios.nome_usuario
-                                 };
+                                     {
+                                         id = a.id,
+                                         c_nome = a.c_nome,
+                                         c_cod_operadora = a.c_cod_operadora,
+                                         data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                         usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                         data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                         usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
+                                     };
                 ViewData["listaoperadora"] = listaoperadora.ToList();
 
                 //atualiza permissao de usuários
@@ -87,15 +95,19 @@ namespace SisUnimed.Controllers
                 if (pesquisa == "")
                 {
                     var lg = from a in dg.operadoras1
+                             join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                             join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                             from x in g.DefaultIfEmpty()
+                             from y in h.DefaultIfEmpty()                             
                              select new ListaOperadora1
                              {
                                  id = a.id,
                                  c_nome = a.c_nome,
                                  c_cod_operadora = a.c_cod_operadora,
-                                 data_Inclusao = a.sisdatai,
-                                 usuario_Inclusao = a.usuarios.nome_usuario,
-                                 data_alteracao = a.sisdataa,
-                                 usuario_alteracao = a.usuarios.nome_usuario
+                                 data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                 usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                 data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                 usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                              };
                     ViewData["listaoperadora"] = lg.ToList();
                 }
@@ -103,16 +115,20 @@ namespace SisUnimed.Controllers
                 {
                     int idoperadora = int.Parse(pesquisa);
                     var lg = from a in dg.operadoras1
-                             where a.id == idoperadora
+                             join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                             join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                             from x in g.DefaultIfEmpty()
+                             from y in h.DefaultIfEmpty()
+                             where a.id.Equals(idoperadora)
                              select new ListaOperadora1
                              {
                                  id = a.id,
                                  c_nome = a.c_nome,
                                  c_cod_operadora = a.c_cod_operadora,
-                                 data_Inclusao = a.sisdatai,
-                                 usuario_Inclusao = a.usuarios.nome_usuario,
-                                 data_alteracao = a.sisdataa,
-                                 usuario_alteracao = a.usuarios.nome_usuario
+                                 data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                 usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                 data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                 usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                              };
                     ViewData["listaoperadora"] = lg.ToList();
                 }
@@ -121,48 +137,60 @@ namespace SisUnimed.Controllers
                     if (tipo == "inicia")
                     {
                         var lg = from a in dg.operadoras1
+                                 join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                 join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                 from x in g.DefaultIfEmpty()
+                                 from y in h.DefaultIfEmpty()
                                  where a.c_nome.StartsWith(pesquisa)
                                  select new ListaOperadora1
                                  {
                                      id = a.id,
                                      c_nome = a.c_nome,
                                      c_cod_operadora = a.c_cod_operadora,
-                                     data_Inclusao = a.sisdatai,
-                                     usuario_Inclusao = a.usuarios.nome_usuario,
-                                     data_alteracao = a.sisdataa,
-                                     usuario_alteracao = a.usuarios.nome_usuario
+                                     data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                     usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                     data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                     usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
                         ViewData["listaoperadora"] = lg.ToList();
                     }
                     else if (tipo == "termina")
                     {
                         var lg = from a in dg.operadoras1
+                                 join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                 join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                 from x in g.DefaultIfEmpty()
+                                 from y in h.DefaultIfEmpty()
                                  where a.c_nome.EndsWith(pesquisa)
                                  select new ListaOperadora1
                                  {
                                      id = a.id,
                                      c_nome = a.c_nome,
                                      c_cod_operadora = a.c_cod_operadora,
-                                     data_Inclusao = a.sisdatai,
-                                     usuario_Inclusao = a.usuarios.nome_usuario,
-                                     data_alteracao = a.sisdataa,
-                                     usuario_alteracao = a.usuarios.nome_usuario
+                                     data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                     usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                     data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                     usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
                         ViewData["listaoperadora"] = lg.ToList();
                     }
                     else
                     {
                         var lg = from a in dg.operadoras1
+                                 join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                 join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                 from x in g.DefaultIfEmpty()
+                                 from y in h.DefaultIfEmpty()
                                  where a.c_nome.Contains(pesquisa)
                                  select new ListaOperadora1
                                  {
                                      id = a.id,
                                      c_nome = a.c_nome,
                                      c_cod_operadora = a.c_cod_operadora,
-                                     data_Inclusao = a.sisdatai,
-                                     usuario_Inclusao = a.usuarios.nome_usuario,
-                                     data_alteracao = a.sisdataa,
-                                     usuario_alteracao = a.usuarios.nome_usuario
+                                     data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                     usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                     data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                     usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
                         ViewData["listaoperadora"] = lg.ToList();
                     }
@@ -184,15 +212,19 @@ namespace SisUnimed.Controllers
 
                 //carrega lista de grupo
                 var lg = from a in dg.operadoras1
+                         join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                         join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                         from x in g.DefaultIfEmpty()
+                         from y in h.DefaultIfEmpty()
                          select new ListaOperadora1
                          {
                              id = a.id,
                              c_nome = a.c_nome,
                              c_cod_operadora = a.c_cod_operadora,
-                             data_Inclusao = a.sisdatai,
-                             usuario_Inclusao = a.usuarios.nome_usuario,
-                             data_alteracao = a.sisdataa,
-                             usuario_alteracao = a.usuarios.nome_usuario
+                             data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                             usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                             data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                             usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
                 ViewData["listaoperadora"] = lg.ToList();
 
@@ -219,6 +251,8 @@ namespace SisUnimed.Controllers
                         try
                         {
                             u.c_nome = (u.c_nome.ToUpper());
+                            u.sisusuarioi = int.Parse(Session["usuariologadoid"].ToString());
+                            u.sisdatai = DateTime.Today;
                             dg.operadoras1.Add(u);
                             dg.SaveChanges();
 
@@ -230,19 +264,23 @@ namespace SisUnimed.Controllers
                             ViewData["usuario_permissao"] = up1;
                             //cria lista de grupo
                             var lg = from a in dg.operadoras1
+                                     join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                     join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                     from x in g.DefaultIfEmpty()
+                                     from y in h.DefaultIfEmpty()
                                      select new ListaOperadora1
                                      {
                                          id = a.id,
                                          c_nome = a.c_nome,
                                          c_cod_operadora = a.c_cod_operadora,
-                                         data_Inclusao = a.sisdatai,
-                                         usuario_Inclusao = a.usuarios.nome_usuario,
-                                         data_alteracao = a.sisdataa,
-                                         usuario_alteracao = a.usuarios.nome_usuario
+                                         data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                         usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                                         data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                         usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                                      };
                             ViewData["listaoperadora"] = lg.ToList();
                             ViewBag.Titulo = "Cadastro de Operadora";
-                            return View("Operadora", u);
+                            return View("Operadora");
                         }
 
                         TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Operadora Inserida com Sucesso!</font>";
@@ -260,15 +298,19 @@ namespace SisUnimed.Controllers
                 ViewData["usuario_permissao"] = up;
                 //cria lista de grupo
                 var lg = from a in dg.operadoras1
+                         join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                         join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                         from x in g.DefaultIfEmpty()
+                         from y in h.DefaultIfEmpty()
                          select new ListaOperadora1
                          {
                              id = a.id,
                              c_nome = a.c_nome,
                              c_cod_operadora = a.c_cod_operadora,
-                             data_Inclusao = a.sisdatai,
-                             usuario_Inclusao = a.usuarios.nome_usuario,
-                             data_alteracao = a.sisdataa,
-                             usuario_alteracao = a.usuarios.nome_usuario
+                             data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                             usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                             data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                             usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
                 ViewData["listaoperadora"] = lg.ToList();
             }
@@ -290,7 +332,8 @@ namespace SisUnimed.Controllers
                     {
                         operadora1 operadora = dg.operadoras1.Find(u.id);
                         operadora.c_nome = u.c_nome.ToUpper();
-
+                        operadora.sisdataa = DateTime.Today;
+                        operadora.sisusuarioa = int.Parse(Session["usuariologadoid"].ToString());
                         if (TryUpdateModel(operadora))
                         {
                             dg.SaveChanges();
@@ -316,15 +359,19 @@ namespace SisUnimed.Controllers
                 ViewData["usuario_permissao"] = up;
                 //cria lista de grupo
                 var lg = from a in dg.operadoras1
+                         join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                         join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                         from x in g.DefaultIfEmpty()
+                         from y in h.DefaultIfEmpty()
                          select new ListaOperadora1
                          {
                              id = a.id,
                              c_nome = a.c_nome,
                              c_cod_operadora = a.c_cod_operadora,
-                             data_Inclusao = a.sisdatai,
-                             usuario_Inclusao = a.usuarios.nome_usuario,
-                             data_alteracao = a.sisdataa,
-                             usuario_alteracao = a.usuarios.nome_usuario
+                             data_Inclusao = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                             usuario_Inclusao = (x == null ? "Sem Dados" : x.nome_usuario),
+                             data_alteracao = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                             usuario_alteracao = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
                 ViewData["listaoperadora"] = lg.ToList();
             }

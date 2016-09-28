@@ -40,7 +40,7 @@
                                     @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
                                     {                                 
                                         <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
-                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Operadora", "Operadora", new { id = Model.Vgrupo.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
+                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Operadora", "Operadora", new { id = Model.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
                                     }    
                                 </tr>
                              </table>
