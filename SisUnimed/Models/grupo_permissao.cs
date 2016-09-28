@@ -36,6 +36,10 @@ namespace SisUnimed.Models
         public int usuario_permissao_i { get; set; }
         public int usuario_permissao_a { get; set; }
         public int usuario_permissao_d { get; set; }
+        public int especialidade { get; set; }
+        public int especialidade_i { get; set; }
+        public int especialidade_a { get; set; }
+        public int especialidade_d { get; set; }
     
         public virtual grupo grupo1 { get; set; }
     }

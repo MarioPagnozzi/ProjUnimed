@@ -83,7 +83,11 @@ namespace SisUnimed.Models
         [Display(Name = "Excluir Permissão de Usuário")]
         [Required(ErrorMessage = "Informe Sim ou Não")]
         public int usuario_permissao_d { get; set; }
-        [Display(Name = "Usuário")]        
+        public int especialidade { get; set; }
+        public int especialidade_i { get; set; }
+        public int especialidade_a { get; set; }
+        public int especialidade_d { get; set; }
+    
         public virtual usuario usuario1 { get; set; }
     }
 }

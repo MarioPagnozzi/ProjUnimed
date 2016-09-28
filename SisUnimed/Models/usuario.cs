@@ -43,7 +43,7 @@ namespace SisUnimed.Models
         [Display(Name = "Senha de Acesso")]
         [Required(ErrorMessage = "Informe uma senha de acesso", AllowEmptyStrings = false)]
         public string senha_usuario { get; set; }
-
+    
         public virtual grupo grupo { get; set; }
         public virtual operadora operadora { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

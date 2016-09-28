@@ -231,6 +231,10 @@
           <Property Name="usuario_permissao_i" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
+          <Property Name="especialidade" Type="int4" Nullable="false" />
+          <Property Name="especialidade_i" Type="int4" Nullable="false" />
+          <Property Name="especialidade_a" Type="int4" Nullable="false" />
+          <Property Name="especialidade_d" Type="int4" Nullable="false" />
         </EntityType>
         <EntityType Name="importacao_xls">
           <Key>
@@ -456,7 +460,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="cod_operadora" Type="bpchar" MaxLength="10" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nome_operadora" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -552,6 +556,10 @@
           <Property Name="usuario_permissao_i" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_a" Type="int4" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="int4" Nullable="false" />
+          <Property Name="especialidade" Type="int4" Nullable="false" />
+          <Property Name="especialidade_i" Type="int4" Nullable="false" />
+          <Property Name="especialidade_a" Type="int4" Nullable="false" />
+          <Property Name="especialidade_d" Type="int4" Nullable="false" />
         </EntityType>
         <Association Name="fornecedores_anexos_fornecedor_fkey">
           <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
@@ -949,6 +957,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        
+        
+        
+        
+        
         <EntityContainer Name="UnimedModelStoreContainer">
           <EntitySet Name="bancos" EntityType="Self.bancos" Schema="public" store:Type="Tables" />
           <EntitySet Name="classificacoes" EntityType="Self.classificacoes" Schema="public" store:Type="Tables" />
@@ -1156,6 +1169,10 @@
           <Property Name="usuario_permissao_a" Type="Int32" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="Int32" Nullable="false" />
           <NavigationProperty Name="grupo1" Relationship="Self.grupo_permissao_id_grupo_fkey" FromRole="grupo_permissao" ToRole="grupo" />
+          <Property Name="especialidade" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_i" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_a" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_d" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="operadora">
           <Key>
@@ -1207,6 +1224,10 @@
           <Property Name="usuario_permissao_a" Type="Int32" Nullable="false" />
           <Property Name="usuario_permissao_d" Type="Int32" Nullable="false" />
           <NavigationProperty Name="usuario1" Relationship="Self.usuario_permissao_id_usuario_fkey" FromRole="usuario_permissao" ToRole="usuario" />
+          <Property Name="especialidade" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_i" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_a" Type="Int32" Nullable="false" />
+          <Property Name="especialidade_d" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="grupo_permissao_id_grupo_fkey">
           <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
@@ -2314,6 +2335,10 @@
           <EntitySetMapping Name="grupo_permissao">
             <EntityTypeMapping TypeName="UnimedModel.grupo_permissao">
               <MappingFragment StoreEntitySet="grupo_permissao">
+                <ScalarProperty Name="especialidade_d" ColumnName="especialidade_d" />
+                <ScalarProperty Name="especialidade_a" ColumnName="especialidade_a" />
+                <ScalarProperty Name="especialidade_i" ColumnName="especialidade_i" />
+                <ScalarProperty Name="especialidade" ColumnName="especialidade" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
                 <ScalarProperty Name="operadora" ColumnName="operadora" />
@@ -2363,6 +2388,10 @@
           <EntitySetMapping Name="usuario_permissao">
             <EntityTypeMapping TypeName="UnimedModel.usuario_permissao">
               <MappingFragment StoreEntitySet="usuario_permissao">
+                <ScalarProperty Name="especialidade_d" ColumnName="especialidade_d" />
+                <ScalarProperty Name="especialidade_a" ColumnName="especialidade_a" />
+                <ScalarProperty Name="especialidade_i" ColumnName="especialidade_i" />
+                <ScalarProperty Name="especialidade" ColumnName="especialidade" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="operadora" ColumnName="operadora" />
