@@ -1,0 +1,50 @@
+﻿@model SisUnimed.Models.banco
+
+
+               
+                            @using (Html.BeginForm((string)ViewBag.Action,"Banco",FormMethod.Post, new{id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_codigo)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_descricao)</font></td>
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.c_codigo, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.c_codigo, new { @size="10", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.c_descricao,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_descricao, new { @size = "30",@style="text-transform: uppercase"})</td>                                   
+                                   
+                               </tr>                              
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Banco", "Banco", new { id = Model.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }                   
+                       
+

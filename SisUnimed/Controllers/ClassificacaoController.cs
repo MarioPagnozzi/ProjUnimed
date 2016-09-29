@@ -7,12 +7,12 @@ using SisUnimed.Models;
 
 namespace SisUnimed.Controllers
 {
-    public class EspecialidadeController : Controller
+    public class ClassificacaoController : Controller
     {
         //
-        // GET: /Especialidade/
+        // GET: /Classificacao/
 
-        public ActionResult Especialidade()
+        public ActionResult Classificacao()
         {
             if (Session["usuariologadoId"] != null)
             {
@@ -24,24 +24,23 @@ namespace SisUnimed.Controllers
                     ViewData["usuario_permissao"] = resultado;
 
                     // busca Operadoras na tabela
-                    var especialidades = from a in up.especialidades
-                                     join b in up.usuarios on a.sisusuarioi equals b.id into g
-                                     join c in up.usuarios on a.sisusuarioa equals c.id into h
-                                     from x in g.DefaultIfEmpty()
-                                     from y in h.DefaultIfEmpty()
-                                     select new ListaEspecialidade
-                                     {
-                                         id = a.id,
-                                         c_nome = a.c_nome,
-                                         c_codigo = a.c_codigo,
-                                         sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
-                                         sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
-                                         sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
-                                         sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
-                                     };
-                    ViewData["listaespecialidade"] = especialidades.ToList();
+                    var classificacao = from a in up.classificacoes
+                                         join b in up.usuarios on a.sisusuarioi equals b.id into g
+                                         join c in up.usuarios on a.sisusuarioa equals c.id into h
+                                         from x in g.DefaultIfEmpty()
+                                         from y in h.DefaultIfEmpty()
+                                         select new ListaClassificacao
+                                         {
+                                             id = a.id,
+                                             descricao = a.c_descricao,                                            
+                                             sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                             sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
+                                             sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                             sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
+                                         };
+                    ViewData["listaclassificacao"] = classificacao.ToList();
                 }
-                ViewBag.Titulo = "Cadastro de Especialidades";
+                ViewBag.Titulo = "Cadastro de Classificacao";
                 ViewBag.Message = TempData["mensagem"];
                 TempData["mensagem"] = "";
                 return View();
@@ -57,25 +56,24 @@ namespace SisUnimed.Controllers
         {
             using (UnimedEntities1 dg = new UnimedEntities1())
             {
-                var dadosespecialidade = dg.especialidades.Where(a => a.id.Equals(id)).FirstOrDefault();
+                var dadosclassificacao = dg.classificacoes.Where(a => a.id.Equals(id)).FirstOrDefault();
 
                 //carrega lista de operadoras
-                var listaespecialidade = from a in dg.especialidades
-                                     join b in dg.usuarios on a.sisusuarioi equals b.id into g
-                                     join c in dg.usuarios on a.sisusuarioa equals c.id into h
-                                     from x in g.DefaultIfEmpty()
-                                     from y in h.DefaultIfEmpty()
-                                     select new ListaEspecialidade
-                                     {
-                                         id = a.id,
-                                         c_nome = a.c_nome,
-                                         c_codigo = a.c_codigo,
-                                         sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
-                                         sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
-                                         sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
-                                         sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
-                                     };
-                ViewData["listaespecialidade"] = listaespecialidade.ToList();
+                var listaclassificacao = from a in dg.classificacoes
+                                         join b in dg.usuarios on a.sisusuarioi equals b.id into g
+                                         join c in dg.usuarios on a.sisusuarioa equals c.id into h
+                                         from x in g.DefaultIfEmpty()
+                                         from y in h.DefaultIfEmpty()
+                                         select new ListaClassificacao
+                                         {
+                                             id = a.id,
+                                             descricao = a.c_descricao,                                            
+                                             sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
+                                             sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
+                                             sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
+                                             sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
+                                         };
+                ViewData["listaclassificacao"] = listaclassificacao.ToList();
 
                 //atualiza permissao de usuários
                 var id_usuario = int.Parse(Session["usuariologadoid"].ToString());
@@ -84,7 +82,7 @@ namespace SisUnimed.Controllers
 
                 //Altera status para editar
                 ViewBag.Action = "Editar";
-                return View("Especialidade", dadosespecialidade);
+                return View("Classificacao", dadosclassificacao);
             }
         }
         public ActionResult Pesquisa(string tipo, string campo, string pesquisa)
@@ -94,110 +92,105 @@ namespace SisUnimed.Controllers
             {
                 if (pesquisa == "")
                 {
-                    var lg = from a in dg.especialidades
+                    var lg = from a in dg.classificacoes
                              join b in dg.usuarios on a.sisusuarioi equals b.id into g
                              join c in dg.usuarios on a.sisusuarioa equals c.id into h
                              from x in g.DefaultIfEmpty()
                              from y in h.DefaultIfEmpty()
-                             select new ListaEspecialidade
+                             select new ListaClassificacao
                              {
                                  id = a.id,
-                                 c_nome = a.c_nome,
-                                 c_codigo = a.c_codigo,
+                                 descricao = a.c_descricao,
                                  sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                  sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                  sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                  sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                              };
-                    ViewData["listaespecialidade"] = lg.ToList();
+                    ViewData["listaclassificacao"] = lg.ToList();
                 }
-                if (campo == "codigo")
+                if (campo == "codigo" && pesquisa != string.Empty)
                 {
                     int idoperadora = int.Parse(pesquisa);
-                    var lg = from a in dg.especialidades
+                    var lg = from a in dg.classificacoes
                              join b in dg.usuarios on a.sisusuarioi equals b.id into g
                              join c in dg.usuarios on a.sisusuarioa equals c.id into h
                              from x in g.DefaultIfEmpty()
                              from y in h.DefaultIfEmpty()
-                             where a.id.Equals(idoperadora)
-                             select new ListaEspecialidade
+                             where a.id == idoperadora
+                             select new ListaClassificacao
                              {
                                  id = a.id,
-                                 c_nome = a.c_nome,
-                                 c_codigo = a.c_codigo,
+                                 descricao = a.c_descricao,
                                  sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                  sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                  sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                  sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                              };
-                    ViewData["listaespecialidade"] = lg.ToList();
+                    ViewData["listaclassificacao"] = lg.ToList();
                 }
                 else
                 {
                     if (tipo == "inicia")
                     {
-                        var lg = from a in dg.especialidades
+                        var lg = from a in dg.classificacoes
                                  join b in dg.usuarios on a.sisusuarioi equals b.id into g
                                  join c in dg.usuarios on a.sisusuarioa equals c.id into h
                                  from x in g.DefaultIfEmpty()
                                  from y in h.DefaultIfEmpty()
-                                 where a.c_nome.StartsWith(pesquisa)
-                                 select new ListaEspecialidade
+                                 where a.c_descricao.StartsWith(pesquisa)
+                                 select new ListaClassificacao
                                  {
                                      id = a.id,
-                                     c_nome = a.c_nome,
-                                     c_codigo = a.c_codigo,
+                                     descricao = a.c_descricao,
                                      sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                      sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                      sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                      sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
-                        ViewData["listaespecialidade"] = lg.ToList();
+                        ViewData["listaclassificacao"] = lg.ToList();
                     }
                     else if (tipo == "termina")
                     {
-                        var lg = from a in dg.especialidades
+                        var lg = from a in dg.classificacoes
                                  join b in dg.usuarios on a.sisusuarioi equals b.id into g
                                  join c in dg.usuarios on a.sisusuarioa equals c.id into h
                                  from x in g.DefaultIfEmpty()
                                  from y in h.DefaultIfEmpty()
-                                 where a.c_nome.EndsWith(pesquisa)
-                                 select new ListaEspecialidade
+                                 where a.c_descricao.EndsWith(pesquisa)
+                                 select new ListaClassificacao
                                  {
                                      id = a.id,
-                                     c_nome = a.c_nome,
-                                     c_codigo = a.c_codigo,
+                                     descricao = a.c_descricao,
                                      sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                      sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                      sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                      sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
-                        ViewData["listaespecialidade"] = lg.ToList();
+                        ViewData["listaclassificacao"] = lg.ToList();
                     }
                     else
                     {
-                        var lg = from a in dg.especialidades
+                        var lg = from a in dg.classificacoes
                                  join b in dg.usuarios on a.sisusuarioi equals b.id into g
                                  join c in dg.usuarios on a.sisusuarioa equals c.id into h
                                  from x in g.DefaultIfEmpty()
                                  from y in h.DefaultIfEmpty()
-                                 where a.c_nome.Contains(pesquisa)
-                                 select new ListaEspecialidade
+                                 where a.c_descricao.Contains(pesquisa)
+                                 select new ListaClassificacao
                                  {
                                      id = a.id,
-                                     c_nome = a.c_nome,
-                                     c_codigo = a.c_codigo,
+                                     descricao = a.c_descricao,
                                      sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                      sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                      sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                      sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                                  };
-                        ViewData["listaespecialidade"] = lg.ToList();
+                        ViewData["listaclassificacao"] = lg.ToList();
                     }
                 }
 
             }
-            return PartialView("ListaEspecialidade");
+            return PartialView("ListaClassificacao");
         }
         public ActionResult Incluir()
         {
@@ -208,52 +201,51 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
 
-                ViewBag.Titulo = "Cadastro de Especialidade";
+                ViewBag.Titulo = "Cadastro de Classificação";
 
                 //carrega lista de grupo
-                var lg = from a in dg.especialidades
+                var lg = from a in dg.classificacoes
                          join b in dg.usuarios on a.sisusuarioi equals b.id into g
                          join c in dg.usuarios on a.sisusuarioa equals c.id into h
                          from x in g.DefaultIfEmpty()
                          from y in h.DefaultIfEmpty()
-                         select new ListaEspecialidade
+                         select new ListaClassificacao
                          {
                              id = a.id,
-                             c_nome = a.c_nome,
-                             c_codigo = a.c_codigo,
+                             descricao = a.c_descricao,
                              sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                              sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                              sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                              sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
-                ViewData["listaespecialidade"] = lg.ToList();
+                ViewData["listaclassificacao"] = lg.ToList();
 
                 //prepara model para inserção
-                var especialidade = new especialidade();
+                var classificacao = new classificaco();
 
                 ViewBag.Action = "Inserir";
 
-                return View("Especialidade", especialidade);
+                return View("Classificacao", classificacao);
             }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inserir(especialidade u)
+        public ActionResult Inserir(classificaco u)
         {
             if (ModelState.IsValid)
             {
                 using (UnimedEntities1 dg = new UnimedEntities1())
                 {
                     int id_usuario = int.Parse(Session["usuariologadoid"].ToString());
-                    var up = dg.usuario_permissao.Where(a => a.especialidade_i.Equals(1) && a.id_usuario.Equals(id_usuario)).Count();
+                    var up = dg.usuario_permissao.Where(a => a.classificacao_i.Equals(1) && a.id_usuario.Equals(id_usuario)).Count();
                     if (up >= 1)
                     {
                         try
                         {
-                            u.c_nome = (u.c_nome.ToUpper());
+                            u.c_descricao = (u.c_descricao.ToUpper());
                             u.sisusuarioi = int.Parse(Session["usuariologadoid"].ToString());
                             u.sisdatai = DateTime.Today;
-                            dg.especialidades.Add(u);
+                            dg.classificacoes.Add(u);
                             dg.SaveChanges();
 
                         }
@@ -263,30 +255,29 @@ namespace SisUnimed.Controllers
                             var up1 = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                             ViewData["usuario_permissao"] = up1;
                             //cria lista de grupo
-                            var lg = from a in dg.especialidades
+                            var lg = from a in dg.classificacoes
                                      join b in dg.usuarios on a.sisusuarioi equals b.id into g
                                      join c in dg.usuarios on a.sisusuarioa equals c.id into h
                                      from x in g.DefaultIfEmpty()
                                      from y in h.DefaultIfEmpty()
-                                     select new ListaEspecialidade
+                                     select new ListaClassificacao
                                      {
                                          id = a.id,
-                                         c_nome = a.c_nome,
-                                         c_codigo = a.c_codigo,
+                                         descricao = a.c_descricao,
                                          sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                                          sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                                          sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                                          sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                                      };
-                            ViewData["listaespecialidade"] = lg.ToList();
-                            ViewBag.Titulo = "Cadastro de Especialidade";
-                            return View("Especialidade");
+                            ViewData["listaclassificacao"] = lg.ToList();
+                            ViewBag.Titulo = "Cadastro de Classificações";
+                            return View("Classificacao");
                         }
 
-                        TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Especialidade Inserida com Sucesso!</font>";
+                        TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Classificação Inserida com Sucesso!</font>";
                         ViewBag.Action = "";
 
-                        return RedirectToAction("Especialidade");
+                        return RedirectToAction("Classificacao");
 
                     }
                 }
@@ -297,58 +288,57 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
                 //cria lista de grupo
-                var lg = from a in dg.especialidades
+                var lg = from a in dg.classificacoes
                          join b in dg.usuarios on a.sisusuarioi equals b.id into g
                          join c in dg.usuarios on a.sisusuarioa equals c.id into h
                          from x in g.DefaultIfEmpty()
                          from y in h.DefaultIfEmpty()
-                         select new ListaEspecialidade
+                         select new ListaClassificacao
                          {
                              id = a.id,
-                             c_nome = a.c_nome,
-                             c_codigo = a.c_codigo,
+                             descricao = a.c_descricao,
                              sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                              sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                              sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                              sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
-                ViewData["listaespecialidade"] = lg.ToList();
+                ViewData["listaclassificacao"] = lg.ToList();
             }
             ViewBag.Action = "Inserir";
-            ViewBag.Titulo = "Cadastro de Especialidade";
-            return View("Especialidade", u);
+            ViewBag.Titulo = "Cadastro de Classificações";
+            return View("Classificacao", u);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(especialidade u)
+        public ActionResult Editar(classificaco u)
         {
             if (ModelState.IsValid)
             {
                 using (UnimedEntities1 dg = new UnimedEntities1())
                 {
                     int id_usuario = int.Parse(Session["usuariologadoid"].ToString());
-                    var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario) && a.especialidade_a.Equals(1)).Count();
+                    var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario) && a.classificacao_a.Equals(1)).Count();
                     if (up >= 1)
                     {
-                        especialidade especialidade = dg.especialidades.Find(u.id);
-                        especialidade.c_nome = u.c_nome.ToUpper();
-                        especialidade.sisdataa = DateTime.Today;
-                        especialidade.sisusuarioa = int.Parse(Session["usuariologadoid"].ToString());
-                        if (TryUpdateModel(especialidade))
+                        classificaco classificacao = dg.classificacoes.Find(u.id);
+                        classificacao.c_descricao = u.c_descricao.ToUpper();
+                        classificacao.sisdataa = DateTime.Today;
+                        classificacao.sisusuarioa = int.Parse(Session["usuariologadoid"].ToString());
+                        if (TryUpdateModel(classificacao))
                         {
                             dg.SaveChanges();
-                            TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Especialidade Atualizada com Sucesso!</font>";
+                            TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Classificacão Atualizada com Sucesso!</font>";
                         }
                         else
                         {
-                            TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Erro ao Atualizar Especialidade</font>";
+                            TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Erro ao Atualizar Classificação</font>";
                         }
-                        return RedirectToAction("Especialiade");
+                        return RedirectToAction("Classificacao");
                     }
                     else
                     {
-                        TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão para Alterar a Especialidade</font>";
-                        return RedirectToAction("Especialiade");
+                        TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão para Alterar a Classificação</font>";
+                        return RedirectToAction("Classificacao");
                     }
                 }
             }
@@ -358,57 +348,55 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
                 //cria lista de grupo
-                var lg = from a in dg.especialidades
+                var lg = from a in dg.classificacoes
                          join b in dg.usuarios on a.sisusuarioi equals b.id into g
                          join c in dg.usuarios on a.sisusuarioa equals c.id into h
                          from x in g.DefaultIfEmpty()
                          from y in h.DefaultIfEmpty()
-                         select new ListaEspecialidade
+                         select new ListaClassificacao
                          {
                              id = a.id,
-                             c_nome = a.c_nome,
-                             c_codigo = a.c_codigo,
+                             descricao = a.c_descricao,
                              sisdatai = a.sisdatai == null ? DateTime.Today : a.sisdatai,
                              sisusuarioi = (x == null ? "Sem Dados" : x.nome_usuario),
                              sisdataa = a.sisdataa == null ? DateTime.Today : a.sisdataa,
                              sisusuarioa = (y == null ? "Sem Dados" : y.nome_usuario)
                          };
-                ViewData["listaespecialidade"] = lg.ToList();
+                ViewData["listaclassificacao"] = lg.ToList();
             }
             ViewBag.Action = "Inserir";
-            ViewBag.Titulo = "Cadastro de Especialidades";
-            return View("Especialidade", u);
+            ViewBag.Titulo = "Cadastro de Classificações";
+            return View("Classificacao", u);
         }
         public ActionResult Delete(int? id)
         {
             using (UnimedEntities1 dg = new UnimedEntities1())
             {
                 int id_usuario = int.Parse(Session["usuariologadoid"].ToString());
-                var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario) && a.especialidade_d.Equals(1)).Count();
+                var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario) && a.classificacao_d.Equals(1)).Count();
                 if (up >= 1)
                 {
                     try
                     {
-                        especialidade especialidade = dg.especialidades.Find(id);
-                        dg.especialidades.Remove(especialidade);
+                        classificaco classificacao = dg.classificacoes.Find(id);
+                        dg.classificacoes.Remove(classificacao);
                         dg.SaveChanges();
                     }
                     catch (SystemException e)
                     {
                         TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>" + e.Message + "</font>";
-                        return RedirectToAction("Especialidade");
+                        return RedirectToAction("Classificacao");
                     }
-                    TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Especialidade Excluída com Sucesso!</font>";
+                    TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Classificação Excluída com Sucesso!</font>";
 
                 }
                 else
                 {
-                    TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão para Excluir a Especialidade</font>";
+                    TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>Usuário Não Tem Permissão para Excluir a Classificação</font>";
                 }
             }
             ViewBag.Action = "";
-            return RedirectToAction("Especialidade");
+            return RedirectToAction("Classificacao");
         }
     }
 }
-

@@ -50,11 +50,19 @@
                         }
                         @if (up.usuario == 1)
                         {
-                            <li>@Html.ActionLink("Usuario","Usuario","Usuario")</li>
+                            <li>@Html.ActionLink("Usuário","Usuario","Usuario")</li>
                         }
                          @if (up.especialidade == 1)
                         {
                             <li>@Html.ActionLink("Especialidade","Especialidade","Especialidade")</li>
+                        }
+                         @if (up.classificacao == 1)
+                        {
+                            <li>@Html.ActionLink("Classificação","Classificacao","Classificacao")</li>
+                        }
+                        @if (up.bancos == 1)
+                        {
+                            <li>@Html.ActionLink("Banco","Banco","Banco")</li>
                         }
                     </ul>
                 </li>

@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassesProjeto.cs" />
+    <Compile Include="Controllers\BancoController.cs" />
+    <Compile Include="Controllers\ClassificacaoController.cs" />
     <Compile Include="Controllers\EspecialidadeController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -345,6 +347,12 @@
     <Content Include="Views\Especialidade\Especialidade.cshtml" />
     <Content Include="Views\Especialidade\CadastroEspecialidade.cshtml" />
     <Content Include="Views\Especialidade\ListaEspecialidade.cshtml" />
+    <Content Include="Views\Classificacao\Classificacao.cshtml" />
+    <Content Include="Views\Classificacao\ListaClassificacao.cshtml" />
+    <Content Include="Views\Classificacao\CadastroClassificacao.cshtml" />
+    <Content Include="Views\Banco\Banco.cshtml" />
+    <Content Include="Views\Banco\ListaBanco.cshtml" />
+    <Content Include="Views\Banco\CadastroBanco.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,8 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+	
     public partial class banco
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,18 +20,41 @@ namespace SisUnimed.Models
         {
             this.fornecedores_bancos = new HashSet<fornecedores_bancos>();
         }
-    
+        
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Número do Banco")]
+        [Required(ErrorMessage="Número do Banco deve ser informado")]
         public string c_codigo { get; set; }
+
+        [Display(Name="Nome do Banco")]
+        [Required(ErrorMessage="Nome do Banco deve ser informado")]
         public string c_descricao { get; set; }
+
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fornecedores_bancos> fornecedores_bancos { get; set; }
+    }
+    public class ListaBanco
+    {
+        public long id { get; set; }
+        public string c_codigo { get; set; }
+        public string c_nome { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }
