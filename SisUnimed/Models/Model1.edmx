@@ -235,6 +235,42 @@
           <Property Name="especialidade_i" Type="int4" Nullable="false" />
           <Property Name="especialidade_a" Type="int4" Nullable="false" />
           <Property Name="especialidade_d" Type="int4" Nullable="false" />
+          <Property Name="classificacao" Type="int4" Nullable="false" />
+          <Property Name="classificacao_i" Type="int4" Nullable="false" />
+          <Property Name="classificacao_a" Type="int4" Nullable="false" />
+          <Property Name="classificacao_d" Type="int4" Nullable="false" />
+          <Property Name="marcas" Type="int4" Nullable="false" />
+          <Property Name="marcas_i" Type="int4" Nullable="false" />
+          <Property Name="marcas_a" Type="int4" Nullable="false" />
+          <Property Name="marcas_d" Type="int4" Nullable="false" />
+          <Property Name="unidades" Type="int4" Nullable="false" />
+          <Property Name="unidades_i" Type="int4" Nullable="false" />
+          <Property Name="unidades_a" Type="int4" Nullable="false" />
+          <Property Name="unidades_d" Type="int4" Nullable="false" />
+          <Property Name="procedimentos" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_i" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_a" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_d" Type="int4" Nullable="false" />
+          <Property Name="regioes" Type="int4" Nullable="false" />
+          <Property Name="regioes_i" Type="int4" Nullable="false" />
+          <Property Name="regioes_a" Type="int4" Nullable="false" />
+          <Property Name="regioes_d" Type="int4" Nullable="false" />
+          <Property Name="estados" Type="int4" Nullable="false" />
+          <Property Name="estados_i" Type="int4" Nullable="false" />
+          <Property Name="estados_a" Type="int4" Nullable="false" />
+          <Property Name="estados_d" Type="int4" Nullable="false" />
+          <Property Name="bancos" Type="int4" Nullable="false" />
+          <Property Name="bancos_i" Type="int4" Nullable="false" />
+          <Property Name="bancos_a" Type="int4" Nullable="false" />
+          <Property Name="bancos_d" Type="int4" Nullable="false" />
+          <Property Name="fornecedores" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_i" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_a" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_d" Type="int4" Nullable="false" />
+          <Property Name="materiais" Type="int4" Nullable="false" />
+          <Property Name="materiais_i" Type="int4" Nullable="false" />
+          <Property Name="materiais_a" Type="int4" Nullable="false" />
+          <Property Name="materiais_d" Type="int4" Nullable="false" />
         </EntityType>
         <EntityType Name="importacao_xls">
           <Key>
@@ -560,6 +596,42 @@
           <Property Name="especialidade_i" Type="int4" Nullable="false" />
           <Property Name="especialidade_a" Type="int4" Nullable="false" />
           <Property Name="especialidade_d" Type="int4" Nullable="false" />
+          <Property Name="classificacao" Type="int4" Nullable="false" />
+          <Property Name="classificacao_i" Type="int4" Nullable="false" />
+          <Property Name="classificacao_a" Type="int4" Nullable="false" />
+          <Property Name="classificacao_d" Type="int4" Nullable="false" />
+          <Property Name="marcas" Type="int4" Nullable="false" />
+          <Property Name="marcas_i" Type="int4" Nullable="false" />
+          <Property Name="marcas_a" Type="int4" Nullable="false" />
+          <Property Name="marcas_d" Type="int4" Nullable="false" />
+          <Property Name="unidades" Type="int4" Nullable="false" />
+          <Property Name="unidades_i" Type="int4" Nullable="false" />
+          <Property Name="unidades_a" Type="int4" Nullable="false" />
+          <Property Name="unidades_d" Type="int4" Nullable="false" />
+          <Property Name="procedimentos" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_i" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_a" Type="int4" Nullable="false" />
+          <Property Name="procedimentos_d" Type="int4" Nullable="false" />
+          <Property Name="regioes" Type="int4" Nullable="false" />
+          <Property Name="regioes_i" Type="int4" Nullable="false" />
+          <Property Name="regioes_a" Type="int4" Nullable="false" />
+          <Property Name="regioes_d" Type="int4" Nullable="false" />
+          <Property Name="estados" Type="int4" Nullable="false" />
+          <Property Name="estados_i" Type="int4" Nullable="false" />
+          <Property Name="estados_a" Type="int4" Nullable="false" />
+          <Property Name="estados_d" Type="int4" Nullable="false" />
+          <Property Name="bancos" Type="int4" Nullable="false" />
+          <Property Name="bancos_i" Type="int4" Nullable="false" />
+          <Property Name="bancos_a" Type="int4" Nullable="false" />
+          <Property Name="bancos_d" Type="int4" Nullable="false" />
+          <Property Name="fornecedores" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_i" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_a" Type="int4" Nullable="false" />
+          <Property Name="fornecedores_d" Type="int4" Nullable="false" />
+          <Property Name="materiais" Type="int4" Nullable="false" />
+          <Property Name="materiais_i" Type="int4" Nullable="false" />
+          <Property Name="materiais_a" Type="int4" Nullable="false" />
+          <Property Name="materiais_d" Type="int4" Nullable="false" />
         </EntityType>
         <Association Name="fornecedores_anexos_fornecedor_fkey">
           <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
@@ -957,11 +1029,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-        
-        
-        
-        
         <EntityContainer Name="UnimedModelStoreContainer">
           <EntitySet Name="bancos" EntityType="Self.bancos" Schema="public" store:Type="Tables" />
           <EntitySet Name="classificacoes" EntityType="Self.classificacoes" Schema="public" store:Type="Tables" />
@@ -1173,6 +1240,42 @@
           <Property Name="especialidade_i" Type="Int32" Nullable="false" />
           <Property Name="especialidade_a" Type="Int32" Nullable="false" />
           <Property Name="especialidade_d" Type="Int32" Nullable="false" />
+          <Property Name="classificacao" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_i" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_a" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_d" Type="Int32" Nullable="false" />
+          <Property Name="marcas" Type="Int32" Nullable="false" />
+          <Property Name="marcas_i" Type="Int32" Nullable="false" />
+          <Property Name="marcas_a" Type="Int32" Nullable="false" />
+          <Property Name="marcas_d" Type="Int32" Nullable="false" />
+          <Property Name="unidades" Type="Int32" Nullable="false" />
+          <Property Name="unidades_i" Type="Int32" Nullable="false" />
+          <Property Name="unidades_a" Type="Int32" Nullable="false" />
+          <Property Name="unidades_d" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_i" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_a" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_d" Type="Int32" Nullable="false" />
+          <Property Name="regioes" Type="Int32" Nullable="false" />
+          <Property Name="regioes_i" Type="Int32" Nullable="false" />
+          <Property Name="regioes_a" Type="Int32" Nullable="false" />
+          <Property Name="regioes_d" Type="Int32" Nullable="false" />
+          <Property Name="estados" Type="Int32" Nullable="false" />
+          <Property Name="estados_i" Type="Int32" Nullable="false" />
+          <Property Name="estados_a" Type="Int32" Nullable="false" />
+          <Property Name="estados_d" Type="Int32" Nullable="false" />
+          <Property Name="bancos" Type="Int32" Nullable="false" />
+          <Property Name="bancos_i" Type="Int32" Nullable="false" />
+          <Property Name="bancos_a" Type="Int32" Nullable="false" />
+          <Property Name="bancos_d" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_i" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_a" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_d" Type="Int32" Nullable="false" />
+          <Property Name="materiais" Type="Int32" Nullable="false" />
+          <Property Name="materiais_i" Type="Int32" Nullable="false" />
+          <Property Name="materiais_a" Type="Int32" Nullable="false" />
+          <Property Name="materiais_d" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="operadora">
           <Key>
@@ -1228,6 +1331,42 @@
           <Property Name="especialidade_i" Type="Int32" Nullable="false" />
           <Property Name="especialidade_a" Type="Int32" Nullable="false" />
           <Property Name="especialidade_d" Type="Int32" Nullable="false" />
+          <Property Name="classificacao" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_i" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_a" Type="Int32" Nullable="false" />
+          <Property Name="classificacao_d" Type="Int32" Nullable="false" />
+          <Property Name="marcas" Type="Int32" Nullable="false" />
+          <Property Name="marcas_i" Type="Int32" Nullable="false" />
+          <Property Name="marcas_a" Type="Int32" Nullable="false" />
+          <Property Name="marcas_d" Type="Int32" Nullable="false" />
+          <Property Name="unidades" Type="Int32" Nullable="false" />
+          <Property Name="unidades_i" Type="Int32" Nullable="false" />
+          <Property Name="unidades_a" Type="Int32" Nullable="false" />
+          <Property Name="unidades_d" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_i" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_a" Type="Int32" Nullable="false" />
+          <Property Name="procedimentos_d" Type="Int32" Nullable="false" />
+          <Property Name="regioes" Type="Int32" Nullable="false" />
+          <Property Name="regioes_i" Type="Int32" Nullable="false" />
+          <Property Name="regioes_a" Type="Int32" Nullable="false" />
+          <Property Name="regioes_d" Type="Int32" Nullable="false" />
+          <Property Name="estados" Type="Int32" Nullable="false" />
+          <Property Name="estados_i" Type="Int32" Nullable="false" />
+          <Property Name="estados_a" Type="Int32" Nullable="false" />
+          <Property Name="estados_d" Type="Int32" Nullable="false" />
+          <Property Name="bancos" Type="Int32" Nullable="false" />
+          <Property Name="bancos_i" Type="Int32" Nullable="false" />
+          <Property Name="bancos_a" Type="Int32" Nullable="false" />
+          <Property Name="bancos_d" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_i" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_a" Type="Int32" Nullable="false" />
+          <Property Name="fornecedores_d" Type="Int32" Nullable="false" />
+          <Property Name="materiais" Type="Int32" Nullable="false" />
+          <Property Name="materiais_i" Type="Int32" Nullable="false" />
+          <Property Name="materiais_a" Type="Int32" Nullable="false" />
+          <Property Name="materiais_d" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="grupo_permissao_id_grupo_fkey">
           <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
@@ -2335,6 +2474,42 @@
           <EntitySetMapping Name="grupo_permissao">
             <EntityTypeMapping TypeName="UnimedModel.grupo_permissao">
               <MappingFragment StoreEntitySet="grupo_permissao">
+                <ScalarProperty Name="materiais_d" ColumnName="materiais_d" />
+                <ScalarProperty Name="materiais_a" ColumnName="materiais_a" />
+                <ScalarProperty Name="materiais_i" ColumnName="materiais_i" />
+                <ScalarProperty Name="materiais" ColumnName="materiais" />
+                <ScalarProperty Name="fornecedores_d" ColumnName="fornecedores_d" />
+                <ScalarProperty Name="fornecedores_a" ColumnName="fornecedores_a" />
+                <ScalarProperty Name="fornecedores_i" ColumnName="fornecedores_i" />
+                <ScalarProperty Name="fornecedores" ColumnName="fornecedores" />
+                <ScalarProperty Name="bancos_d" ColumnName="bancos_d" />
+                <ScalarProperty Name="bancos_a" ColumnName="bancos_a" />
+                <ScalarProperty Name="bancos_i" ColumnName="bancos_i" />
+                <ScalarProperty Name="bancos" ColumnName="bancos" />
+                <ScalarProperty Name="estados_d" ColumnName="estados_d" />
+                <ScalarProperty Name="estados_a" ColumnName="estados_a" />
+                <ScalarProperty Name="estados_i" ColumnName="estados_i" />
+                <ScalarProperty Name="estados" ColumnName="estados" />
+                <ScalarProperty Name="regioes_d" ColumnName="regioes_d" />
+                <ScalarProperty Name="regioes_a" ColumnName="regioes_a" />
+                <ScalarProperty Name="regioes_i" ColumnName="regioes_i" />
+                <ScalarProperty Name="regioes" ColumnName="regioes" />
+                <ScalarProperty Name="procedimentos_d" ColumnName="procedimentos_d" />
+                <ScalarProperty Name="procedimentos_a" ColumnName="procedimentos_a" />
+                <ScalarProperty Name="procedimentos_i" ColumnName="procedimentos_i" />
+                <ScalarProperty Name="procedimentos" ColumnName="procedimentos" />
+                <ScalarProperty Name="unidades_d" ColumnName="unidades_d" />
+                <ScalarProperty Name="unidades_a" ColumnName="unidades_a" />
+                <ScalarProperty Name="unidades_i" ColumnName="unidades_i" />
+                <ScalarProperty Name="unidades" ColumnName="unidades" />
+                <ScalarProperty Name="marcas_d" ColumnName="marcas_d" />
+                <ScalarProperty Name="marcas_a" ColumnName="marcas_a" />
+                <ScalarProperty Name="marcas_i" ColumnName="marcas_i" />
+                <ScalarProperty Name="marcas" ColumnName="marcas" />
+                <ScalarProperty Name="classificacao_d" ColumnName="classificacao_d" />
+                <ScalarProperty Name="classificacao_a" ColumnName="classificacao_a" />
+                <ScalarProperty Name="classificacao_i" ColumnName="classificacao_i" />
+                <ScalarProperty Name="classificacao" ColumnName="classificacao" />
                 <ScalarProperty Name="especialidade_d" ColumnName="especialidade_d" />
                 <ScalarProperty Name="especialidade_a" ColumnName="especialidade_a" />
                 <ScalarProperty Name="especialidade_i" ColumnName="especialidade_i" />
@@ -2388,6 +2563,42 @@
           <EntitySetMapping Name="usuario_permissao">
             <EntityTypeMapping TypeName="UnimedModel.usuario_permissao">
               <MappingFragment StoreEntitySet="usuario_permissao">
+                <ScalarProperty Name="materiais_d" ColumnName="materiais_d" />
+                <ScalarProperty Name="materiais_a" ColumnName="materiais_a" />
+                <ScalarProperty Name="materiais_i" ColumnName="materiais_i" />
+                <ScalarProperty Name="materiais" ColumnName="materiais" />
+                <ScalarProperty Name="fornecedores_d" ColumnName="fornecedores_d" />
+                <ScalarProperty Name="fornecedores_a" ColumnName="fornecedores_a" />
+                <ScalarProperty Name="fornecedores_i" ColumnName="fornecedores_i" />
+                <ScalarProperty Name="fornecedores" ColumnName="fornecedores" />
+                <ScalarProperty Name="bancos_d" ColumnName="bancos_d" />
+                <ScalarProperty Name="bancos_a" ColumnName="bancos_a" />
+                <ScalarProperty Name="bancos_i" ColumnName="bancos_i" />
+                <ScalarProperty Name="bancos" ColumnName="bancos" />
+                <ScalarProperty Name="estados_d" ColumnName="estados_d" />
+                <ScalarProperty Name="estados_a" ColumnName="estados_a" />
+                <ScalarProperty Name="estados_i" ColumnName="estados_i" />
+                <ScalarProperty Name="estados" ColumnName="estados" />
+                <ScalarProperty Name="regioes_d" ColumnName="regioes_d" />
+                <ScalarProperty Name="regioes_a" ColumnName="regioes_a" />
+                <ScalarProperty Name="regioes_i" ColumnName="regioes_i" />
+                <ScalarProperty Name="regioes" ColumnName="regioes" />
+                <ScalarProperty Name="procedimentos_d" ColumnName="procedimentos_d" />
+                <ScalarProperty Name="procedimentos_a" ColumnName="procedimentos_a" />
+                <ScalarProperty Name="procedimentos_i" ColumnName="procedimentos_i" />
+                <ScalarProperty Name="procedimentos" ColumnName="procedimentos" />
+                <ScalarProperty Name="unidades_d" ColumnName="unidades_d" />
+                <ScalarProperty Name="unidades_a" ColumnName="unidades_a" />
+                <ScalarProperty Name="unidades_i" ColumnName="unidades_i" />
+                <ScalarProperty Name="unidades" ColumnName="unidades" />
+                <ScalarProperty Name="marcas_d" ColumnName="marcas_d" />
+                <ScalarProperty Name="marcas_a" ColumnName="marcas_a" />
+                <ScalarProperty Name="marcas_i" ColumnName="marcas_i" />
+                <ScalarProperty Name="marcas" ColumnName="marcas" />
+                <ScalarProperty Name="classificacao_d" ColumnName="classificacao_d" />
+                <ScalarProperty Name="classificacao_a" ColumnName="classificacao_a" />
+                <ScalarProperty Name="classificacao_i" ColumnName="classificacao_i" />
+                <ScalarProperty Name="classificacao" ColumnName="classificacao" />
                 <ScalarProperty Name="especialidade_d" ColumnName="especialidade_d" />
                 <ScalarProperty Name="especialidade_a" ColumnName="especialidade_a" />
                 <ScalarProperty Name="especialidade_i" ColumnName="especialidade_i" />
