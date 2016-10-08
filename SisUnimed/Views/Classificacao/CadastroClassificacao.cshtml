@@ -2,7 +2,7 @@
 
 
                
-                            @using (Html.BeginForm((string)ViewBag.Action,"Classificacao",FormMethod.Post, new{id="formCadastro"}))
+                            @using (Ajax.BeginForm((string)ViewBag.Action, "Classificacao", new AjaxOptions { HttpMethod="POST", InsertionMode = InsertionMode.Replace, UpdateTargetId="corposite" }, new { id = "formCadastro" }))
                             {
                                  @Html.AntiForgeryToken()
                                  @Html.ValidationSummary(true)
@@ -26,18 +26,18 @@
                                    
                                </tr> 
                                <tr>
-                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true"})</td>
-                                   <td>@Html.LabelFor(a => a.c_descricao,new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.c_descricao, new { @size = "30",@style="text-transform: uppercase"})</td>                                   
+                                   <td>@Html.LabelFor(a => a.id, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true" })</td>
+                                   <td>@Html.LabelFor(a => a.c_descricao, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.c_descricao, new { @size = "30", @style = "text-transform: uppercase" })</td>                                   
                                    
                                </tr>                              
                                                              
                                 <tr>   
                                     @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
                                     {                                 
-                                        <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
-                                        <td><button id="btnComandos" type="reset" onclick="location.href='@Url.Action("Classificacao", "Classificacao", new { id = Model.id })'"><img src="/Contents/Images/btnCancelar.png" /></button></td>
+                                        <td><input type="image" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Classificacao", "Classificacao")" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
                                     }    
                                 </tr>
                              </table>

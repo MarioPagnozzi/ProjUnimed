@@ -1,7 +1,7 @@
 ﻿@model SisUnimed.Models.banco
 @{
     ViewBag.Title = "Banco";
-    Layout = "~/Views/Home/Index.cshtml";
+    //Layout = "~/Views/Home/Index.cshtml";
    
     var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
     IEnumerable<SisUnimed.Models.ListaBanco> resultadolista = (IEnumerable<SisUnimed.Models.ListaBanco>)ViewData["listabanco"];
@@ -121,10 +121,11 @@
             <legend>Dados Banco</legend>
              <table class="btnPesquisa">
                  <tr>
-                     <td>
+                     <td width="65px">
                          @if (up.bancos_i == 1)
                          {                        
-                            <button onclick="location.href='@Url.Action("Incluir", "Banco")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                            @*<button onclick="location.href='@Url.Action("Incluir", "Banco")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>*@
+                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Banco")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
                          }
                      </td>
                      @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
@@ -132,7 +133,8 @@
                      <td>
                           @if (up.bancos_d == 1 && Model != null)
                           {
-                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Banco", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
+                            @*<button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Banco", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>*@
+                              <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Banco", new { id = Model.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a>
                           }
                      </td>
                         
@@ -147,7 +149,9 @@
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
-                        @Html.Partial("CadastroBanco", Model)
+                        <div id="cadastro">
+                            @{Html.RenderPartial("CadastroBanco", Model);}
+                        </div>
                     </div>
                        @* <div class="tab-pane" id="tab2"> 
                             <table class="table">
@@ -164,5 +168,5 @@
         </fieldset>
     </div>
     
-                @Html.Partial("ListaBanco",resultadolista)
+                @{Html.RenderPartial("ListaBanco", resultadolista);}
       

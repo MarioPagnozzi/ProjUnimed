@@ -2,7 +2,7 @@
 
 @{       
     IEnumerable<SisUnimed.Models.ListaClassificacao> listaclassificacao = (IEnumerable<SisUnimed.Models.ListaClassificacao>)ViewData["listaclassificacao"];
-    var grid = new WebGrid(listaclassificacao.ToList(), defaultSort: "descricao", rowsPerPage: 5);
+    var grid = new WebGrid(listaclassificacao.ToList(),ajaxUpdateCallback:"divGrid",ajaxUpdateContainerId: "divGrid", defaultSort: "descricao", rowsPerPage: 5);
 }
 
 <div id="divGrid">
@@ -10,12 +10,12 @@
             <legend>Classificação</legend>
 
                 @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
-                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),                    
-                    grid.Column(columnName: "descricao", header: "Descrição", format: a => new HtmlString(Html.ActionLink((string)a.descricao.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.sisdatai.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Html.ActionLink((string)a.sisdataa.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Html.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true)
+                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions { UpdateTargetId="corposite"}).ToString()),canSort: true),                    
+                    grid.Column(columnName: "descricao", header: "Descrição", format: a => new HtmlString(Ajax.ActionLink((string)a.descricao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions { UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions { UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{ UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions { UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true)
     
                 })
 

@@ -82,6 +82,12 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
 
+                if (TempData["mensagem"] != string.Empty)
+                {
+                    ViewBag.Message = TempData["mensagem"];
+                    TempData["mensagem"] = string.Empty;
+                }
+
                 //Altera status para editar
                 ViewBag.Action = "Editar";
                 return View("Especialidade", dadosespecialidade);
@@ -280,13 +286,13 @@ namespace SisUnimed.Controllers
                                      };
                             ViewData["listaespecialidade"] = lg.ToList();
                             ViewBag.Titulo = "Cadastro de Especialidade";
-                            return View("Especialidade");
+                            return RedirectToAction("Especialidade");
                         }
 
                         TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Especialidade Inserida com Sucesso!</font>";
                         ViewBag.Action = "";
 
-                        return RedirectToAction("Especialidade");
+                        return RedirectToAction("PreencheCampos", new { id = u.id });
 
                     }
                 }

@@ -1,0 +1,95 @@
+﻿@model SisUnimed.Models.ViewModelDetalheMarcaOp
+
+@{
+   
+    List<SelectListItem> listaSituacao = new List<SelectListItem>();
+    listaSituacao.Add(new SelectListItem
+    {
+        Text = "Ativa",
+        Value = "1"
+    });
+    listaSituacao.Add(new SelectListItem
+    {
+        Text = "Inativa",
+        Value = "2"
+    });
+
+    IEnumerable<SisUnimed.Models.operadora1> operadoras = (IEnumerable<SisUnimed.Models.operadora1>)ViewData["listaoperadoras"];   
+    List<SelectListItem> listaoperadora = new List<SelectListItem>();
+    foreach (var lo in operadoras)
+    {
+        listaoperadora.Add(new SelectListItem
+        {
+            Text = lo.c_nome,
+            Value = lo.id.ToString()
+        });
+    };
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+
+        $('#btnAdd').click(function () {
+            var vOperadora = document.getElementById("operadora").value;                   
+            var vMarca = document.getElementById("idmarca").value;
+            $.ajax({
+                url: "@Url.Action("IncluirMarcaOp","Marca")",
+                type: "GET",
+                data: { marca: vMarca, operadora: vOperadora },
+                success: function (retorno) {
+                    document.getElementById("listaMarcaOperadora").setAttribute("style", "width:100%");
+                    document.getElementById("listaMarcaOperadora").innerHTML = retorno;
+                }
+
+            });
+           
+              
+        }), 'json';
+
+        function deleta(vid) {          
+
+            $.ajax({
+                url: "@Url.Action("DeleteMarcaOperadora","Marca")",
+                    type: "GET",
+                    data: { id: vid },
+                    success: function (retorno) {
+                        document.getElementById("listaMarcaOperadora").setAttribute("style", "width:100%");
+                        document.getElementById("listaMarcaOperadora").innerHTML = retorno;
+                    }
+
+                });
+         }'json';
+    })
+</script>
+    
+   
+}
+              
+                           
+                                <table class="table">
+                               
+                                <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vmarca.c_nome)</font></td>
+                               </tr> 
+                               <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td>@Html.LabelFor(a => a.VmarcaOperadora.operadora,new {@class="txtcorposite"})</td>
+                                   <td>@Html.DropDownListFor(a => a.VmarcaOperadora.operadora,listaoperadora, new {@id="operadora"})</td>
+                                   <td><button type="button" id="btnAdd"><img src="/Contents/Images/Salvar.png" width="10" height="10" /></button></td>
+                                   <td></td>
+                                   
+                               </tr>                          
+                                                             
+                               
+                             </table>
+                                  
+<div id="listaMarcaOperadora">
+   @{ Html.RenderPartial("ListaMarcaOperadora"); }
+</div>
+                       
+

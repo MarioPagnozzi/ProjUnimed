@@ -14,7 +14,7 @@
 
 @if (Model != null)
 {
-    using (@Html.BeginForm("EditarPermissao","Grupo",FormMethod.Post, new { @id="FormCadastro"}))
+    using (@Ajax.BeginForm("EditarPermissao", "Grupo", new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace,UpdateTargetId="corposite" }, new { @id = "FormCadastro" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true) 
@@ -40,7 +40,7 @@
                </tr>
                <tr class="alternate">
                    <td>Usuario</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario, simenao)</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_i, simenao)</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_a, simenao)</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_d, simenao)</td>
@@ -48,26 +48,26 @@
                <tr>
                    <td>Grupo</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo, simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_i,simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_a,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_i, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_a, simenao)</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_d, simenao)</td>
                </tr>
                <tr class="alternate">
                    <td>Permissão de Grupo</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao1, simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_i,simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_a,simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_d,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_i, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_a, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.grupo_permissao_d, simenao)</td>
                </tr>
                <tr>
                    <td>Permissao de Usuário</td>
                    <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao, simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_i,simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_a,simenao)</td>
-                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_d,simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_i, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_a, simenao)</td>
+                   <td>@Html.DropDownListFor(b => b.Vgrupo_permissao.usuario_permissao_d, simenao)</td>
                </tr>
                <tr>
-                   <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+                   <td><input type="image" value="submit" src="/Contents/Images/btnSalvar.png" /></td>
                </tr>
            </tbody>
 

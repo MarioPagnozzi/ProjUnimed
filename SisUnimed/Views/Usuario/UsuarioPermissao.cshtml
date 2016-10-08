@@ -1,10 +1,6 @@
 ﻿@model SisUnimed.Models.ViewModelDetalhePermisao
 @{       
-    
-    @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
-    IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
-    //SisUnimed.Models.usuario_permissao usuariopermissao = new SisUnimed.Models.usuario_permissao();
-    
+          
    List<SelectListItem> simenao = new List<SelectListItem>();
    simenao.Add(new SelectListItem{
        Text = "Sim",
@@ -16,9 +12,10 @@
    });
 }
 
-@if (Model != null)
+@if (Model != null && Model.Vusuario.id != 0)
 {
-    using (@Html.BeginForm("EditarPermissao","Usuario",FormMethod.Post, new { @id="FormCadastro"}))
+    
+    using (@Ajax.BeginForm("EditarPermissao","Usuario",FormMethod.Post,new AjaxOptions { UpdateTargetId="corposite" }, new { @id="FormCadastro"}))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -72,7 +69,7 @@
                    <td>@Html.DropDownListFor(b => b.VusuarioPermissao.usuario_permissao_d,simenao,new { value =  Model.VusuarioPermissao.usuario_permissao_d })</td>
                </tr>
                <tr>
-                   <td><button id="btnComandos" type="submit"><img src="/Contents/Images/btnSalvar.png" /></button></td>
+                   <td><input type="image" src="/Contents/Images/btnSalvar.png" value="submit" /></td>
                </tr>
            </tbody>
 

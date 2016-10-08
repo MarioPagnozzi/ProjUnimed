@@ -1,13 +1,10 @@
 ﻿@model SisUnimed.Models.ViewModelDetalhePermisao
 @{
     ViewBag.Title = "Usuario";
-    Layout = "~/Views/Home/Index.cshtml";
-    @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
-    IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
+  
     var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
     IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["ListaUsuario"];
-    // Vusuario usuario = (Model.Vusuario)ViewData["usuario"];
-    //SisUnimed.Models.ViewModelDetalhePermisao usuPermissao = (SisUnimed.Models.ViewModelDetalhePermisao)ViewData["usoPermissao"];
+    
     List<SelectListItem> listacampo = new List<SelectListItem>();
     listacampo.Add(new SelectListItem{
         Text="Código",
@@ -59,7 +56,7 @@
         $('#btnPesquisa').click(function () {
             var vtipo = document.getElementById("tipo").value;
             var vcampo = document.getElementById("campo").value;
-            var vpesquisa = document.getElementById("pesquisa").value;
+            var vpesquisa = document.getElementById("pesquisa").value.toUpperCase();
             $.ajax({
                 url: "@Url.Action("Pesquisa","Usuario")",
                 type: "GET",
@@ -67,10 +64,11 @@
                 success: function (retorno) {
                     document.getElementById("divGrid").setAttribute("style","width:100%");
                     document.getElementById("divGrid").innerHTML = retorno;
+                   
                 }
 
             });
-        });
+        });             
 
         $('#pesquisa').keyup(function () {
             var vcampo = document.getElementById("campo").value;
@@ -88,7 +86,7 @@
  <div id="divPesq">
      <fieldset>
         <legend>Pesquisa</legend>
- <table class="tblPesquisa">
+ <table class="table">
               
            
             <tr>
@@ -108,7 +106,7 @@
                     @Html.Label("Conteúdo Pesquisa:", new { @id = "txtcorposite" })
                 </td>
                 <td>
-                    @Html.TextBox("pesquisa","",new { @class="#formPesquisa input" })
+                    @Html.TextBox("pesquisa","",new { @class="#formPesquisa input",@style="text-transform: uppercase" })
                 </td>
                  <td>
                     <button type="button" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
@@ -124,25 +122,26 @@
     <div id="divCadastro">        
         <fieldset>
             <legend>Dados Usuário</legend>
-             <table class="btnPesquisa">
+             <table class="table">
                  <tr>
-                     <td>
+                     <td width="65px">
                          @if (up.usuario_i == 1)
                          {                        
-                            <button onclick="location.href='@Url.Action("Incluir", "Usuario")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                                                                                
+                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Usuario")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
                          }
-                     </td>
-                     @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
+                     </td>                   
                        
                      <td>
-                          @if (up.usuario_d == 1 && Model != null)
+                          @if (up.usuario_d == 1 && Model != null && Model.Vusuario.id != 0)
                           {
-                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Usuario", new { id = Model.Vusuario.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
+                          
+                            <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Usuario", new { id = Model.Vusuario.id})" role="button"><img src="/Contents/Images/btnExcluir.png" /></a>
                           }
                      </td>
                         
                  </tr>
-             </table>
+             </table>            
             <div class="conteiner">
                 <div id="content">
                     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
@@ -150,24 +149,27 @@
                         data-toggle="tab">Usuário</a></li>
                         <li><a href="#tab2" data-toggle="tab">Permissões</a></li>                        
                     </ul>
-                    <div id="my-tab-content" class="tab-content">
+                    <div id="my-tab-content" class="tab-content">                    
                     <div class="tab-pane  active" id="tab1">
-                        @Html.Partial("CadastroUsuario", Model)
+                        @{ Html.RenderPartial("CadastroUsuario", Model); }
                     </div>
                         <div class="tab-pane" id="tab2"> 
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>@Html.Partial("UsuarioPermissao", Model)</td>
+                                        <td>@{Html.RenderPartial("UsuarioPermissao", Model);}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        </div>
                     </div>
-                </div>    
-                </div>           
-        </fieldset>
-    </div>
+                </div> 
+              </fieldset>
+    </div>   
+                
+                       
+      
     
-                @Html.Partial("ListaUsuario",resultadolista)
+                @{Html.RenderPartial("ListaUsuario", resultadolista);}
       

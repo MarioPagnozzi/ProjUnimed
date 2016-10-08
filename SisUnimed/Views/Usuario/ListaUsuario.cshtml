@@ -3,23 +3,20 @@
 @{      
     IEnumerable<SisUnimed.Models.ResultadoLista> resultadolista = (IEnumerable<SisUnimed.Models.ResultadoLista>)ViewData["ListaUsuario"]; 
     var lu = ViewData["ListaUsuario"] as SisUnimed.Models.ResultadoLista;
-    @*IEnumerable<SisUnimed.Models.grupo> modelgrupo = (IEnumerable<SisUnimed.Models.grupo>)ViewBag.Grupo;
-    IEnumerable<SisUnimed.Models.operadora> modeloperadora = (IEnumerable<SisUnimed.Models.operadora>)ViewBag.Operadora;*@
-    
-    var grid = new WebGrid(resultadolista, defaultSort: "nome_usuario", rowsPerPage: 5);
+           
+    var grid = new WebGrid(resultadolista,canPage: true,ajaxUpdateCallback:"corposite", ajaxUpdateContainerId:"divGrid", defaultSort: "nome_usuario", rowsPerPage: 5);
 }
 
 <div id="divGrid">
         <fieldset>
             <legend>Usuários</legend>
 
-@*@grid.GetHtml(columns: grid.Columns(grid.Column("nome_usuario","Nome"), grid.Column("email_usuario","E-mail")))*@
 @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
-    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
-    grid.Column(columnName: "nome_usuario", header: "Nome", format: a => new HtmlString(Html.ActionLink((string)a.nome_usuario.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-    grid.Column(columnName: "email_usuario",header: "E-mail", format: a => new HtmlString(Html.ActionLink((string)a.email_usuario.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-    grid.Column(columnName: "grupo",header:"Grupo",format: a => new HtmlString(Html.ActionLink((string)a.nome_grupo.ToString(),"PreencheCampos", new{id=a.id},null).ToString()),canSort: true),
-    grid.Column(columnName: "Operadora",header:"Operadora",format: a => new HtmlString(Html.ActionLink((string)a.nome_operadora.ToString(),"PreencheCampos", new{id=a.id},null).ToString()),canSort: true)
+    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions { UpdateTargetId = "corposite" }).ToString()),canSort: true),
+    grid.Column(columnName: "nome_usuario", header: "Nome", format: a => new HtmlString(Ajax.ActionLink((string)a.nome_usuario.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions { UpdateTargetId = "corposite" }).ToString()),canSort: true),
+    grid.Column(columnName: "email_usuario",header: "E-mail", format: a => new HtmlString(Ajax.ActionLink((string)a.email_usuario.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions { UpdateTargetId = "corposite" }).ToString()),canSort: true),
+    grid.Column(columnName: "grupo",header:"Grupo",format: a => new HtmlString(Ajax.ActionLink((string)a.nome_grupo.ToString(),"PreencheCampos", new{id=a.id},new AjaxOptions { UpdateTargetId = "corposite" }).ToString()),canSort: true),
+    grid.Column(columnName: "Operadora",header:"Operadora",format: a => new HtmlString(Ajax.ActionLink((string)a.nome_operadora.ToString(),"PreencheCampos", new{id=a.id},new AjaxOptions { UpdateTargetId = "corposite" }).ToString()),canSort: true)
 })
 
   </fieldset>

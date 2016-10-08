@@ -20,5 +20,6 @@ namespace SisUnimed
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-    }
+    }   
+   
 }

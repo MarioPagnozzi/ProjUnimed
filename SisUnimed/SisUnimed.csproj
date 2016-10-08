@@ -133,11 +133,15 @@
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\OperadoraController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="GerenciadorDeRedirecionamento.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ItemDePagina.cs" />
+    <Compile Include="ManipuladorRota.cs" />
     <Compile Include="Models\banco.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -265,8 +269,10 @@
     <Content Include="Contents\Images\btnSalvar.png" />
     <Content Include="Contents\Images\btnLogin-1.png" />
     <Content Include="Contents\Images\btnLoginOff.png" />
+    <Content Include="Contents\Images\excluir.png" />
     <Content Include="Contents\Images\fundohome.jpg" />
     <Content Include="Contents\Images\Lupa.png" />
+    <Content Include="Contents\Images\salvar.png" />
     <Content Include="Contents\Images\seta.png" />
     <Content Include="Contents\Images\unimed.png" />
     <Content Include="Contents\Images\unimedBranco.png" />
@@ -353,6 +359,11 @@
     <Content Include="Views\Banco\Banco.cshtml" />
     <Content Include="Views\Banco\ListaBanco.cshtml" />
     <Content Include="Views\Banco\CadastroBanco.cshtml" />
+    <Content Include="Views\Marca\Marca.cshtml" />
+    <Content Include="Views\Marca\ListaMarcaOperadora.cshtml" />
+    <Content Include="Views\Marca\ListaMarca.cshtml" />
+    <Content Include="Views\Marca\CadastroMarca.cshtml" />
+    <Content Include="Views\Marca\MarcaOperadora.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

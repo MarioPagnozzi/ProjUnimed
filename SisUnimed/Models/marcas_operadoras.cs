@@ -11,20 +11,43 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class marcas_operadoras
     {
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Marca")]
+        [Required(ErrorMessage="Marca deve ser Informada")]
         public long marca { get; set; }
+
+        [Display(Name="Operadora")]
+        [Required(ErrorMessage="Operadora deve ser informada")]
         public long operadora { get; set; }
+
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         public virtual marca marca1 { get; set; }
         public virtual operadora1 operadora1 { get; set; }
+    }
+    public class ListaMarcaOperadora
+    {
+        public long id { get; set; }
+        public string marca { get; set; }
+        public string Operadora { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public string c_cod_operadora { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model SisUnimed.Models.operadora1
 @{
     ViewBag.Title = "Operadora";
-    Layout = "~/Views/Home/Index.cshtml";
+    //Layout = "~/Views/Home/Index.cshtml";
    
     var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
     IEnumerable<SisUnimed.Models.ListaOperadora1> resultadolista = (IEnumerable<SisUnimed.Models.ListaOperadora1>)ViewData["listaoperadora"];
@@ -124,15 +124,15 @@
                      <td>
                          @if (up.operadora_i == 1)
                          {                        
-                            <button onclick="location.href='@Url.Action("Incluir", "Operadora")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>
+                            <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Operadora")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
                          }
                      </td>
                      @*<td><button id="btnComandos" type="button"><img src="/Contents/Images/btnEdit.png" /></button></td>*@
                        
                      <td>
-                          @if (up.operadora_d == 1 && Model != null)
+                          @if (up.operadora_d == 1 && Model != null && Model.id > 0)
                           {
-                            <button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Operadora", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>
+                            <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Operadora")" role="button"><img src="/Contents/Images/btnExcluir.png" /></a>
                           }
                      </td>
                         
@@ -147,7 +147,7 @@
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
-                        @Html.Partial("CadastroOperadora", Model)
+                        @{Html.RenderPartial("CadastroOperadora", Model);}
                     </div>
                        @* <div class="tab-pane" id="tab2"> 
                             <table class="table">

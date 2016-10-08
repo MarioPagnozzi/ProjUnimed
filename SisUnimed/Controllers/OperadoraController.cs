@@ -82,6 +82,12 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
 
+                if (TempData["mensagem"] != string.Empty)
+                {
+                    ViewBag.Message = TempData["mensagem"];
+                    TempData["mensagem"] = string.Empty;
+                }
+
                 //Altera status para editar
                 ViewBag.Action = "Editar";
                 return View("Operadora", dadosoperadora);
@@ -280,13 +286,13 @@ namespace SisUnimed.Controllers
                                      };
                             ViewData["listaoperadora"] = lg.ToList();
                             ViewBag.Titulo = "Cadastro de Operadora";
-                            return View("Operadora");
+                            return RedirectToAction("Operadora");
                         }
 
                         TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Operadora Inserida com Sucesso!</font>";
                         ViewBag.Action = "";
 
-                        return RedirectToAction("Operadora");
+                        return RedirectToAction("PreencheCampos", new { u.id });
 
                     }
                 }

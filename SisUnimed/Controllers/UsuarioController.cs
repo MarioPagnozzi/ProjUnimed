@@ -120,11 +120,18 @@ namespace SisUnimed.Controllers
 
                 };
                 ViewData["usoPermissao"] = usuPermissao;
-                ViewBag.Action = "Editar";
-                return View("Usuario", vDetalheUsuarioPermissao);
+                if (TempData["mensagem"] != string.Empty)
+                {
+                    ViewBag.Message = TempData["mensagem"];
+                    TempData["mensagem"] = string.Empty;
+                }
+                ViewBag.Action = "Editar";               
+               
+                return View("Usuario",vDetalheUsuarioPermissao);
                              
             }            
         }
+        
         public ActionResult Delete(int? id)
         {
             using (UnimedEntities1 lu = new UnimedEntities1())
@@ -169,7 +176,7 @@ namespace SisUnimed.Controllers
                 
                 }
                 ViewBag.Action = "";
-                return RedirectToAction("Usuario");
+                return RedirectToAction("PreencheCampos", new { id = u.Vusuario.id });
             }
             using (UnimedEntities1 lu = new UnimedEntities1())
             {

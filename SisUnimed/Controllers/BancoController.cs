@@ -82,9 +82,15 @@ namespace SisUnimed.Controllers
                 var up = dg.usuario_permissao.Where(a => a.id_usuario.Equals(id_usuario)).FirstOrDefault();
                 ViewData["usuario_permissao"] = up;
 
+                if (TempData["mensagem"] != string.Empty)
+                {
+                    ViewBag.Message = TempData["mensagem"];
+                    TempData["mensagem"] = string.Empty;
+                }
+
                 //Altera status para editar
                 ViewBag.Action = "Editar";
-                return View("Classificacao", dadosbanco);
+                return View("Banco", dadosbanco);
             }
         }
         public ActionResult Pesquisa(string tipo, string campo, string pesquisa)
@@ -280,13 +286,13 @@ namespace SisUnimed.Controllers
                                      };
                             ViewData["listabanco"] = lg.ToList();
                             ViewBag.Titulo = "Cadastro de Bancos";
-                            return View("Banco");
+                            return RedirectToAction("Banco");
                         }
 
                         TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Banco Inserido com Sucesso!</font>";
                         ViewBag.Action = "";
-
-                        return RedirectToAction("Banco");
+                        var id = u.id;
+                        return RedirectToAction("PreencheCampos", new { id = id });
 
                     }
                 }
@@ -320,7 +326,7 @@ namespace SisUnimed.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(classificaco u)
+        public ActionResult Editar(banco u)
         {
             if (ModelState.IsValid)
             {
@@ -396,7 +402,7 @@ namespace SisUnimed.Controllers
                     catch (SystemException e)
                     {
                         TempData["mensagem"] = "<font style='color: red;text-align:right;font-size:11px'>" + e.Message + "</font>";
-                        return RedirectToAction("Classificacao");
+                        return RedirectToAction("Banco");
                     }
                     TempData["mensagem"] = "<font style='color: green;text-align:right;font-size:11px'>Banco Excluído com Sucesso!</font>";
 

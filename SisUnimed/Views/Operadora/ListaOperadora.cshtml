@@ -2,7 +2,7 @@
 
 @{       
     IEnumerable<SisUnimed.Models.ListaOperadora1> listaOperadora = (IEnumerable<SisUnimed.Models.ListaOperadora1>)ViewData["listaoperadora"];
-    var grid = new WebGrid(listaOperadora.ToList(), defaultSort: "c_nome", rowsPerPage: 5);
+    var grid = new WebGrid(listaOperadora.ToList(),ajaxUpdateCallback:"divGrid",ajaxUpdateContainerId:"divGrid", defaultSort: "c_nome", rowsPerPage: 5);
 }
 
 <div id="divGrid">
@@ -10,13 +10,13 @@
             <legend>Operadoras</legend>
 
                 @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
-                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Html.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "c_cod_operadora",header:"Código Alternativo",format: a => new HtmlString(Html.ActionLink((string)a.c_cod_operadora.ToString(),"PreencheCampos",new{id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "c_nome", header: "Descrição", format: a => new HtmlString(Html.ActionLink((string)a.c_nome.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "data_inclusao", header: "Data de Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.data_inclusao.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "usuario_inclusao", header: "Usuário Inclusão", format: a => new HtmlString(Html.ActionLink((string)a.usuario_inclusao.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "data_alteracao", header: "Última Alteração", format: a => new HtmlString(Html.ActionLink((string)a.data_alteracao.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true),
-                    grid.Column(columnName: "usuario_alteracao", header: "Usuário Alteração", format: a => new HtmlString(Html.ActionLink((string)a.usuario_alteracao.ToString(),"PreencheCampos", new { id=a.id},null).ToString()),canSort: true)
+                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_cod_operadora",header:"Código Alternativo",format: a => new HtmlString(Ajax.ActionLink((string)a.c_cod_operadora.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_nome", header: "Descrição", format: a => new HtmlString(Ajax.ActionLink((string)a.c_nome.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "data_inclusao", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.data_inclusao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "usuario_inclusao", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.usuario_inclusao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "data_alteracao", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.data_alteracao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "usuario_alteracao", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.usuario_alteracao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions{UpdateTargetId="corposite"}).ToString()),canSort: true)
     
                 })
 

@@ -234,7 +234,25 @@ hr {
     border: none;
     
 }
- #btnComandos {
+.btnIncluir {
+    /*background: transparent url("/Contents/Images/btnAdd.png") no-repeat right;*/  
+    /*background-size: 15px 15px;*/
+    width: auto;
+    height: auto;
+    padding: 0px;   
+    border: none;
+    
+}
+#btnReseta {
+    /*background: transparent url("/Contents/Images/Lupa.png") no-repeat right;  
+    background-size: 15px 15px;*/
+    width: auto;
+    height: auto;
+    padding: 0px;   
+    border: none;
+    
+}
+#btnExcluir {
     /*background: transparent url("/Contents/Images/Lupa.png") no-repeat right;  
     background-size: 15px 15px;*/
     width: auto;

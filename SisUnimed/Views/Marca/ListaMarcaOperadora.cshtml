@@ -1,0 +1,28 @@
+﻿@{
+    IEnumerable<SisUnimed.Models.ListaMarcaOperadora> marcaop = (IEnumerable<SisUnimed.Models.ListaMarcaOperadora>)ViewData["listaMarcaOp"];
+}
+
+<table id="table">
+    <tr>
+        <th>Código Operadora</th>
+        <th></th>
+        <th>Operadora</th>
+        <th></th>
+        <th>Ação</th>
+    </tr>
+@if (marcaop != null )
+{
+    foreach (var x in (marcaop))
+    {
+        <tr>                        
+            <td>@x.c_cod_operadora</td>
+            <td></td>
+            <td>@x.Operadora</td>
+            <td></td>
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#listaMarcaOperadora" href="@Url.Action("DeleteMarcaOperadora", "Marca", new { id = x.id})" role="button"><img src="/Contents/Images/excluir.png" width="15px" height="15px" /></a>
+            </td>
+        </tr>
+    }
+}
+
+</table>
