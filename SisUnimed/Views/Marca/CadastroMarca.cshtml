@@ -1,0 +1,64 @@
+﻿@model SisUnimed.Models.ViewModelDetalheMarcaOp
+
+@{
+    List<SelectListItem> listaSituacao = new List<SelectListItem>();
+    listaSituacao.Add(new SelectListItem
+    {
+        Text = "Ativa",
+        Value = "1"
+    });
+    listaSituacao.Add(new SelectListItem
+    {
+        Text = "Inativa",
+        Value = "2"
+    });
+   
+}
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action, "Marca", new AjaxOptions {HttpMethod="POST",InsertionMode = InsertionMode.Replace,UpdateTargetId="corposite" }, new { id = "formCadastro" }))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vmarca.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vmarca.f_situacao)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.Vmarca.c_nome)</font></td>
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.Vmarca.id, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.Vmarca.id, new { @readonly = "true", @id = "idmarca" })</td>
+                                   <td>@Html.LabelFor(a => a.Vmarca.f_situacao, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.Vmarca.f_situacao, listaSituacao)</td>
+                                   <td>@Html.LabelFor(a => a.Vmarca.c_nome, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.Vmarca.c_nome, new { @size = "30", @style = "text-transform: uppercase" })</td>
+                                   
+                               </tr>                              
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><input type="image" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Marca", "Marca", new { id = Model.Vmarca.id})" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }                   
+                       
+
