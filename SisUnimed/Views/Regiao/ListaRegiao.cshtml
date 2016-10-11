@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaRegiao>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaRegiao> listaregiao = (IEnumerable<SisUnimed.Models.ListaRegiao>)ViewData["listaregiao"];
+    var grid = new WebGrid(listaregiao.ToList(),ajaxUpdateCallback:"divGrid",ajaxUpdateContainerId:"divGrid", defaultSort: "c_nome", rowsPerPage: 5);
+}
+
+<div id="divGrid">
+        <fieldset>
+            <legend>Regiões</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
+                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),                                       
+                    grid.Column(columnName: "c_descricao", header: "Descrição", format: a => new HtmlString(Ajax.ActionLink((string)a.c_descricao.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>
+
+</div>

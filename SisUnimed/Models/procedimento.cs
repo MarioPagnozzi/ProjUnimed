@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class procedimento
     {
@@ -19,13 +20,25 @@ namespace SisUnimed.Models
         {
             this.materiais_procedimentos = new HashSet<materiais_procedimentos>();
         }
-    
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Código Alternatvo")]
+        [Required(ErrorMessage="Código Alternativo deve ser informado")]
         public string c_codigo { get; set; }
+
+        [Display(Name="Descrição")]
+        [Required(ErrorMessage="Descrição deve ser informada")]
         public string c_descricao { get; set; }
+
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -33,4 +46,14 @@ namespace SisUnimed.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<materiais_procedimentos> materiais_procedimentos { get; set; }
     }
+    public class ListaProcedimentos
+    {
+        public long id { get; set; }
+        public string c_codigo { get; set; }
+        public string c_descricao { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
+    }    
 }

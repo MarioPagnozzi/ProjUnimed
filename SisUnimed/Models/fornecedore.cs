@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class fornecedore
     {
@@ -25,19 +26,38 @@ namespace SisUnimed.Models
             this.fornecedores_telefones = new HashSet<fornecedores_telefones>();
             this.negociacoes = new HashSet<negociaco>();
         }
-    
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Razão Social")]
+        [Required(ErrorMessage="Razão Social deve ser informada")]
         public string c_razao_social { get; set; }
+        [Display(Name="E-mail Principal")]
+        [Required(ErrorMessage="E-mail Principal deve ser informado")]
         public string c_email_principal { get; set; }
+        [Display(Name="Código Alterativo")]
+        [Required(ErrorMessage="Código Alterantivo deve ser informado")]
         public string c_codigo { get; set; }
+        [Display(Name="CNPJ")]
+        [Required(ErrorMessage="CNPJ deve ser informado")]
         public string c_cnpj { get; set; }
+        [Display(Name="Responsável")]
+        [Required(ErrorMessage="Responsável deve ser informado")]
         public string c_responsavel { get; set; }
+        [Display(Name="Operadora")]
         public long operadora { get; set; }
+        [Display(Name="Situação")]
         public int f_situacao { get; set; }
+        [Display(Name="Tipo de Fornecedor")]
         public int f_tipo_fornecedor { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -57,5 +77,32 @@ namespace SisUnimed.Models
         public virtual ICollection<fornecedores_telefones> fornecedores_telefones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociaco> negociacoes { get; set; }
+    }
+    public class ListaFornecedor
+    {
+        public long id { get; set; }        
+        public string c_razao_social { get; set; }       
+        public string c_email_principal { get; set; }      
+        public string c_codigo { get; set; }       
+        public string c_cnpj { get; set; }      
+        public string c_responsavel { get; set; }       
+        public string operadora { get; set; }      
+        public string f_situacao { get; set; }       
+        public string f_tipo_fornecedor { get; set; }       
+        public System.DateTime? sisdatai { get; set; }       
+        public string sisusuarioi { get; set; }      
+        public System.DateTime? sisdataa { get; set; }      
+        public string sisusuarioa { get; set; }
+    }
+    public class vModelDetalheFornecedor
+    {
+        public virtual fornecedore vfornecedor { get; set; }
+        public virtual fornecedores_anexos vfornecedores_anexos { get; set; }
+        public virtual fornecedores_bancos vfornecedores_bancos { get; set; }
+        public virtual fornecedores_emails vfornecedores_emails { get; set; }
+        public virtual fornecedores_enderecos vfornecedores_enderecos { get; set; }
+        public virtual fornecedores_materiais vfornecedores_materiais { get; set; }
+        public virtual fornecedores_regioes vfornecedores_regioes { get; set; }
+        public virtual fornecedores_telefones vfornecedores_telefones { get; set; }
     }
 }

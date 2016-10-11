@@ -47,4 +47,9 @@ namespace SisUnimed.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociacoes_negociadores> negociacoes_negociadores { get; set; }
     }
+    public class ListaNegociacaoF
+    {
+        public long id { get; set; }        
+        public string c_descricao { get; set; }
+    }
 }

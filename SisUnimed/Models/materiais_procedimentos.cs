@@ -11,20 +11,38 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class materiais_procedimentos
     {
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+        [Display(Name="Material")]
         public long material { get; set; }
+        [Display(Name="Procedimento")]        
         public long procedimento { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         public virtual materiai materiai { get; set; }
         public virtual procedimento procedimento1 { get; set; }
+    }
+    public class ListaMatProcedimento
+    {
+        public long id { get; set; }
+        public string procedimento { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

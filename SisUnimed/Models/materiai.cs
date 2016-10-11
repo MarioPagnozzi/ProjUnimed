@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class materiai
     {
@@ -24,32 +25,71 @@ namespace SisUnimed.Models
             this.materiais_similares1 = new HashSet<materiais_similares>();
             this.negociacoes_materiais = new HashSet<negociacoes_materiais>();
         }
-    
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+        [Display(Name="Número Técnico")]
+        [Required(ErrorMessage="Número Técnico deve ser informado")]
         public string c_tnumm { get; set; }
+        [Display(Name="Ref. Fabricante")]
+        [Required(ErrorMessage="Ref. Fabricante deve ser informada")]
         public string c_cod_ref_fabr { get; set; }
+        [Display(Name="Nome do Material")]
+        [Required(ErrorMessage="Nome do Material deve ser informado")]
         public string c_nome_material { get; set; }
+        [Display(Name="Registro Anvisa")]
+        [Required(ErrorMessage="Registro Anvisa deve ser informado")]
         public string c_registro_anvisa { get; set; }
+        [Display(Name="Data Validade")]
+        [Required(ErrorMessage="Data Validade deve ser informada")]
         public Nullable<System.DateTime> d_validade { get; set; }
+        [Display(Name="Início Vigência")]
+        [Required(ErrorMessage="Início Vigência deve ser informada")]
         public Nullable<System.DateTime> d_inicio_vigencia { get; set; }
+        [Display(Name="Fim Vigência")]
+        [Required(ErrorMessage="Fim Vigência deve ser informada")]
         public Nullable<System.DateTime> d_fim_vigencia { get; set; }
+        [Display(Name="Fornecedor Principal")]
         public Nullable<long> fornecedor { get; set; }
+        [Display(Name="Preço Base")]
+        [Required(ErrorMessage="Preço Base deve ser informado")]
         public Nullable<decimal> v_preco { get; set; }
+        [Display(Name="Status")]
+        [Required(ErrorMessage="Status deve ser informado")]
         public int f_status { get; set; }
+        [Display(Name="Distribuidor Exclusivo")]
         public bool f_distribuidor_exclusivo { get; set; }
+        [Display(Name="Não Negociado")]
         public bool f_nao_negociado { get; set; }
+        [Display(Name="Classificação")]
         public Nullable<long> classificacao { get; set; }
+        [Display(Name="Fabricante")]
         public Nullable<long> marca { get; set; }
+        [Display(Name="Origem")]
         public int f_origem { get; set; }
+        [Display(Name="Unidade")]
         public Nullable<long> unidade { get; set; }
+        [Display(Name="Nome Comercial")]
+        [Required(ErrorMessage="Nome Comercial deve ser informado")]
         public string c_nome_comercial { get; set; }
+        [Display(Name="Código Técnico")]
+        [Required(ErrorMessage="Código Técnico deve ser informado")]
         public string c_codigo_tuss { get; set; }
+        [Display(Name="Composição")]
+        [Required(ErrorMessage="Composição deve ser informada")]
         public string c_composicao { get; set; }
+        [Display(Name="Descrição Genérica")]
+        [Required(ErrorMessage="Descrição Genérica deve ser informada")]
         public string c_descricao_generica { get; set; }
+        [Display(Name="Justificativa da Alteração")]
         public string c_justificativa_alteracao { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -70,5 +110,41 @@ namespace SisUnimed.Models
         public virtual ICollection<materiais_similares> materiais_similares1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociacoes_materiais> negociacoes_materiais { get; set; }
+    }
+    public class ListaMaterial
+    {
+        public long id { get; set; }       
+        public string c_tnumm { get; set; }        
+        public string c_cod_ref_fabr { get; set; }       
+        public string c_nome_material { get; set; }        
+        public string c_registro_anvisa { get; set; }      
+        public System.DateTime? d_validade { get; set; }       
+        public System.DateTime? d_inicio_vigencia { get; set; }       
+        public System.DateTime? d_fim_vigencia { get; set; }       
+        public string fornecedor { get; set; }    
+        public decimal v_preco { get; set; }       
+        public string f_status { get; set; }      
+        public string f_distribuidor_exclusivo { get; set; }        
+        public string f_nao_negociado { get; set; }       
+        public string classificacao { get; set; }       
+        public string marca { get; set; }       
+        public string f_origem { get; set; }        
+        public string unidade { get; set; }       
+        public string c_nome_comercial { get; set; }       
+        public string c_codigo_tuss { get; set; }      
+        public string c_composicao { get; set; }      
+        public string c_descricao_generica { get; set; }       
+        public string c_justificativa_alteracao { get; set; }       
+        public System.DateTime? sisdatai { get; set; }       
+        public string sisusuarioi { get; set; }       
+        public System.DateTime? sisdataa { get; set; }      
+        public string sisusuarioa { get; set; }
+    }
+    public class vModelDetalheMateriais
+    {
+        public materiai vmateriais { get; set; }
+        public materiais_informacoes vmateriais_informacoes { get; set; }
+        public materiais_procedimentos vmateriais_procedimentos { get; set; }
+        public materiais_similares vmateriais_similares { get; set; }
     }
 }

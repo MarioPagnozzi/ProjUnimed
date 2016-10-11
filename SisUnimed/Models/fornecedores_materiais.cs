@@ -11,21 +11,43 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class fornecedores_materiais
     {
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+        [Display(Name="Fornecedor")]
         public long fornecedor { get; set; }
+        [Display(Name="Material")]
         public long material { get; set; }
+        [Display(Name="Preço Praticado")]
+        [Required(ErrorMessage="Preço Praticado deve ser informado")]
         public Nullable<decimal> v_preco_ctnpm { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         public virtual fornecedore fornecedore { get; set; }
         public virtual materiai materiai { get; set; }
+    }
+    public class ListaFornecedorMateriais
+    {
+        public long id { get; set; }
+        public string fornecedor { get; set; }
+        public string material { get; set; }
+        public double v_preco_ctnpm { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

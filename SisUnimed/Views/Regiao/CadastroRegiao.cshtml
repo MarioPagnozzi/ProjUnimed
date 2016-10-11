@@ -1,0 +1,45 @@
+﻿@model SisUnimed.Models.regio
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action, "Regiao", new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="corposite" }, new { id = "formCadastro" }))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.id)</font></td>                                   
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_descricao)</font></td>
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.id, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.id, new { @readonly = "true" })</td>                                   
+                                   <td>@Html.LabelFor(a => a.c_descricao, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.c_descricao, new { @size = "30", @style = "text-transform: uppercase" })</td>
+                                   
+                               </tr>                              
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><input type="image" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Regiao", "Regiao")" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }                   
+                       
+

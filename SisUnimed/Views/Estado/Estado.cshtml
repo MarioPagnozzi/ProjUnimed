@@ -1,0 +1,171 @@
+﻿@model SisUnimed.Models.estado
+@{
+    ViewBag.Title = "Estado";
+    //Layout = "~/Views/Home/Index.cshtml";
+   
+    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
+    IEnumerable<SisUnimed.Models.ListaEstado> resultadolista = (IEnumerable<SisUnimed.Models.ListaEstado>)ViewData["listaestado"];
+  
+    List<SelectListItem> listacampo = new List<SelectListItem>();
+    listacampo.Add(new SelectListItem{
+        Text="Código",
+        Value="codigo"
+    });
+    listacampo.Add(new SelectListItem{
+       Text="Descrição",
+       Value="descricao",
+       Selected=true 
+    });   
+    List<SelectListItem> listatipo = new List<SelectListItem>();
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Inicia com",
+        Value = "inicia",
+        Selected=true
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Contém",
+        Value = "contem"
+        
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Termina com",
+        Value = "termina"
+    });
+   
+}
+<script type="text/javascript">
+    function er_replace(pattern, replacement, subject) {
+        return subject.replace(pattern, replacement);
+    };
+    $(document).ready(function () {
+
+        $('#btnPesquisa').click(function () {
+            var vtipo = document.getElementById("tipo").value;
+            var vcampo = document.getElementById("campo").value;
+            var vpesquisa = document.getElementById("pesquisa").value.toUpperCase();
+
+            $.ajax({
+                url: "@Url.Action("Pesquisa","Estado")",
+                type: "GET",
+                data: { tipo: vtipo, campo: vcampo, pesquisa: vpesquisa },
+                success: function (retorno) {
+                    document.getElementById("divGrid").setAttribute("style", "width:100%");
+                    document.getElementById("divGrid").innerHTML = retorno;
+                }
+
+            });
+        });
+
+        $('#pesquisa').keyup(function () {
+            var vcampo = document.getElementById("campo").value;
+            if (vcampo == "codigo") {
+                var $this = $(this);
+                $this.val(er_replace(/[^0-9]+/g, '', $this.val()));
+            }
+        });
+
+        $('#campo').click(function () {
+            document.getElementById("pesquisa").value = "";
+        });
+
+        if (document.getElementById("Vusuario_id").value == "0") {
+            document.getElementById("tab2").style.display = "none";
+        };
+    }), 'json';
+
+</script>
+
+<h2 id="txtTitulo">Cadastro de Estados</h2>
+<hr />
+ <div id="divPesq">
+     <fieldset>
+        <legend>Pesquisa</legend>
+ <table class="table">
+              
+           
+            <tr>
+                <td>
+                    @Html.Label("Pesquisar Por:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("campo", listacampo, new { @class="#formPesquisa input" })
+                </td>
+                 <td>
+                    @Html.Label("Tipo:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("tipo",listatipo,new { @class="#formPesquisa input" })
+                </td>
+                 <td>
+                    @Html.Label("Conteúdo Pesquisa:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.TextBox("pesquisa","", new { @class="#formPesquisa input",@style="text-transform: uppercase" })
+                </td>
+                 <td>
+                    <button type="button" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
+                </td>
+
+            </tr>          
+  
+
+</table>
+     
+</fieldset>
+ </div>
+    <div id="divCadastro">        
+        <fieldset>
+            <legend>Dados Estado</legend>
+             <table class="btnPesquisa">
+                 <tr>
+                     <td width="65px">
+                         @if (up.estados_i == 1)
+                         {                        
+                            @*<button onclick="location.href='@Url.Action("Incluir", "Banco")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>*@
+                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Estado")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
+                         }
+                     </td>                   
+                       
+                     <td>
+                          @if (up.estados_d == 1 && Model != null)
+                          {
+                            @*<button id="btnComandos" type="button" onclick="location.href='@Url.Action("Delete", "Banco", new { id = Model.id })'"><img src="/Contents/Images/btnExcluir.png" /></button>*@
+                              <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Estado", new { id = Model.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a>
+                          }
+                     </td>
+                        
+                 </tr>
+             </table>
+            <div class="conteiner">
+                <div id="content">
+                    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                        <li class="active"><a href="#tab1" 
+                        data-toggle="tab">Estado</a></li>
+                        @*<li><a href="#tab2" data-toggle="tab">Permissões</a></li> *@                       
+                    </ul>
+                    <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane  active" id="tab1">
+                        <div id="cadastro">
+                            @{Html.RenderPartial("CadastroEstado", Model);}
+                        </div>
+                    </div>
+                       @* <div class="tab-pane" id="tab2"> 
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>@Html.Partial("UsuarioPermissao", Model)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>*@
+                    </div>
+                </div>    
+                </div>           
+        </fieldset>
+    </div>
+    
+                @{Html.RenderPartial("ListaEstado", resultadolista);}
+      

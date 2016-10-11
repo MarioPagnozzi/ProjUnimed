@@ -1,0 +1,135 @@
+﻿@model SisUnimed.Models.fornecedores_bancos
+@{
+    List<SelectListItem> listasituacao = new List<SelectListItem>();
+    List<SelectListItem> listatipofornecedor = new List<SelectListItem>();
+    IEnumerable<SisUnimed.Models.ListaOperadora1> listaoperadora = (IEnumerable<SisUnimed.Models.ListaOperadora1>)ViewData["listaoperadora"];    
+
+    listasituacao.Add(new SelectListItem {
+        Text = "Ativo",
+        Value = "1"
+    });
+    listasituacao.Add(new SelectListItem {
+        Text = "Inativo",
+        Value = "2"
+    });
+
+    listatipofornecedor.Add(new SelectListItem {
+        Text = "Distribuidor/Atacadista",
+        Value = "1"
+    });
+    listatipofornecedor.Add(new SelectListItem {
+        Text = "Fabricante",
+        Value = "2"
+    });
+    listatipofornecedor.Add(new SelectListItem {
+        Text = "Importador",
+        Value = "3"
+    });
+    listatipofornecedor.Add(new SelectListItem {
+        Text = "Varejista",
+        Value = "4"
+    });
+
+    List<SelectListItem> operadoras = new List<SelectListItem>();
+    foreach (var x in listaoperadora)
+    {
+        operadoras.Add(new SelectListItem {
+            Text = x.c_nome,
+            Value = x.id.ToString()
+        }); 
+    }    
+    
+}
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="corposite" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_codigo)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_cnpj)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_razao_social)</font></td>
+                                   
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.id, new { @size="10", @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.c_codigo, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.c_codigo, new { @size="10", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.c_cnpj, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_cnpj,"cnpj")</td>
+                                   <td>@Html.LabelFor(a => a.c_razao_social,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_razao_social, new { @size = "30",@style="text-transform: uppercase"})</td>                                   
+                                   
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_responsavel)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.f_situacao)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.f_tipo_fornecedor)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.operadora)</font></td>
+                                   
+
+                               </tr>
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.c_responsavel, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_responsavel,new {@size="30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.f_situacao, new { @class="txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.f_situacao,listasituacao)</td>
+                                   <td>@Html.LabelFor(a => a.f_tipo_fornecedor,new { @class = "txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.f_tipo_fornecedor, listatipofornecedor)</td>
+                                   <td>@Html.LabelFor(a => a.operadora, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.operadora,operadoras)</td>                                   
+                               </tr>    
+                               <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_email_principal)</font></td>
+                                   <td></td>
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.c_email_principal,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.c_email_principal,new {@size="30",@style="text-transform: lowercase"})</td>
+                               </tr>                  
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Fornecedor","Fornecedor")" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <script>
+        $(document).ready(function () {
+            $("#c_cnpj").inputmask("mask", { "mask": "99.999.999/9999-99" });
+        });
+    </script>
+               
+                       
+

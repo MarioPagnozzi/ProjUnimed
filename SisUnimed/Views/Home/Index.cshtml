@@ -18,6 +18,12 @@
     <script src="~/Scripts/jquery-3.1.0.js"></script>   
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.js"></script>
+    <script src="~/Scripts/jquery.inputmask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.phone.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"></script>
         
     <!--[if lt IE 7] /* Ver [C14 S14.5] */
     <script type="text/javascript">
@@ -67,6 +73,26 @@
                         @if (up.marcas == 1)
                         {
                             <li>@Ajax.ActionLink("Marca", "Marca", "Marca", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
+                         @if (up.estados == 1)
+                        {
+                            <li>@Ajax.ActionLink("Estados", "Estado", "Estado", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
+                        @if (up.regioes == 1)
+                        {
+                            <li>@Ajax.ActionLink("Região", "Regiao", "Regiao", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
+                         @if (up.unidades == 1)
+                        {
+                            <li>@Ajax.ActionLink("Unidades", "Unidade", "Unidade", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
+                        @if (up.procedimentos == 1)
+                        {
+                            <li>@Ajax.ActionLink("Procedimento", "Procedimento", "Procedimento", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
+                         @if (up.fornecedores == 1)
+                        {
+                            <li>@Ajax.ActionLink("Fornecedor", "Fornecedor", "Fornecedor", new AjaxOptions { UpdateTargetId="corposite" })</li>
                         }
                     </ul>
                 </li>

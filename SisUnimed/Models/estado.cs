@@ -11,6 +11,7 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class estado
     {
@@ -20,13 +21,25 @@ namespace SisUnimed.Models
             this.fornecedores_bancos = new HashSet<fornecedores_bancos>();
             this.fornecedores_enderecos = new HashSet<fornecedores_enderecos>();
         }
-    
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+
+        [Display(Name="Sigla")]
+        [Required(ErrorMessage="Sigla do Estado deve ser informada")]
         public string c_sigla { get; set; }
+
+        [Display(Name="Estado")]
+        [Required(ErrorMessage="Estado deve ser informado")]
         public string c_nome { get; set; }
+
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
@@ -35,5 +48,15 @@ namespace SisUnimed.Models
         public virtual ICollection<fornecedores_bancos> fornecedores_bancos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fornecedores_enderecos> fornecedores_enderecos { get; set; }
+    }
+    public class ListaEstado
+    {
+        public long id { get; set; }
+        public string c_sigla { get; set; }
+        public string c_nome { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

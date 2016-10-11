@@ -11,21 +11,46 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class fornecedores_anexos
     {
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+        [Display(Name="Fornecedor")]
         public long fornecedor { get; set; }
+        [Display(Name="Nome Anexo")]
+        [Required(ErrorMessage="Nome Anexo deve ser informado")]
         public string c_nome_anexo { get; set; }
+        [Display(Name="Data de Validade")]
+        [Required(ErrorMessage="Data de Validade deve ser informada")]
         public Nullable<System.DateTime> d_validade { get; set; }
+        [Display(Name="Caminho Arquivo")]
+        [Required(ErrorMessage="Caminho do Arquivo deve ser informado")]
         public string c_caminho_arquivo { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         public virtual fornecedore fornecedore { get; set; }
+    }
+    public class ListaAnexo
+    {
+        public long id { get; set; }
+        public string c_nome_anexo { get; set; }
+        public System.DateTime? d_validade { get; set; }
+        public string c_caminho_arquivo { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

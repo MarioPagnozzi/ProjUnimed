@@ -11,24 +11,54 @@ namespace SisUnimed.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class fornecedores_regioes
     {
+        [Key]
+        [Display(Name="Código")]
         public long id { get; set; }
+        [Display(Name="Fornecedor")]
         public long fornecedor { get; set; }
+        [Display(Name="Região")]
         public long regiao { get; set; }
+        [Display(Name="Distribuidor")]
+        [Required(ErrorMessage="Distribuidor deve ser informado")]
         public string c_distribuidor { get; set; }
+        [Display(Name="Telefone")]
+        [Required(ErrorMessage="Telefone deve ser informado")]
         public string c_telefone { get; set; }
+        [Display(Name="Responsável")]
+        [Required(ErrorMessage="Responsável deve ser informado")]
         public string c_responsavel { get; set; }
+        [Display(Name="E-mail")]
         public string c_email { get; set; }
+        [Display(Name="Data Inclusão")]
         public Nullable<System.DateTime> sisdatai { get; set; }
+        [Display(Name="Usuário Inclusão")]
         public Nullable<long> sisusuarioi { get; set; }
+        [Display(Name="Data Alteração")]
         public Nullable<System.DateTime> sisdataa { get; set; }
+        [Display(Name="Usuário Alteração")]
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
     
         public virtual fornecedore fornecedore { get; set; }
         public virtual regio regio { get; set; }
+    }
+    public class ListaFornecedorRegiao
+    {
+        public long id { get; set; }
+        public string fornecedor { get; set; }
+        public string regiao { get; set; }
+        public string c_distribuidor { get; set; }
+        public string c_telefone { get; set; }
+        public string c_responsavel { get; set; }
+        public string c_email { get; set; }
+        public System.DateTime? sisdatai { get; set; }
+        public string sisusuarioi { get; set; }
+        public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

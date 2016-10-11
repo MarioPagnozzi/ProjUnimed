@@ -1,0 +1,203 @@
+﻿@model SisUnimed.Models.fornecedore
+@{
+    ViewBag.Title = "Fornecedor";
+    //Layout = "~/Views/Home/Index.cshtml";
+   
+    var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
+    IEnumerable<SisUnimed.Models.ListaFornecedor> resultadolista = (IEnumerable<SisUnimed.Models.ListaFornecedor>)ViewData["listafornecedor"];
+  
+    List<SelectListItem> listacampo = new List<SelectListItem>();
+    listacampo.Add(new SelectListItem{
+        Text="Código",
+        Value="codigo"
+    });
+    listacampo.Add(new SelectListItem{
+       Text="Razão Social",
+       Value="razao",
+       Selected=true 
+    });   
+    List<SelectListItem> listatipo = new List<SelectListItem>();
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Inicia com",
+        Value = "inicia",
+        Selected=true
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Contém",
+        Value = "contem"
+        
+    });
+    listatipo.Add(new SelectListItem
+    {
+        Text = "Termina com",
+        Value = "termina"
+    });
+   
+}
+<script type="text/javascript">
+    function er_replace(pattern, replacement, subject) {
+        return subject.replace(pattern, replacement);
+    };
+    $(document).ready(function () {
+
+        $('#btnPesquisa').click(function () {
+            var vtipo = document.getElementById("tipo").value;
+            var vcampo = document.getElementById("campo").value;
+            var vpesquisa = document.getElementById("pesquisa").value.toUpperCase();
+
+            $.ajax({
+                url: "@Url.Action("Pesquisa","Fornecedor")",
+                type: "GET",
+                data: { tipo: vtipo, campo: vcampo, pesquisa: vpesquisa },
+                success: function (retorno) {
+                    document.getElementById("divGrid").setAttribute("style", "width:100%");
+                    document.getElementById("divGrid").innerHTML = retorno;
+                }
+
+            });
+        });
+
+        $('#pesquisa').keyup(function () {
+            var vcampo = document.getElementById("campo").value;
+            if (vcampo == "codigo") {
+                var $this = $(this);
+                $this.val(er_replace(/[^0-9]+/g, '', $this.val()));
+            }
+        });
+
+        $('#campo').click(function () {
+            document.getElementById("pesquisa").value = "";
+        });
+
+        if (document.getElementById("Vusuario_id").value == "0") {
+            document.getElementById("tab2").style.display = "none";
+        };
+    }), 'json';
+
+</script>
+
+<h2 id="txtTitulo">Cadastro de Fornecedores</h2>
+<hr />
+ <div id="divPesq">
+     <fieldset>
+        <legend>Pesquisa</legend>
+ <table class="table">
+              
+           
+            <tr>
+                <td>
+                    @Html.Label("Pesquisar Por:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("campo", listacampo, new { @class="#formPesquisa input" })
+                </td>
+                 <td>
+                    @Html.Label("Tipo:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.DropDownList("tipo",listatipo,new { @class="#formPesquisa input" })
+                </td>
+                 <td>
+                    @Html.Label("Conteúdo Pesquisa:", new { @id = "txtcorposite" })
+                </td>
+                <td>
+                    @Html.TextBox("pesquisa","", new { @class="#formPesquisa input",@style="text-transform: uppercase" })
+                </td>
+                 <td>
+                    <button type="button" id="btnPesquisa">@*<img src="/Contents/Images/Lupa.png" />*@</button>
+                </td>
+
+            </tr>          
+  
+
+</table>
+     
+</fieldset>
+ </div>
+    <div id="divCadastro">        
+        <fieldset>
+            <legend>Dados Fornecedor</legend>
+             <table class="btnPesquisa">
+                 <tr>
+                     <td width="65px">
+                         @if (up.fornecedores_i == 1)
+                         {                        
+                            @*<button onclick="location.href='@Url.Action("Incluir", "Banco")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>*@
+                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Fornecedor")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
+                         }
+                     </td>                    
+                       
+                     <td>
+                          @if (up.fornecedores_d == 1 && Model != null && Model.id > 0)
+                          {
+                              <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Fornecedor", new { id = Model.id })" role="button">
+                                  <img src="/Contents/Images/btnExcluir.png" /></a>
+                          }
+                     </td>
+                        
+                 </tr>
+             </table>
+            <div class="conteiner">
+                <div id="content">
+                    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                        <li class="active"><a href="#tab1" 
+                        data-toggle="tab">Fornecedor</a></li>
+                        <li><a href="#tab2" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadBanco" href="@Url.Action("Bancos", "Fornecedor", new { id = Model.id })">Bancos</a></li>   
+                        <li><a href="#tab3" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEnderecos" href="@Url.Action("Enderecos", "Fornecedor", new { id = Model.id })">Endereços</a></li>
+                        <li><a href="#tab4" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadTelefones" href="@Url.Action("Telefones", "Fornecedor", new { id = Model.id })">Telefones</a></li>
+                        <li><a href="#tab5" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEmails" href="@Url.Action("Emails", "Fornecedor", new { id = Model.id })">E-mails</a></li>
+                        <li><a href="#tab6" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadRegiao" href="@Url.Action("Regiao", "Fornecedor", new { id = Model.id })">Regiões</a></li>
+                        <li><a href="#tab7" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadMateriais" href="@Url.Action("Materiais", "Fornecedor", new { id = Model.id })">Materiais</a></li>
+                        <li><a href="#tab8" data-toggle="tab"data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadAnexos" href="@Url.Action("Anexos", "Fornecedor", new { id = Model.id })">Anexos</a></li>                                    
+                    </ul>
+                    <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane  active" id="tab1">
+                        <div id="cadastro">
+                            @{Html.RenderPartial("CadastroFornecedor", Model);}
+                        </div>
+                    </div>
+                        <div class="tab-pane" id="tab2">
+                            <div id="cadBanco"> 
+                                                            
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <div id="cadEnderecos"> 
+                                                          
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            <div id="cadTelefones"> 
+                                                           
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab5">
+                            <div id="cadEmails"> 
+                                                           
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                            <div id="cadRegiao"> 
+                                                           
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab7">
+                            <div id="cadMateriais"> 
+                                                       
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab8">
+                            <div id="cadAnexos"> 
+                                                            
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                </div>           
+        </fieldset>
+    </div>
+    
+              @{Html.RenderPartial("ListaFornecedor", resultadolista);}
+      
