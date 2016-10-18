@@ -44,13 +44,16 @@ namespace SisUnimed.Models
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
+        public long fornecedor { get; set; }
     
         public virtual banco banco1 { get; set; }
         public virtual estado estado1 { get; set; }
+        public virtual fornecedore fornecedore { get; set; }
     }
     public class ListaFornecedorBanco
     {
         public long id { get; set; }
+        public long fornecedor { get; set; }
         public string banco { get; set; }
         public string c_agencia { get; set; }
         public string c_conta { get; set; }

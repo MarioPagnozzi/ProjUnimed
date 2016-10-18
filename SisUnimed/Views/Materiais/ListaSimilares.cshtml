@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaMatSimilar>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaMatSimilar> listasimilares = (IEnumerable<SisUnimed.Models.ListaMatSimilar>)ViewData["listasimilares"];
+    var grid = new WebGrid(listasimilares.ToList(), ajaxUpdateCallback: "divGridSimilar", ajaxUpdateContainerId: "divGridSimilar", defaultSort: "material_similar", rowsPerPage: 5);
+}
+
+
+        <fieldset>
+            <legend>Materiais Similares</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
+                    grid.Column(columnName: "id",header:"id",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCamposSimilar",new{id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true),
+                    grid.Column(columnName: "material_similar",header:"Similar",format: a => new HtmlString(Ajax.ActionLink((string)a.material_similar.ToString(),"PreencheCamposSimilar",new{id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true),
+                  
+                   
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCamposSimilar", new { id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCamposSimilar", new {id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCamposSimilar", new { id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCamposSimilar", new {id_similar=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadSimilares"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>

@@ -1,4 +1,4 @@
-﻿@model SisUnimed.Models.fornecedore
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
 @{
     List<SelectListItem> listasituacao = new List<SelectListItem>();
     List<SelectListItem> listatipofornecedor = new List<SelectListItem>();
@@ -61,58 +61,58 @@
                                  }
                                 <tr>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.id)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.id)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_codigo)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.c_codigo)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_cnpj)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.c_cnpj)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_razao_social)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.c_razao_social)</font></td>
                                    
 
                                    
                                </tr> 
                                <tr>
-                                   <td>@Html.LabelFor(a => a.id,new{@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.id, new { @size="10", @readonly = "true"})</td>
-                                   <td>@Html.LabelFor(a => a.c_codigo, new { @class="txtcorposite" })</td>
-                                   <td>@Html.TextBoxFor(a => a.c_codigo, new { @size="10", @style="text-transform: uppercase" })</td>
-                                   <td>@Html.LabelFor(a => a.c_cnpj, new{ @class = "txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.c_cnpj,"cnpj")</td>
-                                   <td>@Html.LabelFor(a => a.c_razao_social,new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.c_razao_social, new { @size = "30",@style="text-transform: uppercase"})</td>                                   
+                                   <td>@Html.LabelFor(a => a.vfornecedor.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.id, new { @size="10", @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.c_codigo, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.c_codigo, new { @size="10", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.c_cnpj, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.c_cnpj, new { value = Model.vfornecedor.c_cnpj })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.c_razao_social,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.c_razao_social, new { @size = "30",@style="text-transform: uppercase"})</td>                                   
                                    
                                </tr>
                                <tr>
                                    <td></td>
-                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_responsavel)</font></td>
+                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.c_responsavel)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.f_situacao)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.f_situacao)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.f_tipo_fornecedor)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.f_tipo_fornecedor)</font></td>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.operadora)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.operadora)</font></td>
                                    
 
                                </tr>
                                <tr>
-                                   <td>@Html.LabelFor(a => a.c_responsavel, new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.c_responsavel,new {@size="30",@style="text-transform: uppercase"})</td>
-                                   <td>@Html.LabelFor(a => a.f_situacao, new { @class="txtcorposite" })</td>
-                                   <td>@Html.DropDownListFor(a => a.f_situacao,listasituacao)</td>
-                                   <td>@Html.LabelFor(a => a.f_tipo_fornecedor,new { @class = "txtcorposite" })</td>
-                                   <td>@Html.DropDownListFor(a => a.f_tipo_fornecedor, listatipofornecedor)</td>
-                                   <td>@Html.LabelFor(a => a.operadora, new { @class = "txtcorposite" })</td>
-                                   <td>@Html.DropDownListFor(a => a.operadora,operadoras)</td>                                   
+                                   <td>@Html.LabelFor(a => a.vfornecedor.c_responsavel, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.c_responsavel,new {@size="30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.f_situacao, new { @class="txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedor.f_situacao,listasituacao)</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.f_tipo_fornecedor,new { @class = "txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedor.f_tipo_fornecedor, listatipofornecedor)</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.operadora, new { @class = "txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedor.operadora,operadoras)</td>                                   
                                </tr>    
                                <tr>
                                    <td></td>
-                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.c_email_principal)</font></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedor.c_email_principal)</font></td>
                                    <td></td>
                                </tr> 
                                <tr>
-                                   <td>@Html.LabelFor(a => a.c_email_principal,new {@class="txtcorposite"})</td>
-                                   <td>@Html.TextBoxFor(a => a.c_email_principal,new {@size="30",@style="text-transform: lowercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedor.c_email_principal,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedor.c_email_principal,new {@size="30",@style="text-transform: lowercase"})</td>
                                </tr>                  
                                                              
                                 <tr>   
@@ -127,7 +127,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#c_cnpj").inputmask("mask", {"mask":"99.999.999/9999-99"});
+            $("#vfornecedor_c_cnpj").inputmask("mask", { "mask": "99.999.999/9999-99" });
         });
     </script>
                

@@ -1,0 +1,85 @@
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
+@{
+        
+   IEnumerable<SisUnimed.Models.ListaEmail> listaemail = (IEnumerable<SisUnimed.Models.ListaEmail>)ViewData["listaemail"];   
+   
+       
+}
+<table class="table">
+    <tr>
+        @if (Model.vfornecedor.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEmails" href="@Url.Action("IncluirEmail", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vfornecedores_emails != null && (Model.vfornecedores_emails.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEmails" href="@Url.Action("DeleteEmail","Fornecedor",new {id_email = Model.vfornecedores_emails.id, id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadEmails" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vfornecedores_emails.id)
+                                @Html.HiddenFor(a => a.vfornecedores_emails.fornecedor)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_emails.c_nome)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_emails.c_email)</font></td>
+                                   <td></td>                                                                                                    
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_emails.c_nome,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_emails.c_nome, new {@size = "30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_emails.c_email, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_emails.c_email, new { @size="50", @style="text-transform: lowercase" })</td>
+                                                                    
+                                   
+                               </tr>
+                                                           
+                                               
+                                                             
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirEmail" || ViewBag.Action == "EditarEmail") && Model.vfornecedor != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEmails" href="@Url.Action("Email", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridEmail">
+                    @{Html.RenderPartial("ListaFornEmail",listaemail);}
+                </div>
+            </td>
+        </tr>
+    </table>
+
+               
+                       
+
+
+

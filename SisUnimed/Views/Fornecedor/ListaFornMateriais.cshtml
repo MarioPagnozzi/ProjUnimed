@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaFornecedorMateriais>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaFornecedorMateriais> listamateriais = (IEnumerable<SisUnimed.Models.ListaFornecedorMateriais>)ViewData["listamateriais"];
+    var grid = new WebGrid(listamateriais.ToList(), ajaxUpdateCallback: "divGridMaterial", ajaxUpdateContainerId: "divGridMaterial", defaultSort: "material", rowsPerPage: 5);
+}
+
+
+        <fieldset>
+            <legend>Materiais</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
+                    grid.Column(columnName: "id",header:"id",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCamposMaterial",new{id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    grid.Column(columnName: "material",header:"Material",format: a => new HtmlString(Ajax.ActionLink((string)a.material.ToString(),"PreencheCamposMaterial",new{id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    grid.Column(columnName: "v_preco_ctnpm",header:"Preço",format: a => new HtmlString(Ajax.ActionLink((string)string.Format("{0:C}",a.v_preco_ctnpm),"PreencheCamposMaterial",new{id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCamposMaterial", new { id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCamposMaterial", new {id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCamposMaterial", new { id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCamposMaterial", new {id_mat=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadMateriais"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>

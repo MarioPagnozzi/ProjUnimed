@@ -1,0 +1,127 @@
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
+@{
+        
+    IEnumerable<SisUnimed.Models.ListaEstado> listaestado = (IEnumerable<SisUnimed.Models.ListaEstado>)ViewData["listaestado"];
+    IEnumerable<SisUnimed.Models.ListaEndereco> listafornendereco = (IEnumerable<SisUnimed.Models.ListaEndereco>)ViewData["listaendereco"];   
+     
+    
+    List<SelectListItem> estado = new List<SelectListItem>();
+    foreach (var x in listaestado)
+    {
+        estado.Add(new SelectListItem { 
+            Text = x.c_sigla,
+            Value = x.id.ToString()
+        });
+    }   
+    
+}
+<table class="table">
+    <tr>
+        @if (Model.vfornecedor.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEnderecos" href="@Url.Action("IncluirEndereco", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vfornecedores_enderecos != null && (Model.vfornecedores_enderecos.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEnderecos" href="@Url.Action("DeleteEndereco","Fornecedor",new {id_end = Model.vfornecedores_enderecos.id, id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadEnderecos" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vfornecedores_enderecos.id)
+                                @Html.HiddenFor(a => a.vfornecedores_enderecos.fornecedor)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_logradouro)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_descricao)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_numero)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_complemento)</font></td>
+                                   
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_logradouro,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_logradouro, new {@size = "10",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_descricao, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_descricao, new { @size="30", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_numero, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_numero, new { @size = "8", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_complemento,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_complemento, new { @size = "15",@style="text-transform: uppercase"})</td>                                   
+                                   
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_bairro)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_cep)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.c_cidade)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_enderecos.estado)</font></td>                                 
+                                   
+
+                               </tr>
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_bairro, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_bairro,new {@size="20",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_cep, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_cep,new {@size="15",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_enderecos.c_cidade, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_enderecos.c_cidade,new {@size="30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_bancos.estado, new { @class="txtcorposite" })</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedores_enderecos.estado,estado)</td>                                                                     
+                               </tr> 
+                               
+                                               
+                                                             
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirEndereco" || ViewBag.Action == "EditarEndereco") && Model.vfornecedor != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadEnderecos" href="@Url.Action("Endereco", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridEndereco">
+                    @{Html.RenderPartial("ListaFornEndereco",listafornendereco);}
+                </div>
+            </td>
+        </tr>
+    </table>
+<script>
+    $(document).ready(function () {
+        $("#vfornecedores_enderecos_c_cep").inputmask("mask",{"mask":"99999-999"});
+    });
+</script>
+               
+                       
+
+

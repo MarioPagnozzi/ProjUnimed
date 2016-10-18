@@ -71,6 +71,8 @@
         <AssociationConnector Association="UnimedModel.negociacoes_negociadores_negociacao_fkey" />
         <AssociationConnector Association="UnimedModel.negociacoes_negociadores_negociador_fkey" />
         <AssociationConnector Association="UnimedModel.negociadores_operadora_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_bancos_fornecedor_fkey" />
+        <AssociationConnector Association="UnimedModel.fornecedores_enderecos_fornecedor_fkey" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

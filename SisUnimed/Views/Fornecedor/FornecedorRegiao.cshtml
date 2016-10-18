@@ -1,0 +1,119 @@
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
+@{
+    
+    
+    IEnumerable<SisUnimed.Models.ListaRegiao> listaregiao = (IEnumerable<SisUnimed.Models.ListaRegiao>)ViewData["listaregiao"];
+    IEnumerable<SisUnimed.Models.ListaFornecedorRegiao> listafornregiao = (IEnumerable<SisUnimed.Models.ListaFornecedorRegiao>)ViewData["listafornregiao"];  
+       
+    List<SelectListItem> regiao = new List<SelectListItem>();
+    foreach (var x in listaregiao)
+    {
+        regiao.Add(new SelectListItem {
+            Text = x.c_descricao,
+            Value = x.id.ToString()
+        }); 
+    }
+  
+    
+}
+<table class="table">
+    <tr>
+        @if (Model.vfornecedor.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadRegiao" href="@Url.Action("IncluirRegiao", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vfornecedores_regioes != null && (Model.vfornecedores_regioes.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadRegiao" href="@Url.Action("DeleteRegiao","Fornecedor",new {id_reg = Model.vfornecedores_regioes.id, id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadRegiao" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vfornecedores_regioes.id)
+                                @Html.HiddenFor(a => a.vfornecedores_regioes.fornecedor)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_regioes.regiao)</font></td>
+                                    <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_regioes.c_distribuidor)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_regioes.c_responsavel)</font></td>
+                                   <td></td>                                                        
+                                   
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_regioes.regiao,new{@class="txtcorposite"})</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedores_regioes.regiao,regiao)</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_regioes.c_distribuidor, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_regioes.c_distribuidor, new { @size="35", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_regioes.c_responsavel, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_regioes.c_responsavel, new { @size = "30", @style="text-transform: uppercase" })</td>
+                                                                    
+                                   
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_regioes.c_email)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_regioes.c_telefone)</font></td>
+                                   <td></td>
+                                                                      
+
+                               </tr>
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_regioes.c_email, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_regioes.c_email,new {@size="50",@style="text-transform: lowercase"})</td>
+                                    <td>@Html.LabelFor(a => a.vfornecedores_regioes.c_telefone,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_regioes.c_telefone, new { @size = "15",@style="text-transform: uppercase"})</td>
+                                                                                     
+                               </tr> 
+                               
+                                               
+                                                             
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirRegiao" || ViewBag.Action == "EditarRegiao") && Model.vfornecedor != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadRegiao" href="@Url.Action("Regiao", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridRegiao">
+                    @{Html.RenderPartial("ListaFornRegiao",listafornregiao);}
+                </div>
+            </td>
+        </tr>
+    </table>
+<script>
+    $(document).ready(function () {
+        $("#vfornecedores_regioes_c_telefone").inputmask("masc", {"mask":"(99) 99999-9999"});
+    });
+</script>
+               
+                       
+
+

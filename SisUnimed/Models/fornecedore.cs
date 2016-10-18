@@ -25,6 +25,8 @@ namespace SisUnimed.Models
             this.fornecedores_regioes = new HashSet<fornecedores_regioes>();
             this.fornecedores_telefones = new HashSet<fornecedores_telefones>();
             this.negociacoes = new HashSet<negociaco>();
+            this.fornecedores_bancos = new HashSet<fornecedores_bancos>();
+            this.fornecedores_enderecos = new HashSet<fornecedores_enderecos>();
         }
         [Key]
         [Display(Name="Código")]
@@ -77,6 +79,10 @@ namespace SisUnimed.Models
         public virtual ICollection<fornecedores_telefones> fornecedores_telefones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<negociaco> negociacoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_bancos> fornecedores_bancos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fornecedores_enderecos> fornecedores_enderecos { get; set; }
     }
     public class ListaFornecedor
     {

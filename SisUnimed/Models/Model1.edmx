@@ -113,6 +113,7 @@
           <Property Name="sisusuarioa" Type="int8" />
           <Property Name="sisdatae" Type="timestamp" />
           <Property Name="sisusuarioe" Type="int8" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
         </EntityType>
         <EntityType Name="fornecedores_emails">
           <Key>
@@ -148,6 +149,7 @@
           <Property Name="sisusuarioa" Type="int8" />
           <Property Name="sisdatae" Type="timestamp" />
           <Property Name="sisusuarioe" Type="int8" />
+          <Property Name="fornecedor" Type="int8" Nullable="false" />
         </EntityType>
         <EntityType Name="fornecedores_materiais">
           <Key>
@@ -669,6 +671,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fornecedores_bancos_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="fornecedores_bancos" Type="Self.fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fornecedores_emails_fornecedor_fkey">
           <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1" />
           <End Role="fornecedores_emails" Type="Self.fornecedores_emails" Multiplicity="*" />
@@ -690,6 +706,20 @@
             </Principal>
             <Dependent Role="fornecedores_enderecos">
               <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_enderecos_fornecedor_fkey">
+          <End Role="fornecedores" Type="Self.fornecedores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="fornecedores_enderecos" Type="Self.fornecedores_enderecos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_enderecos">
+              <PropertyRef Name="fornecedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1075,12 +1105,20 @@
             <End Role="estados" EntitySet="estados" />
             <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
           </AssociationSet>
+          <AssociationSet Name="fornecedores_bancos_fornecedor_fkey" Association="Self.fornecedores_bancos_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
           <AssociationSet Name="fornecedores_emails_fornecedor_fkey" Association="Self.fornecedores_emails_fornecedor_fkey">
             <End Role="fornecedores" EntitySet="fornecedores" />
             <End Role="fornecedores_emails" EntitySet="fornecedores_emails" />
           </AssociationSet>
           <AssociationSet Name="fornecedores_enderecos_estado_fkey" Association="Self.fornecedores_enderecos_estado_fkey">
             <End Role="estados" EntitySet="estados" />
+            <End Role="fornecedores_enderecos" EntitySet="fornecedores_enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_enderecos_fornecedor_fkey" Association="Self.fornecedores_enderecos_fornecedor_fkey">
+            <End Role="fornecedores" EntitySet="fornecedores" />
             <End Role="fornecedores_enderecos" EntitySet="fornecedores_enderecos" />
           </AssociationSet>
           <AssociationSet Name="fornecedores_materiais_fornecedor_fkey" Association="Self.fornecedores_materiais_fornecedor_fkey">
@@ -1582,6 +1620,14 @@
             <End Role="operadora1" EntitySet="operadoras1" />
             <End Role="negociadore" EntitySet="negociadores" />
           </AssociationSet>
+          <AssociationSet Name="fornecedores_bancos_fornecedor_fkey" Association="UnimedModel.fornecedores_bancos_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_bancos" EntitySet="fornecedores_bancos" />
+          </AssociationSet>
+          <AssociationSet Name="fornecedores_enderecos_fornecedor_fkey" Association="UnimedModel.fornecedores_enderecos_fornecedor_fkey">
+            <End Role="fornecedore" EntitySet="fornecedores" />
+            <End Role="fornecedores_enderecos" EntitySet="fornecedores_enderecos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="classificaco">
           <Key>
@@ -1638,6 +1684,8 @@
           <NavigationProperty Name="fornecedores_regioes" Relationship="UnimedModel.fornecedores_regioes_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_regioes" />
           <NavigationProperty Name="fornecedores_telefones" Relationship="UnimedModel.fornecedores_telefones_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_telefones" />
           <NavigationProperty Name="negociacoes" Relationship="UnimedModel.negociacoes_fornecedor_fkey" FromRole="fornecedore" ToRole="negociaco" />
+          <NavigationProperty Name="fornecedores_bancos" Relationship="UnimedModel.fornecedores_bancos_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_bancos" />
+          <NavigationProperty Name="fornecedores_enderecos" Relationship="UnimedModel.fornecedores_enderecos_fornecedor_fkey" FromRole="fornecedore" ToRole="fornecedores_enderecos" />
         </EntityType>
         <EntityType Name="importacao_xls">
           <Key>
@@ -1929,6 +1977,8 @@
           <Property Name="sisusuarioe" Type="Int64" />
           <NavigationProperty Name="banco1" Relationship="UnimedModel.fornecedores_bancos_banco_fkey" FromRole="fornecedores_bancos" ToRole="banco" />
           <NavigationProperty Name="estado1" Relationship="UnimedModel.fornecedores_bancos_estado_fkey" FromRole="fornecedores_bancos" ToRole="estado" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_bancos_fornecedor_fkey" FromRole="fornecedores_bancos" ToRole="fornecedore" />
         </EntityType>
         <EntityType Name="fornecedores_emails">
           <Key>
@@ -1966,6 +2016,8 @@
           <Property Name="sisdatae" Type="DateTime" Precision="6" />
           <Property Name="sisusuarioe" Type="Int64" />
           <NavigationProperty Name="estado1" Relationship="UnimedModel.fornecedores_enderecos_estado_fkey" FromRole="fornecedores_enderecos" ToRole="estado" />
+          <Property Name="fornecedor" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="fornecedore" Relationship="UnimedModel.fornecedores_enderecos_fornecedor_fkey" FromRole="fornecedores_enderecos" ToRole="fornecedore" />
         </EntityType>
         <EntityType Name="fornecedores_materiais">
           <Key>
@@ -2457,6 +2509,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fornecedores_bancos_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="UnimedModel.fornecedores_bancos" Role="fornecedores_bancos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_bancos">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fornecedores_enderecos_fornecedor_fkey">
+          <End Type="UnimedModel.fornecedore" Role="fornecedore" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="UnimedModel.fornecedores_enderecos" Role="fornecedores_enderecos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fornecedores_enderecos">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2855,6 +2935,7 @@
           <EntitySetMapping Name="fornecedores_bancos">
             <EntityTypeMapping TypeName="UnimedModel.fornecedores_bancos">
               <MappingFragment StoreEntitySet="fornecedores_bancos">
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
                 <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
                 <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
                 <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />
@@ -2890,6 +2971,7 @@
           <EntitySetMapping Name="fornecedores_enderecos">
             <EntityTypeMapping TypeName="UnimedModel.fornecedores_enderecos">
               <MappingFragment StoreEntitySet="fornecedores_enderecos">
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
                 <ScalarProperty Name="sisusuarioe" ColumnName="sisusuarioe" />
                 <ScalarProperty Name="sisdatae" ColumnName="sisdatae" />
                 <ScalarProperty Name="sisusuarioa" ColumnName="sisusuarioa" />

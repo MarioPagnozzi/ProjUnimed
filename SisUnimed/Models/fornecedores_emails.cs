@@ -42,11 +42,12 @@ namespace SisUnimed.Models
     public class ListaEmail
     {
         public long id { get; set; }
-        public string fornecedor { get; set; }
+        public long fornecedor { get; set; }
         public string c_nome { get; set; }
         public string c_email { get; set; }
         public System.DateTime? sisdatai { get; set; }
         public string sisusuarioi { get; set; }
         public System.DateTime? sisdataa { get; set; }
+        public string sisusuarioa { get; set; }
     }
 }

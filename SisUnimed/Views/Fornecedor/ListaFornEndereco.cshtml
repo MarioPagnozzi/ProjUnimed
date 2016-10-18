@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaEndereco>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaEndereco> listaendereco = (IEnumerable<SisUnimed.Models.ListaEndereco>)ViewData["listaendereco"];
+    var grid = new WebGrid(listaendereco.ToList(), ajaxUpdateCallback: "divGridEndereco", ajaxUpdateContainerId: "divGridEndereco", defaultSort: "c_descricao", rowsPerPage: 5);
+}
+
+
+        <fieldset>
+            <legend>Endereços</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
+                    grid.Column(columnName: "id",header:"id",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_logradoro",header:"Logradouro",format: a => new HtmlString(Ajax.ActionLink((string)a.c_logradoro.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_descricao",header:"Descrição",format: a => new HtmlString(Ajax.ActionLink((string)a.c_descricao.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_numero",header:"Número",format: a => new HtmlString(Ajax.ActionLink((string)a.c_numero.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_bairro",header:"Bairro",format: a => new HtmlString(Ajax.ActionLink((string)a.c_bairro.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_cep",header:"CEP",format: a => new HtmlString(Ajax.ActionLink((string)a.c_cep.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_cidade",header:"Cidade",format: a => new HtmlString(Ajax.ActionLink((string)a.c_cidade.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_estado",header:"Estado",format: a => new HtmlString(Ajax.ActionLink((string)a.c_estado.ToString(),"PreencheCamposEndereco",new{id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),                    
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCamposEndereco", new { id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCamposEndereco", new {id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCamposEndereco", new { id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCamposEndereco", new {id_end=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>

@@ -45,7 +45,7 @@ namespace SisUnimed.Models
     public class ListaFornecedorTelefone
     {
         public long id { get; set; }
-        public string fornecedor { get; set; }
+        public string fornecedor_nome { get; set; }
         public string c_telefone { get; set; }
         public string c_setor { get; set; }
         public string c_nome { get; set; }
@@ -53,5 +53,6 @@ namespace SisUnimed.Models
         public string sisusuarioi { get; set; }
         public System.DateTime? sisdataa { get; set; }
         public string sisusuarioa { get; set; }
+        public long fornecedor { get; set; }
     }
 }

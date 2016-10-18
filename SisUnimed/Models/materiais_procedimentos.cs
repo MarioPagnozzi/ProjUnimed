@@ -44,5 +44,6 @@ namespace SisUnimed.Models
         public string sisusuarioi { get; set; }
         public System.DateTime? sisdataa { get; set; }
         public string sisusuarioa { get; set; }
+        public long material { get; set; }
     }
 }

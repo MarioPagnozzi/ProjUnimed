@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\MateriaisController.cs" />
     <Compile Include="Controllers\OperadoraController.cs" />
     <Compile Include="Controllers\ProcedimentoController.cs" />
     <Compile Include="Controllers\RegiaoController.cs" />
@@ -400,6 +401,26 @@
     <Content Include="Views\Fornecedor\CadastroFornecedor.cshtml" />
     <Content Include="Views\Fornecedor\ListaFornecedor.cshtml" />
     <Content Include="Views\Fornecedor\FonecedorBanco.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornBanco.cshtml" />
+    <Content Include="Views\Fornecedor\FornecedorEndereco.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornEndereco.cshtml" />
+    <Content Include="Views\Fornecedor\FornecedorTelefone.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornTelefone.cshtml" />
+    <Content Include="Views\Fornecedor\FornecedorEmail.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornEmail.cshtml" />
+    <Content Include="Views\Fornecedor\FornecedorRegiao.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornRegiao.cshtml" />
+    <Content Include="Views\Materiais\Materiais.cshtml" />
+    <Content Include="Views\Materiais\CadastroMateriais.cshtml" />
+    <Content Include="Views\Materiais\ListaMateriais.cshtml" />
+    <Content Include="Views\Materiais\MateriaisInformacao.cshtml" />
+    <Content Include="Views\Materiais\ListaInformacao.cshtml" />
+    <Content Include="Views\Materiais\MateriaisProcedimentos.cshtml" />
+    <Content Include="Views\Materiais\ListaProcedimento.cshtml" />
+    <Content Include="Views\Materiais\MateriaisSimilares.cshtml" />
+    <Content Include="Views\Materiais\ListaSimilares.cshtml" />
+    <Content Include="Views\Fornecedor\FornecedorMateriais.cshtml" />
+    <Content Include="Views\Fornecedor\ListaFornMateriais.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

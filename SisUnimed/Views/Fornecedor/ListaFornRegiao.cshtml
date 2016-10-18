@@ -1,0 +1,27 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaFornecedorRegiao>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaFornecedorRegiao> listafornregiao = (IEnumerable<SisUnimed.Models.ListaFornecedorRegiao>)ViewData["listafornregiao"];
+    var grid = new WebGrid(listafornregiao.ToList(), ajaxUpdateCallback: "divGridRegiao", ajaxUpdateContainerId: "divGridRegiao", defaultSort: "c_distribuidor", rowsPerPage: 5);
+}
+
+
+        <fieldset>
+            <legend>Regiões</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
+                    grid.Column(columnName: "id",header:"id",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_distribuidor",header:"Distribuidor",format: a => new HtmlString(Ajax.ActionLink((string)a.c_distribuidor.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_responsavel",header:"Responsável",format: a => new HtmlString(Ajax.ActionLink((string)a.c_responsavel.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_telefone",header:"Telefone",format: a => new HtmlString(Ajax.ActionLink((string)a.c_telefone.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                    grid.Column(columnName: "c_email",header:"Email",format: a => new HtmlString(Ajax.ActionLink((string)a.c_email.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                    grid.Column(columnName: "regiao",header:"Regiao",format: a => new HtmlString(Ajax.ActionLink((string)a.regiao.ToString(),"PreencheCamposRegiao",new{id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadRegiao"}).ToString()),canSort: true),
+                               
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCamposRegiao", new { id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCamposRegiao", new {id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCamposRegiao", new { id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCamposRegiao", new {id_reg=a.id,id=a.fornecedor},new AjaxOptions {UpdateTargetId="cadEnderecos"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>

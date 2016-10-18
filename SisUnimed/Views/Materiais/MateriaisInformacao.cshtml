@@ -1,0 +1,79 @@
+﻿@model SisUnimed.Models.vModelDetalheMateriais
+@{
+    
+    IEnumerable<SisUnimed.Models.ListaMatInformacao> listainformacao = (IEnumerable<SisUnimed.Models.ListaMatInformacao>)ViewData["listainformacao"];
+   
+}      
+
+<table class="table">
+    <tr>
+        @if (Model.vmateriais.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadInformacao" href="@Url.Action("IncluirInformacao", "Materiais", new { id = Model.vmateriais.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vmateriais_informacoes != null && (Model.vmateriais_informacoes.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadInformacao" href="@Url.Action("DeleteInformacao","Materiais",new {id_info = Model.vmateriais_informacoes.id, id = Model.vmateriais.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Materiais",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadInformacao" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vmateriais_informacoes.id)
+                                @Html.HiddenFor(a => a.vmateriais_informacoes.material)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais_informacoes.c_informacoes)</font></td>
+                                                                     
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais_informacoes.c_informacoes,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextAreaFor(a => a.vmateriais_informacoes.c_informacoes, new {@cols="100",@rows="5", @style="text-transform: uppercase" })</td>
+                                  
+                                   
+                               </tr>
+                                                           
+                                               
+                                                             
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirInformacao" || ViewBag.Action == "EditarInformacao") && Model.vmateriais_informacoes != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadInformacao" href="@Url.Action("Informacao", "Materiais", new { id = Model.vmateriais.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridInformacao">
+                    @{Html.RenderPartial("ListaInformacao",listainformacao);}
+                </div>
+            </td>
+        </tr>
+    </table>
+               
+                       
+
+

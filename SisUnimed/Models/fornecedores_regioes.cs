@@ -50,7 +50,7 @@ namespace SisUnimed.Models
     public class ListaFornecedorRegiao
     {
         public long id { get; set; }
-        public string fornecedor { get; set; }
+        public long fornecedor { get; set; }
         public string regiao { get; set; }
         public string c_distribuidor { get; set; }
         public string c_telefone { get; set; }

@@ -9,9 +9,7 @@
         <fieldset>
             <legend>Fornecedores</legend>
 
-                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {
-                    grid.Column(columnName: "id",header:"Código",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
-                    grid.Column(columnName: "c_codigo",header:"Código Alternativo",format: a => new HtmlString(Ajax.ActionLink((string)a.codigo.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
                     grid.Column(columnName: "c_cnpj",header:"CNPJ",format: a => new HtmlString(Ajax.ActionLink((string)a.c_cnpj.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "c_razao_social",header:"Razão Social",format: a => new HtmlString(Ajax.ActionLink((string)a.c_razao_social.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "c_responsavel",header:"Responsável",format: a => new HtmlString(Ajax.ActionLink((string)a.c_responsavel.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
@@ -19,7 +17,7 @@
                     grid.Column(columnName: "operadora",header:"Operadora",format: a => new HtmlString(Ajax.ActionLink((string)a.operadora.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "f_situacao",header:"Situação",format: a => new HtmlString(Ajax.ActionLink((string)a.f_situacao.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "f_tipo_fornecedor",header:"Tipo Fornecedor",format: a => new HtmlString(Ajax.ActionLink((string)a.f_tipo_fornecedor.ToString(),"PreencheCampos",new{id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
-                    grid.Column(columnName: "c_sigla", header: "Sigla", format: a => new HtmlString(Ajax.ActionLink((string)a.c_sigla.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
+                    
                     grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),
                     grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCampos", new { id=a.id},new AjaxOptions {UpdateTargetId="corposite"}).ToString()),canSort: true),

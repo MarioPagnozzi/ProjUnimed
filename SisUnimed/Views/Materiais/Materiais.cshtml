@@ -1,10 +1,10 @@
-﻿@model SisUnimed.Models.vModelDetalheFornecedor
+﻿@model SisUnimed.Models.vModelDetalheMateriais
 @{
-    ViewBag.Title = "Fornecedor";
+    ViewBag.Title = "Materiais";
     //Layout = "~/Views/Home/Index.cshtml";
    
     var up = ViewData["usuario_permissao"] as SisUnimed.Models.usuario_permissao;
-    IEnumerable<SisUnimed.Models.ListaFornecedor> resultadolista = (IEnumerable<SisUnimed.Models.ListaFornecedor>)ViewData["listafornecedor"];
+    IEnumerable<SisUnimed.Models.ListaMaterial> resultadolista = (IEnumerable<SisUnimed.Models.ListaMaterial>)ViewData["listamaterial"];
   
     List<SelectListItem> listacampo = new List<SelectListItem>();
     listacampo.Add(new SelectListItem{
@@ -12,8 +12,8 @@
         Value="codigo"
     });
     listacampo.Add(new SelectListItem{
-       Text="Razão Social",
-       Value="razao",
+       Text="Nome Material",
+       Value="nome",
        Selected=true 
     });   
     List<SelectListItem> listatipo = new List<SelectListItem>();
@@ -48,7 +48,7 @@
             var vpesquisa = document.getElementById("pesquisa").value.toUpperCase();
 
             $.ajax({
-                url: "@Url.Action("Pesquisa","Fornecedor")",
+                url: "@Url.Action("Pesquisa","Materiais")",
                 type: "GET",
                 data: { tipo: vtipo, campo: vcampo, pesquisa: vpesquisa },
                 success: function (retorno) {
@@ -67,18 +67,7 @@
             }
         });
 
-        $('#vfornecedores_bancos_c_conta').keyup(function () {
-                var $this = $(this);
-                $this.val(er_replace(/[^0-9]+/g, '', $this.val()));
-           
-        });
-
-        $('#vfornecedores_bancos_c_agencia').keyup(function () {
-            var $this = $(this);
-            $this.val(er_replace(/[^0-9]+/g, '', $this.val()));
-
-        });
-
+       
         $('#campo').click(function () {
             document.getElementById("pesquisa").value = "";
         });
@@ -90,7 +79,7 @@
 
 </script>
 
-<h2 id="txtTitulo">Cadastro de Fornecedores</h2>
+<h2 id="txtTitulo">Cadastro de Materiais</h2>
 <hr />
  <div id="divPesq">
      <fieldset>
@@ -130,21 +119,21 @@
  </div>
     <div id="divCadastro">        
         <fieldset>
-            <legend>Dados Fornecedor</legend>
+            <legend>Dados Material</legend>
              <table class="btnPesquisa">
                  <tr>
                      <td width="65px">
-                         @if (up.fornecedores_i == 1)
+                         @if (up.materiais_i == 1)
                          {                        
                             @*<button onclick="location.href='@Url.Action("Incluir", "Banco")'" type="button" id="btnComandos"><img src="/Contents/Images/btnAdd.png" /></button>*@
-                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Fornecedor")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
+                             <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Incluir","Materiais")" role="button"><img src="/Contents/Images/btnAdd.png" /></a>
                          }
                      </td>                    
                        
                      <td>
-                          @if (up.fornecedores_d == 1 && Model != null && Model.vfornecedor.id > 0)
+                          @if (up.materiais_d == 1 && Model != null && Model.vmateriais.id > 0)
                           {
-                              <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Fornecedor", new { id = Model.vfornecedor.id })" role="button">
+                              <a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Delete", "Materiais", new { id = Model.vmateriais.id})" role="button">
                                   <img src="/Contents/Images/btnExcluir.png" /></a>
                           }
                      </td>
@@ -155,61 +144,36 @@
                 <div id="content">
                     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                         <li class="active"><a href="#tab1" 
-                        data-toggle="tab">Fornecedor</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Bancos</></a></li>   
-                        <li><a href="#tab3" data-toggle="tab">Endereços</a></li>
-                        <li><a href="#tab4" data-toggle="tab">Telefones</a></li>
-                        <li><a href="#tab5" data-toggle="tab">E-mails</a></li>
-                        <li><a href="#tab6" data-toggle="tab">Regiões</a></li>
-                        <li><a href="#tab7" data-toggle="tab">Materiais</a></li>
-                        <li><a href="#tab8" data-toggle="tab">Anexos</a></li>                                    
+                        data-toggle="tab">Material</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Informações</></a></li>   
+                        <li><a href="#tab3" data-toggle="tab">Procedimentos</a></li>
+                        <li><a href="#tab4" data-toggle="tab">Similares</a></li>                                                       
                     </ul>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane  active" id="tab1">
                         <div id="cadastro">
-                            @{Html.RenderPartial("CadastroFornecedor", Model);}
+                            @{Html.RenderPartial("CadastroMateriais", Model);}
                         </div>
                     </div>
                         <div class="tab-pane" id="tab2">
-                            <div id="cadBanco"> 
-                                 @{Html.RenderPartial("FonecedorBanco",Model);}
+                            <div id="cadInformacao"> 
+                                 @{Html.RenderPartial("MateriaisInformacao",Model);}
                             </div>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <div id="cadEnderecos"> 
-                                @{Html.RenderPartial("FornecedorEndereco", Model);}                          
+                            <div id="cadProcedimento"> 
+                                @{Html.RenderPartial("MateriaisProcedimentos", Model);}                          
                             </div>
                         </div>
                         <div class="tab-pane" id="tab4">
-                            <div id="cadTelefones"> 
-                               @{Html.RenderPartial("FornecedorTelefone", Model);}                            
+                            <div id="cadSimilares"> 
+                               @{Html.RenderPartial("MateriaisSimilares", Model);}                            
                             </div>
-                        </div>
-                        <div class="tab-pane" id="tab5">
-                            <div id="cadEmails"> 
-                                @{Html.RenderPartial("FornecedorEmail", Model);}                           
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tab6">
-                            <div id="cadRegiao"> 
-                                @{Html.RenderPartial("FornecedorRegiao", Model);}                           
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tab7">
-                            <div id="cadMateriais"> 
-                                @{Html.RenderPartial("FornecedorMateriais", Model);}                       
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tab8">
-                            <div id="cadAnexos"> 
-                                                            
-                            </div>
-                        </div>
-                    </div>
+                        </div>                        
                 </div>    
                 </div>           
         </fieldset>
     </div>
     
-              @{Html.RenderPartial("ListaFornecedor", resultadolista);}
+              @{Html.RenderPartial("ListaMateriais", resultadolista);}
       

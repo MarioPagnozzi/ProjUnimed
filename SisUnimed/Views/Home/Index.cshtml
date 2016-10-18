@@ -94,6 +94,10 @@
                         {
                             <li>@Ajax.ActionLink("Fornecedor", "Fornecedor", "Fornecedor", new AjaxOptions { UpdateTargetId="corposite" })</li>
                         }
+                         @if (up.materiais == 1)
+                        {
+                            <li>@Ajax.ActionLink("Materiais", "Materiais", "Materiais", new AjaxOptions { UpdateTargetId="corposite" })</li>
+                        }
                     </ul>
                 </li>
             </ul>

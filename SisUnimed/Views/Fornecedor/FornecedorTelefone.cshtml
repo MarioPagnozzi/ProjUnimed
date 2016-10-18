@@ -1,0 +1,91 @@
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
+@{
+        
+   IEnumerable<SisUnimed.Models.ListaFornecedorTelefone> listatelefone = (IEnumerable<SisUnimed.Models.ListaFornecedorTelefone>)ViewData["listatelefone"];   
+   
+       
+}
+<table class="table">
+    <tr>
+        @if (Model.vfornecedor.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadTelefones" href="@Url.Action("IncluirTelefone", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vfornecedores_telefones != null && (Model.vfornecedores_telefones.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadTelefones" href="@Url.Action("DeleteTelefone","Fornecedor",new {id_tel = Model.vfornecedores_telefones.id, id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadTelefones" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vfornecedores_telefones.id)
+                                @Html.HiddenFor(a => a.vfornecedores_telefones.fornecedor)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_telefones.c_nome)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_telefones.c_setor)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_telefones.c_telefone)</font></td>
+                                   <td></td>                                                                  
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_telefones.c_nome,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_telefones.c_nome, new {@size = "30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_telefones.c_setor, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_telefones.c_setor, new { @size="15", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_telefones.c_telefone, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_telefones.c_telefone, new { @size = "15", @style="text-transform: uppercase" })</td>                                  
+                                   
+                               </tr>
+                                                           
+                                               
+                                                             
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirTelefone" || ViewBag.Action == "EditarTelefone") && Model.vfornecedor != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadTelefones" href="@Url.Action("Telefone", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridTelefone">
+                    @{Html.RenderPartial("ListaFornTelefone",listatelefone);}
+                </div>
+            </td>
+        </tr>
+    </table>
+<script>
+    $(document).ready(function () {
+        $("#vfornecedores_telefones_c_telefone").inputmask("mask",{"mask":"(99) 99999-9999"});
+    });
+</script>
+               
+                       
+
+

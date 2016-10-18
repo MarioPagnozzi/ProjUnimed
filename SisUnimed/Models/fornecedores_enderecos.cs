@@ -50,8 +50,10 @@ namespace SisUnimed.Models
         public Nullable<long> sisusuarioa { get; set; }
         public Nullable<System.DateTime> sisdatae { get; set; }
         public Nullable<long> sisusuarioe { get; set; }
+        public long fornecedor { get; set; }
     
         public virtual estado estado1 { get; set; }
+        public virtual fornecedore fornecedore { get; set; }
     }
     public class ListaEndereco
     {
@@ -68,5 +70,6 @@ namespace SisUnimed.Models
         public string sisusuarioi { get; set; }
         public System.DateTime? sisdataa { get; set; }
         public string sisusuarioa { get; set; }
+        public long fornecedor { get; set; }
     }
 }

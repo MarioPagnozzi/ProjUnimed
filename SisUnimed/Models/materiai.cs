@@ -42,17 +42,25 @@ namespace SisUnimed.Models
         public string c_registro_anvisa { get; set; }
         [Display(Name="Data Validade")]
         [Required(ErrorMessage="Data Validade deve ser informada")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date, ErrorMessage="Data em formato inválido")]
         public Nullable<System.DateTime> d_validade { get; set; }
         [Display(Name="Início Vigência")]
         [Required(ErrorMessage="Início Vigência deve ser informada")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
         public Nullable<System.DateTime> d_inicio_vigencia { get; set; }
         [Display(Name="Fim Vigência")]
         [Required(ErrorMessage="Fim Vigência deve ser informada")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
         public Nullable<System.DateTime> d_fim_vigencia { get; set; }
         [Display(Name="Fornecedor Principal")]
         public Nullable<long> fornecedor { get; set; }
         [Display(Name="Preço Base")]
         [Required(ErrorMessage="Preço Base deve ser informado")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public Nullable<decimal> v_preco { get; set; }
         [Display(Name="Status")]
         [Required(ErrorMessage="Status deve ser informado")]
@@ -122,7 +130,7 @@ namespace SisUnimed.Models
         public System.DateTime? d_inicio_vigencia { get; set; }       
         public System.DateTime? d_fim_vigencia { get; set; }       
         public string fornecedor { get; set; }    
-        public decimal v_preco { get; set; }       
+        public decimal? v_preco { get; set; }       
         public string f_status { get; set; }      
         public string f_distribuidor_exclusivo { get; set; }        
         public string f_nao_negociado { get; set; }       

@@ -23,6 +23,8 @@ namespace SisUnimed.Models
         [Display(Name="Material")]
         public long material { get; set; }
         [Display(Name="Preço Praticado")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [Required(ErrorMessage="Preço Praticado deve ser informado")]
         public Nullable<decimal> v_preco_ctnpm { get; set; }
         [Display(Name="Data Inclusão")]
@@ -42,12 +44,13 @@ namespace SisUnimed.Models
     public class ListaFornecedorMateriais
     {
         public long id { get; set; }
-        public string fornecedor { get; set; }
+        public long fornecedor { get; set; }
         public string material { get; set; }
-        public double v_preco_ctnpm { get; set; }
+        public decimal? v_preco_ctnpm { get; set; }
         public System.DateTime? sisdatai { get; set; }
         public string sisusuarioi { get; set; }
         public System.DateTime? sisdataa { get; set; }
         public string sisusuarioa { get; set; }
+       
     }
 }

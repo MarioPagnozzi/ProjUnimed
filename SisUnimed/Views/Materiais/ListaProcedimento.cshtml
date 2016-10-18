@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SisUnimed.Models.ListaMatProcedimento>
+
+@{       
+    IEnumerable<SisUnimed.Models.ListaMatProcedimento> listaprocedimentos = (IEnumerable<SisUnimed.Models.ListaMatProcedimento>)ViewData["listaprocedimentos"];
+    var grid = new WebGrid(listaprocedimentos.ToList(), ajaxUpdateCallback: "divGridProcedimento", ajaxUpdateContainerId: "divGridProcedimento", defaultSort: "procedimento", rowsPerPage: 5);
+}
+
+
+        <fieldset>
+            <legend>Procedimentos</legend>
+
+                @grid.GetHtml(tableStyle: "table",alternatingRowStyle: "alternate", headerStyle: "header", columns: new[] {                    
+                    grid.Column(columnName: "id",header:"id",format: a => new HtmlString(Ajax.ActionLink((string)a.id.ToString(),"PreencheCamposProcedimento",new{id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true),
+                    grid.Column(columnName: "procedimento",header:"Procedimento",format: a => new HtmlString(Ajax.ActionLink((string)a.procedimento.ToString(),"PreencheCamposProcedimento",new{id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true),
+                  
+                   
+                    grid.Column(columnName: "sisdatai", header: "Data de Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdatai.ToString(),"PreencheCamposProcedimento", new { id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioi", header: "Usuário Inclusão", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioi.ToString(),"PreencheCamposProcedimento", new {id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisdataa", header: "Última Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisdataa.ToString(),"PreencheCamposProcedimento", new { id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true),
+                    grid.Column(columnName: "sisusuarioa", header: "Usuário Alteração", format: a => new HtmlString(Ajax.ActionLink((string)a.sisusuarioa.ToString(),"PreencheCamposProcedimento", new {id_proc=a.id,id=a.material},new AjaxOptions {UpdateTargetId="cadProcedimento"}).ToString()),canSort: true)
+    
+                })
+
+        </fieldset>

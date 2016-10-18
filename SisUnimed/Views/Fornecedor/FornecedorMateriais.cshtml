@@ -1,0 +1,105 @@
+﻿@model SisUnimed.Models.vModelDetalheFornecedor
+@{
+    
+    IEnumerable<SisUnimed.Models.ListaFornecedorMateriais> listamateriais = (IEnumerable<SisUnimed.Models.ListaFornecedorMateriais>)ViewData["listamateriais"];
+    IEnumerable<SisUnimed.Models.ListaMaterial> lstmaterial = (IEnumerable<SisUnimed.Models.ListaMaterial>)ViewData["lstmaterial"];
+
+    List<SelectListItem> material = new List<SelectListItem>();
+    
+    foreach (var x in lstmaterial)
+    {
+        material.Add(new SelectListItem { 
+            Text = x.c_nome_material,
+            Value = x.id.ToString()
+        });   
+    };
+       
+   
+    
+}
+<table class="table">
+    <tr>
+        @if (Model.vfornecedor.id > 0)
+        {
+            <td width="65px"><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadMateriais" href="@Url.Action("IncluirMaterial", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnAdd.png" /></a></td>
+        }
+        @if (Model.vfornecedores_materiais != null && (Model.vfornecedores_materiais.id) > 0)
+        {
+            <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadMateriais" href="@Url.Action("DeleteMaterial","Fornecedor",new {id_mat = Model.vfornecedores_materiais.id, id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnExcluir.png" /></a></td>
+        }
+    </tr>
+</table>
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Fornecedor",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="cadMateriais" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                @Html.HiddenFor(a => a.vfornecedores_materiais.id)
+                                @Html.HiddenFor(a => a.vfornecedores_materiais.fornecedor)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_materiais.material)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vfornecedores_materiais.v_preco_ctnpm)</font></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_materiais.material,new{@class="txtcorposite"})</td>
+                                   <td>@Html.DropDownListFor(a => a.vfornecedores_materiais.material,material)</td>
+                                   <td>@Html.LabelFor(a => a.vfornecedores_materiais.v_preco_ctnpm, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vfornecedores_materiais.v_preco_ctnpm,new {@size="15"})</td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>                                   
+                                   
+                               </tr>
+                                                                                           
+                                <tr>   
+                                    @if ((ViewBag.Action == "InserirMaterial" || ViewBag.Action == "EditarMaterial") && Model.vfornecedor != null)
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cadMateriais" href="@Url.Action("Materiais", "Fornecedor", new { id = Model.vfornecedor.id })" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <table class="table">
+        <tr>
+            <td>
+                <div id="divGridMaterial">
+                    @{Html.RenderPartial("ListaFornMateriais",listamateriais);}
+                </div>
+            </td>
+        </tr>
+    </table>
+ <script>
+        $(document).ready(function () {
+            $("#vfornecedores_materiais_v_preco_ctnpm").inputmask("currency", { "prefix": "", "groupSeparator": ".", "radixPoint": "," });
+        });
+    </script>
+               
+                       
+
+
