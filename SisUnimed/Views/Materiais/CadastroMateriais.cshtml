@@ -1,0 +1,257 @@
+﻿@model SisUnimed.Models.vModelDetalheMateriais
+@{
+    List<SelectListItem> status = new List<SelectListItem>();
+    List<SelectListItem> origem = new List<SelectListItem>();
+
+    IEnumerable<SisUnimed.Models.ListaFornecedor> fornecedores = (IEnumerable<SisUnimed.Models.ListaFornecedor>)ViewData["listafornecedor"];
+    IEnumerable<SisUnimed.Models.ListaClassificacao> classificacoes = (IEnumerable<SisUnimed.Models.ListaClassificacao>)ViewData["listaclassificacao"];
+    IEnumerable<SisUnimed.Models.ListaMarca> marcas = (IEnumerable<SisUnimed.Models.ListaMarca>)ViewData["listamarca"];
+    IEnumerable<SisUnimed.Models.ListaUnidade> unidades = (IEnumerable<SisUnimed.Models.ListaUnidade>)ViewData["listaunidade"];
+
+    List<SelectListItem> fornecedor = new List<SelectListItem>();
+    List<SelectListItem> classificacao = new List<SelectListItem>();
+    List<SelectListItem> marca = new List<SelectListItem>();
+    List<SelectListItem> unidade = new List<SelectListItem>();
+
+    status.Add(new SelectListItem { 
+        Text = "Disponível",
+        Value = "1"
+    });
+    status.Add(new SelectListItem { 
+        Text = "Indisponível",
+        Value = "2"
+    });
+
+    origem.Add(new SelectListItem { 
+        Text = "Nacional",
+        Value = "1"
+    });
+    origem.Add(new SelectListItem { 
+        Text = "Importado",
+        Value = "2"
+    });
+    
+    foreach (var x in fornecedores)
+    {
+        fornecedor.Add(new SelectListItem { 
+            Text = x.c_razao_social,
+            Value = x.id.ToString()
+        });
+    };
+    
+    foreach (var x in classificacoes)
+    {
+        classificacao.Add(new SelectListItem { 
+            Text = x.descricao,
+            Value = x.id.ToString()
+        });
+    };
+    
+    foreach (var x in marcas)
+    {
+        marca.Add(new SelectListItem { 
+            Text = x.c_nome,
+            Value = x.id.ToString()
+        });
+    };
+    
+    foreach (var x in unidades)
+    {
+        unidade.Add(new SelectListItem { 
+            Text = x.c_sigla,
+            Value = x.id.ToString()
+        });
+    };
+    
+}
+
+
+               
+                            @using (Ajax.BeginForm((string)ViewBag.Action,"Materiais",new AjaxOptions { HttpMethod="POST",InsertionMode = InsertionMode.Replace, UpdateTargetId="corposite" }, new{@id="formCadastro"}))
+                            {
+                                 @Html.AntiForgeryToken()
+                                 @Html.ValidationSummary(true)
+                                <table class="table">
+                                 @if (@ViewBag.Message != null)
+                                 {
+                                     
+                                     <tr>
+                                         <td>
+                                           
+                                               @Html.Raw(ViewBag.Message)
+                                            
+                                         </td>
+                                     </tr>
+                                 }
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.id)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_cod_ref_fabr)</font></td>
+                                                               
+
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais.id,new{@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.id, new { @size="8", @readonly = "true"})</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_cod_ref_fabr, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_cod_ref_fabr, new { @size="10", @style="text-transform: uppercase" })</td>
+                                                                    
+                                   
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                    <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_registro_anvisa)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_codigo_tuss)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_tnumm)</font></td>                         
+                                                                     
+
+                               </tr>
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_registro_anvisa, new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_registro_anvisa,new {@size="10",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_codigo_tuss, new{ @class = "txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_codigo_tuss, new { @size="10", @style="text-transform: uppercase" })</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_tnumm,new {@class="txtcorposite"})</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_tnumm, new { @size = "10",@style="text-transform: uppercase"})</td>  
+                                  
+                                                                   
+                               </tr>    
+                               <tr>
+                                   
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_descricao_generica)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_nome_material)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_nome_comercial)</font></td>
+                                    
+                                   
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_descricao_generica,new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_descricao_generica, new {@size="30",@style="text-transform: uppercase"})</td>
+                                  <td>@Html.LabelFor(a => a.vmateriais.c_nome_material, new { @class="txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_nome_material,new {@size="30",@style="text-transform: uppercase"})</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.c_nome_comercial,new { @class = "txtcorposite" })</td>
+                                   <td>@Html.TextBoxFor(a => a.vmateriais.c_nome_comercial, new {@size="30",@style="text-transform: uppercase"})</td>
+                                  
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.d_validade)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.d_inicio_vigencia)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.d_fim_vigencia)</font></td>
+                                  
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais.d_validade, new { @class="txtcorposite" })</td>
+                                   <td>@Html.EditorFor(a => a.vmateriais.d_validade, new { value = Model.vmateriais.d_validade})</td>
+                                    <td>@Html.LabelFor(a => a.vmateriais.d_inicio_vigencia, new { @class="txtcorposite" })</td>
+                                   <td>@Html.EditorFor(a => a.vmateriais.d_inicio_vigencia, new { value = Model.vmateriais.d_inicio_vigencia })</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.d_fim_vigencia, new { @class="txtcorposite" } )</td>
+                                   <td>@Html.EditorFor(a => a.vmateriais.d_fim_vigencia, new { value = Model.vmateriais.d_fim_vigencia})</td>
+                                  
+                               </tr>
+                               <tr>
+                                    <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.f_origem)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.f_distribuidor_exclusivo)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.f_nao_negociado)</font></td>
+                                  
+                               </tr> 
+                               <tr>
+                                   <td>@Html.LabelFor(a => a.vmateriais.f_origem, new { @class="txtcorposite" } )</td>
+                                   <td>@Html.DropDownListFor(a => a.vmateriais.f_origem,origem)</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.f_distribuidor_exclusivo,new {@class="txtcorposite"})</td>
+                                   <td>@Html.CheckBoxFor(a => a.vmateriais.f_distribuidor_exclusivo, false)</td>
+                                   <td>@Html.LabelFor(a => a.vmateriais.f_nao_negociado, new { @class="txtcorposite" })</td>
+                                   <td>@Html.CheckBoxFor(a => a.vmateriais.f_nao_negociado,false)</td>
+                                   
+                                   
+                               </tr> 
+                                <tr>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.marca)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.f_status)</font></td>
+                                   <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.fornecedor)</font></td>
+                                   
+                                </tr>
+                                    <tr>
+                                        <td>@Html.LabelFor(a => a.vmateriais.marca, new { @class="txtcorposite" })</td>
+                                        <td>@Html.DropDownListFor(a => a.vmateriais.marca,marca)</td>
+                                        <td>@Html.LabelFor(a => a.vmateriais.f_status, new { @class="txtcorposite" })</td>
+                                        <td>@Html.DropDownListFor(a => a.vmateriais.f_status,status)</td>
+                                        <td>@Html.LabelFor(a => a.vmateriais.fornecedor,new {@class="txtcorposite"})</td>
+                                        <td>@Html.DropDownListFor(a => a.vmateriais.fornecedor,fornecedor)</td>
+                                        
+                                        
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.unidade)</font></td>
+                                        <td></td>
+                                        <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.f_nao_negociado)</font></td>
+                                        <td></td>
+                                        <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.v_preco)</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.LabelFor(a => a.vmateriais.unidade, new { @class="txtcorposite" } )</td>
+                                        <td>@Html.DropDownListFor(a => a.vmateriais.unidade, unidade)</td>
+                                        <td>@Html.LabelFor(a => a.vmateriais.classificacao, new { @class="txtcorposite" } )</td>
+                                        <td>@Html.DropDownListFor(a => a.vmateriais.classificacao, classificacao)</td>
+                                        <td>@Html.LabelFor(a => a.vmateriais.v_preco, new { @class="txtcorposite" })</td>
+                                        <td>@Html.TextBoxFor(a => a.vmateriais.v_preco, new { @size="20"})</td>
+                                    </tr>
+                                
+                             </table>
+                             <table class="table">
+                                 <tr>
+                                    <td></td>
+                                   <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.c_composicao)</font></td>
+                                </tr>
+                                    <tr>
+                                        <td>@Html.LabelFor(a => a.vmateriais.c_composicao,new {@class="txtcorposite"})</td>
+                                        <td>@Html.TextAreaFor(a => a.vmateriais.c_composicao,new { @cols="100", @rows="5",@style="text-transform: uppercase" })</td>
+                                    </tr>
+                               @if (ViewBag.Action == "Editar")
+                               {
+                                   <tr>
+                                        <td></td>
+                                        <td><font style="color: red;text-align:right;font-size:11px">@Html.ValidationMessageFor(a => a.vmateriais.fornecedor)</font></td>
+                                   </tr>
+                                   <tr>
+                                       <td>@Html.LabelFor(a => a.vmateriais.c_justificativa_alteracao,new { @class="txtcorposite" } )</td>
+                                       <td>@Html.TextAreaFor(a => a.vmateriais.c_justificativa_alteracao, new { @cols="100",@rows="5", @style="text-transform: uppercase" })</td>
+                                   </tr>
+                               }                               
+                                                             
+                                <tr>   
+                                    @if (ViewBag.Action == "Inserir" || ViewBag.Action == "Editar")
+                                    {                                 
+                                        <td><input type="image" class="btnIncluir" src="/Contents/Images/btnSalvar.png" value="submit"/></td>
+                                        <td><a class="btnIncluir" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#corposite" href="@Url.Action("Materiais","Materiais")" role="button"><img src="/Contents/Images/btnCancelar.png" /></a></td>
+                                    }    
+                                </tr>
+                             </table>
+                            }  
+
+    <script>
+        $(document).ready(function () {
+            $("#vmateriais_v_preco").inputmask("currency", { "prefix": "", "groupSeparator": ".", "radixPoint": "," });
+        });
+    </script>
+               
+                       
+
+
